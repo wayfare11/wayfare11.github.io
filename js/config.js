@@ -64,3 +64,4 @@ if (!window.NexT) window.NexT = {};
     variableConfig = {};
   });
 })();
+
