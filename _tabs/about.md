@@ -4,10 +4,15 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-{: .prompt-tip }
-
-
 # About Me
 
-I am a software engineer with a passion for building scalable and reliable software systems. I have a strong background in web development, data analysis, and machine learning.
+我是一个软件工程师，热衷于构建可扩展和可靠的软件系统。我在软件开发、数据分析和机器学习方面有着坚实的背景。同时，我在医学影像自动分割和半自动分割方面也有丰富的经验，熟悉MITK、ITK、VTK等工具。
+
+我精通Python和C++编程语言，并且在以下领域有深入的实践经验：
+
+- 软件开发
+- 前端开发（Vue3）
+- 后端开发（Flask）
+- 桌面应用开发（Qt、PyQt）
+
+我始终致力于不断提升自己的技术能力，并且喜欢在工作中面对挑战，解决复杂的问题。希望能有机会与您合作，共同创造卓越的软件产品。
