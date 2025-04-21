@@ -1,11 +1,12 @@
 ---
 title: 通过Jekyll Chirpy主题搭建Github Page博客
 description: >-
-  通过Jekyll Chirpy主题搭建Github Page博客的教程
+  通过Jekyll Chirpy主题搭建Github Page博客的教程，包括安装Jekyll、配置主题、写博客、写评论、修改配置等。
 author: wayfare11
 date: 2025-04-21 16:00:00 +0800
 categories: [博客]
 tags: [搭建博客]
+pin: true
 ---
 
 ## 前言
