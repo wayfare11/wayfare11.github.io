@@ -36,6 +36,7 @@ pin: true
 ## 简介
 
 本教程介绍如何**用Otsu阈值与形态学方法实现分割医学CT中的肺部**。本方法无需深度学习，完全基于传统图像处理算法，可自动获得三维肺部掩码，适合医学影像处理初学者和进阶用户。
+源码及数据可在[GitHub](https://github.com/wayfare11/MedicalImageProcessing/blob/main/Python/lung-seg-by-otsu.py)获取。
 
 ---
 
