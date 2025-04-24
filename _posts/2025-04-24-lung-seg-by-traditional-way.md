@@ -40,7 +40,7 @@ pin: true
 ![](https://cdn.jsdelivr.net/gh/wayfare11/MyImages/images/MedicalImages/lung-seg-demo.png)
 
 
-源码及数据可在[GitHub]()获取。
+源码可在[GitHub](https://github.com/wayfare11/MedicalImageProcessing/blob/main/Python/lung-seg-by-otsu.py)获取。
 
 ---
 
