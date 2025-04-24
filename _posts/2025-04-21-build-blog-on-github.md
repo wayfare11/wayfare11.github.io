@@ -6,7 +6,7 @@ author: wayfare11
 date: 2025-04-21 16:00:00 +0800
 categories: [博客]
 tags: [搭建博客]
-pin: true
+pin: false
 ---
 
 ## 前言
