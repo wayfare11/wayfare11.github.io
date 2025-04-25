@@ -4,7 +4,7 @@ description: >-
   介绍lungmask的用法，以及如何使用lungmask实现肺部自动分割。
 author: wayfare11
 date: 2025-04-25 17:00:00 +0800
-categories: [医学影像处理, 图像分割, 肺部分割]
+categories: [医学影像处理, 图像分割]
 tags: [医学影像处理]
 pin: false
 ---
