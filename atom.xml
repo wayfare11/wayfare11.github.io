@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://wayfare11.github.io/blog</id>
+    <title>ShokaX Can</title>
+    <subtitle></subtitle>
+    <icon>https://wayfare11.github.io/blog/assets/favicon.ico</icon>
+    <link href="https://wayfare11.github.io/blog" />
+    <author>
+      <name>John Doe</name>
+    </author>
+    <updated>2025-12-24T06:56:57.562Z</updated>
+</feed>
