@@ -3,14 +3,14 @@
     <channel>
         <title>wayfare</title>
         <subtitle></subtitle>
-        <icon>https://wayfare11.github.io/blog/assets/favicon.ico</icon>
-        <link>https://wayfare11.github.io/blog</link>
+        <icon>https://wayfare11.github.io/assets/favicon.ico</icon>
+        <link>https://wayfare11.github.io</link>
         <author>
           <name>wayfare</name>
         </author>
         <description></description>
         <language>zh-cn</language>
-        <pubDate>Thu, 25 Dec 2025 09:24:54 +0800</pubDate>
-        <lastBuildDate>Thu, 25 Dec 2025 09:24:54 +0800</lastBuildDate>
+        <pubDate>Thu, 25 Dec 2025 17:25:24 +0800</pubDate>
+        <lastBuildDate>Thu, 25 Dec 2025 17:25:24 +0800</lastBuildDate>
     </channel>
 </rss>
