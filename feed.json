@@ -1,16 +1,16 @@
 {
     "version": "https://jsonfeed.org/version/1",
-    "title": "wayfare",
+    "title": "ShokaX Can",
     "subtitle": "",
     "icon": "https://wayfare11.github.io/assets/favicon.ico",
-    "description": "",
+    "description": "我的博客",
     "home_page_url": "https://wayfare11.github.io",
     "items": [
         {
             "id": "https://wayfare11.github.io/2026/01/05/hello-world/",
             "url": "https://wayfare11.github.io/2026/01/05/hello-world/",
             "title": "Hello World",
-            "date_published": "2026-01-05T10:45:49.848Z",
+            "date_published": "2026-01-05T10:50:16.241Z",
             "content_html": "<p>Welcome to <a href=\"https://hexo.io/\">Hexo</a>! This is your very first post. Check <a href=\"https://hexo.io/docs/\">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href=\"https://hexo.io/docs/troubleshooting.html\">troubleshooting</a> or you can ask me on <a href=\"https://github.com/hexojs/hexo/issues\">GitHub</a>.</p>\n<h2 id=\"quick-start\"><a class=\"anchor\" href=\"#quick-start\">#</a> Quick Start</h2>\n<h3 id=\"create-a-new-post\"><a class=\"anchor\" href=\"#create-a-new-post\">#</a> Create a new post</h3>\n<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code class=\"language-bash\"><span class=\"line\"><span style=\"color:#59873A;--shiki-dark:#80A665\">$</span><span style=\"color:#B56959;--shiki-dark:#C98A7D\"> hexo</span><span style=\"color:#B56959;--shiki-dark:#C98A7D\"> new</span><span style=\"color:#B5695977;--shiki-dark:#C98A7D77\"> \"</span><span style=\"color:#B56959;--shiki-dark:#C98A7D\">My New Post</span><span style=\"color:#B5695977;--shiki-dark:#C98A7D77\">\"</span></span></code></pre>\n<p>More info: <a href=\"https://hexo.io/docs/writing.html\">Writing</a></p>\n<h3 id=\"run-server\"><a class=\"anchor\" href=\"#run-server\">#</a> Run server</h3>\n<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code class=\"language-bash\"><span class=\"line\"><span style=\"color:#59873A;--shiki-dark:#80A665\">$</span><span style=\"color:#B56959;--shiki-dark:#C98A7D\"> hexo</span><span style=\"color:#B56959;--shiki-dark:#C98A7D\"> server</span></span></code></pre>\n<p>More info: <a href=\"https://hexo.io/docs/server.html\">Server</a></p>\n<h3 id=\"generate-static-files\"><a class=\"anchor\" href=\"#generate-static-files\">#</a> Generate static files</h3>\n<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code class=\"language-bash\"><span class=\"line\"><span style=\"color:#59873A;--shiki-dark:#80A665\">$</span><span style=\"color:#B56959;--shiki-dark:#C98A7D\"> hexo</span><span style=\"color:#B56959;--shiki-dark:#C98A7D\"> generate</span></span></code></pre>\n<p>More info: <a href=\"https://hexo.io/docs/generating.html\">Generating</a></p>\n<h3 id=\"deploy-to-remote-sites\"><a class=\"anchor\" href=\"#deploy-to-remote-sites\">#</a> Deploy to remote sites</h3>\n<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code class=\"language-bash\"><span class=\"line\"><span style=\"color:#59873A;--shiki-dark:#80A665\">$</span><span style=\"color:#B56959;--shiki-dark:#C98A7D\"> hexo</span><span style=\"color:#B56959;--shiki-dark:#C98A7D\"> deploy</span></span></code></pre>\n<p>More info: <a href=\"https://hexo.io/docs/one-command-deployment.html\">Deployment</a></p>\n<h1 id=\"不显示\"><a class=\"anchor\" href=\"#不显示\">#</a> 不显示</h1>\n",
             "tags": []
         }
