@@ -8,7 +8,7 @@
     <author>
       <name>wayfar</name>
     </author>
-    <updated>2026-01-09T07:53:14.424Z</updated>
+    <updated>2026-01-09T07:57:12.854Z</updated>
     <entry>
         <id>https://wayfare11.github.io/2026/01/09/HelloWorld2/</id>
         <title>Hello World2</title>
@@ -28,7 +28,7 @@
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; hexo&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; deploy&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/one-command-deployment.html&#34;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
 </content>
-        <updated>2026-01-09T07:53:14.424Z</updated>
+        <updated>2026-01-09T07:57:12.854Z</updated>
     </entry>
     <entry>
         <id>https://wayfare11.github.io/2026/01/09/helloworld3/</id>
@@ -50,7 +50,7 @@
 &lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/one-command-deployment.html&#34;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;hello3&lt;/p&gt;
 </content>
-        <updated>2026-01-09T07:53:14.424Z</updated>
+        <updated>2026-01-09T07:57:12.854Z</updated>
     </entry>
     <entry>
         <id>https://wayfare11.github.io/2026/01/09/helloworld4/</id>
@@ -71,7 +71,7 @@
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; hexo&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; deploy&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/one-command-deployment.html&#34;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
 </content>
-        <updated>2026-01-09T07:53:14.424Z</updated>
+        <updated>2026-01-09T07:57:12.854Z</updated>
     </entry>
     <entry>
         <id>https://wayfare11.github.io/2026/01/09/helloworld5/</id>
@@ -92,7 +92,7 @@
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; hexo&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; deploy&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/one-command-deployment.html&#34;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
 </content>
-        <updated>2026-01-09T07:53:14.424Z</updated>
+        <updated>2026-01-09T07:57:12.854Z</updated>
     </entry>
     <entry>
         <id>https://wayfare11.github.io/2026/01/09/helloworld6/</id>
@@ -113,7 +113,7 @@
 &lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; hexo&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; deploy&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/one-command-deployment.html&#34;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
 </content>
-        <updated>2026-01-09T07:53:14.424Z</updated>
+        <updated>2026-01-09T07:57:12.854Z</updated>
     </entry>
     <entry>
         <id>https://wayfare11.github.io/2026/01/09/test/</id>
@@ -183,27 +183,24 @@
 H&lt;sub&gt;2&lt;/sub&gt;0&lt;br /&gt;
 29&lt;sup&gt;th&lt;/sup&gt;&lt;/p&gt;
 </content>
-        <updated>2026-01-09T07:53:14.424Z</updated>
+        <updated>2026-01-09T07:57:12.854Z</updated>
     </entry>
     <entry>
         <id>https://wayfare11.github.io/2026/01/09/hello-world/</id>
         <title>Hello World</title>
         <link rel="alternate" href="https://wayfare11.github.io/2026/01/09/hello-world/"/>
-        <content type="html">&lt;p&gt;Welcome to &lt;a href=&#34;https://hexo.io/&#34;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&#34;https://hexo.io/docs/&#34;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&#34;https://hexo.io/docs/troubleshooting.html&#34;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&#34;https://github.com/hexojs/hexo/issues&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;quick-start&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#quick-start&#34;&gt;#&lt;/a&gt; Quick Start&lt;/h2&gt;
-&lt;h3 id=&#34;create-a-new-post&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#create-a-new-post&#34;&gt;#&lt;/a&gt; Create a new post&lt;/h3&gt;
-&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; hexo&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; new&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;My New Post&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/writing.html&#34;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;run-server&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#run-server&#34;&gt;#&lt;/a&gt; Run server&lt;/h3&gt;
-&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; hexo&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; server&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/server.html&#34;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;generate-static-files&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#generate-static-files&#34;&gt;#&lt;/a&gt; Generate static files&lt;/h3&gt;
-&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; hexo&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; generate&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/generating.html&#34;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;deploy-to-remote-sites&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#deploy-to-remote-sites&#34;&gt;#&lt;/a&gt; Deploy to remote sites&lt;/h3&gt;
-&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; hexo&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; deploy&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/one-command-deployment.html&#34;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
-</content>
+        <content type="html">&lt;div class=&#34;hbe hbe-container&#34; id=&#34;hexo-blog-encrypt&#34; data-wpm=&#34;密码错误，请重试&#34; data-whm=&#34;内容校验失败（可能被篡改），仍可尝试查看&#34;&gt;
+  &lt;script id=&#34;hbeData&#34; type=&#34;hbeData&#34; data-hmacdigest=&#34;79b501a12126362ed71b44e48f3bdee8fc70e3c24fe58dd077020fd6813899fd&#34;&gt;4630436162ade97ba2718b7d0c4b3b63f97fe7f487088031e1ec7f30c37889e17af4f6297068ec459b8609dd5e773f884c55009995b4e2fa14cd0ad5eff0ada9f9fb8fb348a39322f64a27b4e67198e9d0918355853825b4a8b859e1b0997d0838db13d93eb663a75abf26151a4cd6693bc3399e41eef6d4a0d8ac518bee9c9ddee4d733ecfde4f1c7c01610b2139c3f919d321e3580e4ea4d25333a1eb6a757138158c91746eb650d2bd292b639e6c34cbf144f87d98390fac9f8662146f06c3a6438c2b9ee94e1d311e783b3870047c72629be8369de61aafcfd95d1a6b146908a00176e823191858046b0d3068b0efa543f002c4411ac17d84cfbc5419db7d33e0dec60d5febc26877845ea4a0c78edbec57ec484cb94f4a5981b779247299a083552613550cf2067f03e18806e1d8b7363322598e505c747f93d1e38576db45e8de5d1770b452a4fb1219a730e7968e9f6fbb48dd64088b4f6b768d41ae0fde1188c840a5b26f4bcf87fc459371861bccf009fd56466bfb6189998e9e6a70ba3621ca8bdf949e5cadcc118f51f1285e700fe9e7e6b557a1dd209d48a1d0cbb009051daa698734920b51a1aa78f68fc2b0299483a7421083daf7909956f711be6626cc6534f4736430c17d6c46c593112fa10c561bf1246143710c5a0c7c54c11a581e91994c9152dac32b459dae57c4ea0bbd34ed722620af66652f5f34b98f87925f8c08aff464632b07fe51a8d9115c5962be55f417416cb9930d9520b65026781945942f1ea271c3a633c50d3310c176fc3de69eeb0b8cedbca66657094308f9aca76183b6eca487a6b95e196f950ff29c17f9032f45c0bc5ba0e2fa42daf09cfda4c013766fa33077988142984f32617e473a712bc5f3d5554d5107d41a40d0bf0e5664177e9904b47bb3f7f48ad85b56d2e87eadf71027f50781ea43e0fe48b700103ee56d8b2b99f3c1ee65736cc14818ea09ff2a2c2522d33c90205627a5675ca22650eb49150afc1b79e1824c8f29c9fbea80a76a7d4dea7d6967c50aea29c865ff9ebeb2ad4fc7a800776f980ffeb1b773e11adad25229e05320d6046b42907961ba960ec690b20704e2a3cd3310a58592ce7f7c9a5d60e76af4b731025c6595d6a981d73eae3ff4cd02ecc603923447a7d3c7339ea1eb0cd73daf103f71f1bf95cdeafec85dfd967af9637e36cffdacdb7195483304788721e3c39e56af4575fb53250cce49021d6bff79c4a10f9e38aaea5a77cc40630e7aba68d1f88237906163b49df764fcfee6aa0b6277087436b424d5d892543b6a0dbdff28814af47c1b14281b00bc785df1fbbd9fbabc17879c43169afa2e014f139671084c86eeb3b53ce8754462118b2b747dbe865c165d2546ec35b2215b19b02ced560bda16d6ccb2e36a74f2ae0bd1f3852b2db80e80abd59c2fa4b222a2c9a53be90223b53fba9a04a71112938e6dfc1787d67da958c63d7e5731015a88a8871c91ad5900c70fa9ccce285f94b1a1f82815834803fafe81ad4021f0ea7bff2f2aecf83fbd584854d007bdecb0166bcd7210a41f8143f62d5d77be0d999d632f87ea8232be795ef382915b65049b14ff0d61d76599b9b616c6d0f6aeb0cd37b16f2e4191d656af05d45861a9cf595f1719dd7a24eb932f0e4f8d4eed5078a578cb586d937932b851389f4256022d1f2a3497e76a1cb555d7871910fc91c7aefab69c2c28ae39044d424d6614b8e6f98c0e13ee885d50026e069c719323af52d0494d2eb96db59dbcb37b9867a71f48f988fd6476a40784327472e4a9b71c2dcd9a9db887c2787839c0de4286723fe802ed115fcb8ca007d9f45849d53a1de29f5890ce88460741f27ca9cd0b872c290aeab29191f7cdad00c8cad6a2b9b9d86b9d1caa93db4bf78f44700cd952eb4c551e8874f6d1b26178a7a889f9fb2bebc8acbc6ac5174bdf657eb5a0250f1c3adf9e53dd38798eea8e39cb988dd654d2891eb3730bd3132a24a33d801b637b5d60a9634aa0bab951285fd1df33cde5ce03d2e41e9295b1f69a976d99a50bc9283960981f87a0cbef9a1bda3f5e6fb603accfde5ca211d85e24cc8219dbd1bc0b96314366938b21c0b7115434ece06e361e11b5a71adcef436df63145f49b555c6c3261707c11bc88a0527a54a14dbc1af8dbe869b76201a7c811421658dff79e073dd646c5111bffc069dca07e1b5baaa9137ff4314873fb6c8d0db00ad4c53b1c6d536c610f0eebd7e7b8dc707c3873e70d222a694ca6741bf6be0e090e6c72f7a6d9cc16be2b604df596b3f5eb3b0844da03bf3fe441e71bcecc7e0cbc3aceaa7e376f0a4c41ec322f324da31a41dd27a7d69fbcaba5bced4021acd0091eccae44bfd7997d0852ce78f8c47753ff8f757be8b0ed8d3777ada5dcbc6fea333d2a3c4f075e4a103f3ae14577b003bcf38f47530dd44d579227a0e7c453c454c4fb8e1e0b54eaeb021b947c41c0977f547fd39e64619dad57f3b1dfee705d8cf97ab08db7e5afd3d213ecb568f656003f863184255f987561c381dc801015a65a515d08dd111b05b6df00025f721d4dae3d6978a508abcfcacae46b3fd345a72eef97804597acbe441d11d00d500b2ca215bf149c5993e7bdbbcd023d27684cc167fe710ba811aa01bb27cc7d19544b60eebae6154e876f1220d57964ef4086df6ec2edee35d24d08150b59f21736023c94b372e5613bf02398b40d07e1598bd0d1c8257cbdb818c43161e9acc3b32be5a3d1f61bb98f7395b71eac9d4174cc6b62d48aeb6565d1680927a457d5b1c5292118870a8cd1789c12e097fe614b485ced6d08075dfd41a125661b74547915f08cf89c428788ea77cd02106c76e38f12870c41ac8c27316f3a4341e8a7dc4de6c0dbe9e57ef0c2b66d20956ca5c6f3c46d78713ad74b6af172b73087d7909458c856f8f70f86c09b5bdb3f3edddfd51c802bb3c272c1bbc5bc8b5f7839075204c53b2fcf5e985f329896499c048a95550aa9e79c6b618dd95b8955f2fd10fec0fabb195f8b815a7be9c01957c6af0766320e8232d6f675434a7c7d3589fa6fd48a49a941586d41aa38c9953d9921e1fd1b4f95a85d4d3fed1a1c70ab2256b1d29ce52011488e6149fe07170a57ac415d55720e221883fe8d0e0fd8e580e7309377ef84a3b7ad98f623b5f998f50cf0dc1c5feafe145f4716bf5cf8027ffe7c89ce582d2deb94e2f23a3cc443aba6deb325a9a572d92df274db44295d07cfc3bd3815fd02cbd1aa00c367eef9a533dce76f9d5bf6671c62912f9156f3fc4956d1200c2bb59c391eeadcfd1d077a74a50e4d9acf5e85316da3112716d060f96933ddedcfeb1013f03b7b4e701990710ceb5710f66a490275b0fd7b484b97a00d75a7a73a290d75537f55b6fbdeb3c473401782f2f4c52ff1e4cad0619138139d09e11df7657857531b12afc0aad4ee8198728b14bc83c702730c8b3a8ee762543982ac5cb0af23756935a71110854b671a47418c85829a819b369a1c4558bb9499cc3df392d6369ed2c879d61b5b3b1ed78129b8975ef2a45714cb17d13abec461259de5e2e627ef7f9e4154d8aae0afd7eb04ea51cf3b1786c56f34a7fe000dfbcf1652365877d6a0b10ca7dfd20262b134f97c40ed44cbc8bda6b45fdddafe51671496df45ff3291c795f9c032950f06976278e53c1c1c95bb25bf96a6e341c8f87e9d5a0fef986d21a4f0b11e2e38bcf8a6477a62b976dfed8f7e56eeb0d285243738e506f976f8afe32f49760cb1fbd663b1370ae4bcc8ad63345cbb995f29ff68d1f130c5089f7d4c32ac1ab1157be25e64cd64170a729030378f7bf30fe7440eb06f56425e949ce3872dc7f14a465b1106b47d841a38417f72f3d05e2b73d5ddb033d6a595af6eab60205d4750413905c2c790b2c453b887f2b4fbb68a6b4f790e5e619b46b95a1b3dc2568f1c2424cb59fa95be373ac66a86b1bf1139f91b80c4eb6b96cbe4bdf1c313de96cee4dae5e9ba2387d7e9a6ba15fee10d2ee97b0770fdd04c85f2c5a3ca215ba74cc8f9b28969b3eee058d0d9c4d2ee394d8789355542445f0c3631c4f962e289c379a3ad11786553156636cd0a0149d6d69edddc958aaa40f8ea9831e3be6c046cf9699caa66bf8bf20a7245a26935420b947a344b6b72e3d4771b91ca289c16de70cdbe04e8ac1d75735fa35340519771ae4b4af90ddfef12e3db3a7ccd079bb4b1d560ea0164095ff3c570f9b1e1d386e5032cf37eeb5ae75fd2bdbd24b2054482beb9c0a355c6d469a7031906e62ee34b9a485c2fc43015df0c8bd9b9cb76c273d2f1326dd6dfeedebc08ad1709c2b3396&lt;/script&gt;
+  &lt;div class=&#34;hbe hbe-content&#34;&gt;
+    &lt;div class=&#34;hbe hbe-input hbe-input-default&#34;&gt;
+      &lt;input class=&#34;hbe hbe-input-field hbe-input-field-default&#34; type=&#34;password&#34; id=&#34;hbePass&#34;&gt;
+      &lt;label class=&#34;hbe hbe-input-label hbe-input-label-default&#34; for=&#34;hbePass&#34;&gt;
+        &lt;span class=&#34;hbe hbe-input-label-content hbe-input-label-content-default&#34;&gt;请输入访问密码&lt;/span&gt;
+      &lt;/label&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;script data-pjax src=&#34;/lib/hbe.js&#34;&gt;&lt;/script&gt;&lt;link href=&#34;/css/hbe.style.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;</content>
         <category term="技术" scheme="https://wayfare11.github.io/categories/%E6%8A%80%E6%9C%AF/" />
         <category term="Hexo" scheme="https://wayfare11.github.io/categories/%E6%8A%80%E6%9C%AF/Hexo/" />
         <category term="教程" scheme="https://wayfare11.github.io/tags/%E6%95%99%E7%A8%8B/" />
