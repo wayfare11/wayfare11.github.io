@@ -10,13 +10,34 @@
         </author>
         <description>我的博客</description>
         <language>zh-CN</language>
-        <pubDate>Tue, 13 Jan 2026 15:43:49 +0800</pubDate>
-        <lastBuildDate>Tue, 13 Jan 2026 15:43:49 +0800</lastBuildDate>
+        <pubDate>Mon, 09 Mar 2026 14:39:53 +0800</pubDate>
+        <lastBuildDate>Mon, 09 Mar 2026 14:39:53 +0800</lastBuildDate>
         <item>
-            <guid isPermalink="true">https://wayfar.qzz.io/2026/01/13/helloworld3/</guid>
+            <guid isPermalink="true">https://wayfar.qzz.io/2026/03/09/HelloWorld2/</guid>
+            <title>Hello World2</title>
+            <link>https://wayfar.qzz.io/2026/03/09/HelloWorld2/</link>
+            <pubDate>Mon, 09 Mar 2026 14:39:53 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;Welcome to &lt;a href=&#34;https://hexo.io/&#34;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&#34;https://hexo.io/docs/&#34;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&#34;https://hexo.io/docs/troubleshooting.html&#34;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&#34;https://github.com/hexojs/hexo/issues&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;quick-start&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#quick-start&#34;&gt;#&lt;/a&gt; Quick Start&lt;/h2&gt;
+&lt;h3 id=&#34;create-a-new-post&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#create-a-new-post&#34;&gt;#&lt;/a&gt; Create a new post&lt;/h3&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; hexo&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; new&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;My New Post&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/writing.html&#34;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;run-server&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#run-server&#34;&gt;#&lt;/a&gt; Run server&lt;/h3&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; hexo&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; server&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/server.html&#34;&gt;Server&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;generate-static-files&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#generate-static-files&#34;&gt;#&lt;/a&gt; Generate static files&lt;/h3&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; hexo&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; generate&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/generating.html&#34;&gt;Generating&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;deploy-to-remote-sites&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#deploy-to-remote-sites&#34;&gt;#&lt;/a&gt; Deploy to remote sites&lt;/h3&gt;
+&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; hexo&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; deploy&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/one-command-deployment.html&#34;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://wayfar.qzz.io/2026/03/09/helloworld3/</guid>
             <title>Hello World3</title>
-            <link>https://wayfar.qzz.io/2026/01/13/helloworld3/</link>
-            <pubDate>Tue, 13 Jan 2026 15:43:49 +0800</pubDate>
+            <link>https://wayfar.qzz.io/2026/03/09/helloworld3/</link>
+            <pubDate>Mon, 09 Mar 2026 14:39:53 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;Welcome to &lt;a href=&#34;https://hexo.io/&#34;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&#34;https://hexo.io/docs/&#34;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&#34;https://hexo.io/docs/troubleshooting.html&#34;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&#34;https://github.com/hexojs/hexo/issues&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;quick-start&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#quick-start&#34;&gt;#&lt;/a&gt; Quick Start&lt;/h2&gt;
 &lt;h3 id=&#34;create-a-new-post&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#create-a-new-post&#34;&gt;#&lt;/a&gt; Create a new post&lt;/h3&gt;
@@ -35,10 +56,10 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">https://wayfar.qzz.io/2026/01/13/helloworld4/</guid>
+            <guid isPermalink="true">https://wayfar.qzz.io/2026/03/09/helloworld4/</guid>
             <title>Hello World4</title>
-            <link>https://wayfar.qzz.io/2026/01/13/helloworld4/</link>
-            <pubDate>Tue, 13 Jan 2026 15:43:49 +0800</pubDate>
+            <link>https://wayfar.qzz.io/2026/03/09/helloworld4/</link>
+            <pubDate>Mon, 09 Mar 2026 14:39:53 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;Welcome to &lt;a href=&#34;https://hexo.io/&#34;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&#34;https://hexo.io/docs/&#34;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&#34;https://hexo.io/docs/troubleshooting.html&#34;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&#34;https://github.com/hexojs/hexo/issues&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;quick-start&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#quick-start&#34;&gt;#&lt;/a&gt; Quick Start&lt;/h2&gt;
 &lt;h3 id=&#34;create-a-new-post&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#create-a-new-post&#34;&gt;#&lt;/a&gt; Create a new post&lt;/h3&gt;
@@ -56,10 +77,10 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">https://wayfar.qzz.io/2026/01/13/helloworld5/</guid>
+            <guid isPermalink="true">https://wayfar.qzz.io/2026/03/09/helloworld5/</guid>
             <title>Hello World5</title>
-            <link>https://wayfar.qzz.io/2026/01/13/helloworld5/</link>
-            <pubDate>Tue, 13 Jan 2026 15:43:49 +0800</pubDate>
+            <link>https://wayfar.qzz.io/2026/03/09/helloworld5/</link>
+            <pubDate>Mon, 09 Mar 2026 14:39:53 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;Welcome to &lt;a href=&#34;https://hexo.io/&#34;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&#34;https://hexo.io/docs/&#34;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&#34;https://hexo.io/docs/troubleshooting.html&#34;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&#34;https://github.com/hexojs/hexo/issues&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;quick-start&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#quick-start&#34;&gt;#&lt;/a&gt; Quick Start&lt;/h2&gt;
 &lt;h3 id=&#34;create-a-new-post&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#create-a-new-post&#34;&gt;#&lt;/a&gt; Create a new post&lt;/h3&gt;
@@ -77,10 +98,10 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">https://wayfar.qzz.io/2026/01/13/helloworld6/</guid>
+            <guid isPermalink="true">https://wayfar.qzz.io/2026/03/09/helloworld6/</guid>
             <title>Hello World6</title>
-            <link>https://wayfar.qzz.io/2026/01/13/helloworld6/</link>
-            <pubDate>Tue, 13 Jan 2026 15:43:49 +0800</pubDate>
+            <link>https://wayfar.qzz.io/2026/03/09/helloworld6/</link>
+            <pubDate>Mon, 09 Mar 2026 14:39:53 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;Welcome to &lt;a href=&#34;https://hexo.io/&#34;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&#34;https://hexo.io/docs/&#34;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&#34;https://hexo.io/docs/troubleshooting.html&#34;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&#34;https://github.com/hexojs/hexo/issues&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;quick-start&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#quick-start&#34;&gt;#&lt;/a&gt; Quick Start&lt;/h2&gt;
 &lt;h3 id=&#34;create-a-new-post&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#create-a-new-post&#34;&gt;#&lt;/a&gt; Create a new post&lt;/h3&gt;
@@ -98,10 +119,10 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">https://wayfar.qzz.io/2026/01/13/test/</guid>
+            <guid isPermalink="true">https://wayfar.qzz.io/2026/03/09/test/</guid>
             <title>练习题与答案</title>
-            <link>https://wayfar.qzz.io/2026/01/13/test/</link>
-            <pubDate>Tue, 13 Jan 2026 15:43:49 +0800</pubDate>
+            <link>https://wayfar.qzz.io/2026/03/09/test/</link>
+            <pubDate>Mon, 09 Mar 2026 14:39:53 +0800</pubDate>
             <description><![CDATA[ &lt;ol&gt;
 &lt;li class=&#34;quiz true&#34;&gt;
 &lt;p&gt;编译时多态主要指运算符重载与函数重载，而运行时多态主要指虚函数。&lt;/p&gt;
@@ -168,24 +189,108 @@ H&lt;sub&gt;2&lt;/sub&gt;0&lt;br /&gt;
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">https://wayfar.qzz.io/2026/01/13/HelloWorld2/</guid>
-            <title>Hello World2</title>
-            <link>https://wayfar.qzz.io/2026/01/13/HelloWorld2/</link>
-            <pubDate>Tue, 13 Jan 2026 15:43:49 +0800</pubDate>
-            <description><![CDATA[ &lt;p&gt;Welcome to &lt;a href=&#34;https://hexo.io/&#34;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&#34;https://hexo.io/docs/&#34;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&#34;https://hexo.io/docs/troubleshooting.html&#34;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&#34;https://github.com/hexojs/hexo/issues&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;quick-start&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#quick-start&#34;&gt;#&lt;/a&gt; Quick Start&lt;/h2&gt;
-&lt;h3 id=&#34;create-a-new-post&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#create-a-new-post&#34;&gt;#&lt;/a&gt; Create a new post&lt;/h3&gt;
-&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; hexo&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; new&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt; &#34;&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt;My New Post&lt;/span&gt;&lt;span style=&#34;color:#B5695977;--shiki-dark:#C98A7D77&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/writing.html&#34;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;run-server&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#run-server&#34;&gt;#&lt;/a&gt; Run server&lt;/h3&gt;
-&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; hexo&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; server&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/server.html&#34;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;generate-static-files&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#generate-static-files&#34;&gt;#&lt;/a&gt; Generate static files&lt;/h3&gt;
-&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; hexo&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; generate&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/generating.html&#34;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;deploy-to-remote-sites&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#deploy-to-remote-sites&#34;&gt;#&lt;/a&gt; Deploy to remote sites&lt;/h3&gt;
-&lt;pre class=&#34;shiki shiki-themes vitesse-light vitesse-dark&#34; style=&#34;background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee&#34; tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span style=&#34;color:#59873A;--shiki-dark:#80A665&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; hexo&lt;/span&gt;&lt;span style=&#34;color:#B56959;--shiki-dark:#C98A7D&#34;&gt; deploy&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;More info: &lt;a href=&#34;https://hexo.io/docs/one-command-deployment.html&#34;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+            <guid isPermalink="true">https://wayfar.qzz.io/2026/01/09/2026-03-09-idiom-1/</guid>
+            <title>中华文化常用成语积累</title>
+            <link>https://wayfar.qzz.io/2026/01/09/2026-03-09-idiom-1/</link>
+            <category term="成语积累" scheme="https://wayfar.qzz.io/categories/%E6%88%90%E8%AF%AD%E7%A7%AF%E7%B4%AF/" />
+            <category term="成语积累" scheme="https://wayfar.qzz.io/tags/%E6%88%90%E8%AF%AD%E7%A7%AF%E7%B4%AF/" />
+            <category term="中华文化" scheme="https://wayfar.qzz.io/tags/%E4%B8%AD%E5%8D%8E%E6%96%87%E5%8C%96/" />
+            <category term="传统文化" scheme="https://wayfar.qzz.io/tags/%E4%BC%A0%E7%BB%9F%E6%96%87%E5%8C%96/" />
+            <pubDate>Fri, 09 Jan 2026 10:00:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;一-源远流长&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-源远流长&#34;&gt;#&lt;/a&gt; 一、&lt;span class=&#34;label primary&#34;&gt;源远流长&lt;/span&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;成语释义&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#成语释义&#34;&gt;#&lt;/a&gt; 成语释义&lt;/h3&gt;
+&lt;p&gt;“源远流长”原意是河流的源头很远，水流很长。后来多用来比喻 &lt;strong&gt;历史悠久、传承久远&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;词语拆解&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#词语拆解&#34;&gt;#&lt;/a&gt; 词语拆解&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;源远&lt;/strong&gt;：源头很远&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;流长&lt;/strong&gt;：水流很长&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;合起来强调的是：&lt;strong&gt;从起点到延续，时间跨度很大。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;例句&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#例句&#34;&gt;#&lt;/a&gt; 例句&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;中华文化&lt;mark&gt;源远流长&lt;/mark&gt;，是中华民族最深厚的文化根脉。&lt;/li&gt;
+&lt;li&gt;中国茶文化&lt;mark&gt;源远流长&lt;/mark&gt;，至今仍影响着人们的生活方式。&lt;/li&gt;
+&lt;li&gt;书法艺术&lt;mark&gt;源远流长&lt;/mark&gt;，承载着中华民族独特的审美追求。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;易错提醒&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#易错提醒&#34;&gt;#&lt;/a&gt; 易错提醒&lt;/h3&gt;
+&lt;p&gt;“源远流长”强调的是 &lt;strong&gt;历史久、传承长&lt;/strong&gt;，不侧重内容是否丰富。&lt;br /&gt;
+&lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;写“历史悠久”时最适合用这个成语。&lt;/span&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;二-连绵不绝&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#二-连绵不绝&#34;&gt;#&lt;/a&gt; 二、&lt;span class=&#34;label info&#34;&gt;连绵不绝&lt;/span&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;成语释义-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#成语释义-2&#34;&gt;#&lt;/a&gt; 成语释义&lt;/h3&gt;
+&lt;p&gt;“连绵不绝”意思是连续不断，没有中断。&lt;/p&gt;
+&lt;h3 id=&#34;词语拆解-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#词语拆解-2&#34;&gt;#&lt;/a&gt; 词语拆解&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;连绵&lt;/strong&gt;：连续不断地延伸&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不绝&lt;/strong&gt;：没有断绝&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;合起来强调的是：&lt;strong&gt;持续不断，一直延续下来。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;例句-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#例句-2&#34;&gt;#&lt;/a&gt; 例句&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;中华文脉&lt;mark&gt;连绵不绝&lt;/mark&gt;，展现出顽强而持久的生命力。&lt;/li&gt;
+&lt;li&gt;传统节日的代代传承，使中华文化血脉&lt;mark&gt;连绵不绝&lt;/mark&gt;。&lt;/li&gt;
+&lt;li&gt;从诗词歌赋到礼乐制度，中华文明的精神追求&lt;mark&gt;连绵不绝&lt;/mark&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;易错提醒-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#易错提醒-2&#34;&gt;#&lt;/a&gt; 易错提醒&lt;/h3&gt;
+&lt;p&gt;“连绵不绝”更强调 &lt;strong&gt;不断、持续&lt;/strong&gt;，而“源远流长”更强调 &lt;strong&gt;历史久远&lt;/strong&gt;。&lt;br /&gt;
+&lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;写“传承不断”时更适合用“连绵不绝”。&lt;/span&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;三-博大精深&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#三-博大精深&#34;&gt;#&lt;/a&gt; 三、&lt;span class=&#34;label success&#34;&gt;博大精深&lt;/span&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;成语释义-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#成语释义-3&#34;&gt;#&lt;/a&gt; 成语释义&lt;/h3&gt;
+&lt;p&gt;“博大精深”指内容广博宏大，同时内涵精妙深刻。&lt;/p&gt;
+&lt;h3 id=&#34;词语拆解-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#词语拆解-3&#34;&gt;#&lt;/a&gt; 词语拆解&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;博大&lt;/strong&gt;：广博宏大&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;精深&lt;/strong&gt;：精妙深刻&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;合起来强调的是：&lt;strong&gt;既广又深，既丰富又有内涵。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;例句-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#例句-3&#34;&gt;#&lt;/a&gt; 例句&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;中华文化&lt;mark&gt;博大精深&lt;/mark&gt;，值得我们不断学习和传承。&lt;/li&gt;
+&lt;li&gt;中国古典诗词&lt;mark&gt;博大精深&lt;/mark&gt;，蕴含着丰富的情感与哲理。&lt;/li&gt;
+&lt;li&gt;中医药文化&lt;mark&gt;博大精深&lt;/mark&gt;，凝聚着古人的智慧结晶。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;易错提醒-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#易错提醒-3&#34;&gt;#&lt;/a&gt; 易错提醒&lt;/h3&gt;
+&lt;p&gt;“博大精深”强调的是 &lt;strong&gt;内容丰富、思想深刻&lt;/strong&gt;，不是强调历史久。&lt;br /&gt;
+&lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;写“文化内涵深厚”时，这个成语最合适。&lt;/span&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;四-历久弥新&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#四-历久弥新&#34;&gt;#&lt;/a&gt; 四、&lt;span class=&#34;label warning&#34;&gt;历久弥新&lt;/span&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;成语释义-4&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#成语释义-4&#34;&gt;#&lt;/a&gt; 成语释义&lt;/h3&gt;
+&lt;p&gt;“历久弥新”意思是经历了长时间的考验，反而更显出新的价值和生命力。&lt;/p&gt;
+&lt;h3 id=&#34;词语拆解-4&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#词语拆解-4&#34;&gt;#&lt;/a&gt; 词语拆解&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;历久&lt;/strong&gt;：经历很长时间&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;弥新&lt;/strong&gt;：更加显得新，更有新意&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;合起来强调的是：&lt;strong&gt;时间越久，越能体现出它的新价值。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;例句-4&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#例句-4&#34;&gt;#&lt;/a&gt; 例句&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;古诗词穿越千年，今天读来依然令人感动，真正体现了中华文化的&lt;mark&gt;历久弥新&lt;/mark&gt;。&lt;/li&gt;
+&lt;li&gt;二十四节气在现代社会依然具有现实意义，展现出传统智慧的&lt;mark&gt;历久弥新&lt;/mark&gt;。&lt;/li&gt;
+&lt;li&gt;很多传统美德在今天仍值得我们践行，显示出中华文化&lt;mark&gt;历久弥新&lt;/mark&gt;的魅力。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;易错提醒-4&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#易错提醒-4&#34;&gt;#&lt;/a&gt; 易错提醒&lt;/h3&gt;
+&lt;p&gt;“历久弥新”不是单纯说“新”，而是说 &lt;strong&gt;经过很长时间后仍然有活力、有价值&lt;/strong&gt;。&lt;br /&gt;
+&lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;写“传统文化在今天依然有意义”时，很适合用这个成语。&lt;/span&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;五-兼收并蓄&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#五-兼收并蓄&#34;&gt;#&lt;/a&gt; 五、&lt;span class=&#34;label danger&#34;&gt;兼收并蓄&lt;/span&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;成语释义-5&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#成语释义-5&#34;&gt;#&lt;/a&gt; 成语释义&lt;/h3&gt;
+&lt;p&gt;“兼收并蓄”意思是把不同方面的长处都吸收进来，并加以保存和融合。&lt;/p&gt;
+&lt;h3 id=&#34;词语拆解-5&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#词语拆解-5&#34;&gt;#&lt;/a&gt; 词语拆解&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;兼收&lt;/strong&gt;：同时吸收&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;并蓄&lt;/strong&gt;：一起保存、容纳&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;合起来强调的是：&lt;strong&gt;开放包容，善于吸收优秀成果。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;例句-5&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#例句-5&#34;&gt;#&lt;/a&gt; 例句&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;中华文化之所以能够不断发展，一个重要原因就在于它具有&lt;mark&gt;兼收并蓄&lt;/mark&gt;的品格。&lt;/li&gt;
+&lt;li&gt;中华文明在交流互鉴中&lt;mark&gt;兼收并蓄&lt;/mark&gt;，形成了独特而丰富的文化面貌。&lt;/li&gt;
+&lt;li&gt;开放包容、&lt;mark&gt;兼收并蓄&lt;/mark&gt;，是中华文明的重要特征之一。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;易错提醒-5&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#易错提醒-5&#34;&gt;#&lt;/a&gt; 易错提醒&lt;/h3&gt;
+&lt;p&gt;“兼收并蓄”不是盲目接受一切，而是 &lt;strong&gt;有选择地吸收优秀成果，并使其融入自身发展之中&lt;/strong&gt;。&lt;br /&gt;
+&lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;写“开放包容”时，这个成语非常贴切。&lt;/span&gt;&lt;/p&gt;
  ]]></description>
         </item>
         <item>
