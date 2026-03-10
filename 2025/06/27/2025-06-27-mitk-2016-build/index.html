@@ -1,0 +1,384 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"/><meta name="theme-color" content="#222"/><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/><meta name="renderer" content="webkit"/><link rel="icon" type="image/ico" sizes="32x32" href="/assets/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/><link rel="alternate" href="/rss.xml" title="羽见风声" type="application/rss+xml"><link rel="alternate" href="/atom.xml" title="羽见风声" type="application/atom+xml"><link rel="alternate" type="application/json" title="羽见风声" href="https://wayfar.qzz.io/feed.json"/><link rel="preconnect" href="https://s4.zstatic.net"/><link rel="preconnect" href="https://at.alicdn.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CFredericka%20the%20Great:400,400italic,700,700italic%7CNoto%20Serif%20JP:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CInconsolata:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="none" onload="this.media&#x3D;&#39;all&#39;"><link rel="modulepreload" href="/js/siteInit.js"></link><link rel="modulepreload" href="/js/nyx-player-UFEBMXAY.js"></link><link rel="modulepreload" href="/js/copy-tex-JNJFBT44.js"></link><link rel="modulepreload" href="/js/post-TE2XW44Y.js"></link><link rel="modulepreload" href="/js/chunk-KZP7HV7X.js"></link><link rel="modulepreload" href="/js/index.esm-UN4B2S2R.js"></link><link rel="modulepreload" href="/js/chunk-HJSTZ4VX.js"></link><link rel="modulepreload" href="/js/chunk-YNTJXH5W.js"></link><link rel="stylesheet" href="/css/siteInit.css" media="none" onload="this.media&#x3D;&#39;all&#39;"></link><link rel="preload" href="/assets/th6.jpg" as="image" fetchpriority="high"><link rel="preload" href="/assets/th6.jpg" as="image" fetchpriority="high"><link rel="preload" href="/assets/th3.jpg" as="image" fetchpriority="high"><link rel="preload" href="/assets/th1.jpg" as="image" fetchpriority="high"><link rel="preload" href="/assets/th4.jpg" as="image" fetchpriority="high"><link rel="preload" href="/assets/th1.jpg" as="image" fetchpriority="high"><meta name="keywords" content="医学影像处理"/><meta name="description" content="编译MITK2016.11源码。"/><link rel="canonical" href="https://wayfar.qzz.io/2025/06/27/2025-06-27-mitk-2016-build/"><link rel="stylesheet" href="/css/post.css?v=0.5.4"><link rel="stylesheet" href="/css/mermaid.css?v=0.5.4"><!-- 临时处理--><link rel="stylesheet" media="none" onload="this.media='all'" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css"><title>MITK2016.11源码编译</title><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/waifu.css">
+<style>
+  /* 置顶，避免被主题遮住 */
+  #waifu { z-index: 999999 !important; }
+
+  /* 手机端隐藏看板娘 */
+  @media (max-width: 768px) {
+    #waifu { display: none !important; }
+  }
+
+  /* ====== 关键修复：tips 层不要拦截鼠标/触摸事件，否则点不到 canvas 就无法触发拖拽 ====== */
+  #waifu-tips, .waifu-tips-active { pointer-events: none !important; }
+
+  /* 工具栏依然需要可点击 */
+  #waifu-tool { pointer-events: auto !important; }
+
+  /* 保险：canvas 必须能接收事件 */
+  #live2d { pointer-events: auto !important; }
+</style>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="pagefind_mount"></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">MITK2016.11源码编译</h1><div class="meta"><span class="item" title="创建时间：2025-06-27 10:00:00"><span class="icon"><i class="ic i-calendar"></i></span><span class="text">发表于</span><time itemprop="dateCreated datePublished" datetime="2025-06-27T10:00:00+08:00">2025-06-27</time></span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i></span><span class="text">本文字数</span><span>4k</span><span class="text">字</span></span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i></span><span class="text">阅读时长</span><span>4 分钟</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span><span class="line"></span><span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">wayfar</a></li></ul><ul class="right" id="rightNav"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div class="pjax" id="imgs"><ul><li class="item" style="background-image: url(&quot;/assets/th6.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;/assets/th6.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;/assets/th3.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;/assets/th1.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;/assets/th4.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;/assets/th1.jpg&quot;);"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><main><div class="inner"><div class="pjax" id="main"><div class="article wrap"><div class="breadcrumb" itemListElement itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i><span><a href="/">首页</a></span><i class="ic i-angle-right"></i><span itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/" itemprop="item" rel="index" title="分类于医学影像处理"><span itemprop="name">医学影像处理<meta itemprop="position" content="0"/></span></a></span><i class="ic i-angle-right"></i><span class="current" itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/MITK/" itemprop="item" rel="index" title="分类于MITK"><span itemprop="name">MITK<meta itemprop="position" content="1"/></span></a></span></div><article class="post block" itemscope="itemscope" itemtype="http://schema.org/Article" data-pagefind-body="data-pagefind-body" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://wayfar.qzz.io/2025/06/27/2025-06-27-mitk-2016-build/"/><span hidden="hidden" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="image" content="/assets/avatar.jpg"/><meta itemprop="name" content="wayfar"/><meta itemprop="description" content="羽落风起，书尽人间, 我的博客"/></span><span hidden="hidden" itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name" content="羽见风声"/></span><div class="body md" itemprop="articleBody"><h1 id="mitk201611源码编译"><a class="anchor" href="#mitk201611源码编译">#</a> MITK2016.11源码编译</h1>
+<hr />
+<p>下面是针对 <strong>MITK 2016.11</strong> 源码编译整理的完整指南，替换原文中的代码分割内容：</p>
+<hr />
+<h2 id="1-环境准备"><a class="anchor" href="#1-环境准备">#</a> 1. 环境准备</h2>
+<p>确保以下依赖安装完毕（以 <strong>Windows</strong> 为例）：</p>
+<ul>
+<li><strong>Qt</strong>：5.7.1</li>
+<li><strong>CMake</strong>：3.7</li>
+<li><strong>编译器</strong>：MSVC 2015、2017</li>
+</ul>
+<p>我已经安装好了MSVC 2017，所以没有安装 MSVC 2015，亲测MSVC 2017也可以成功编译。</p>
+<p>Qt的目录需要放到环境变量中，例如在环境变量的Path下添加：D:\ProgramData\Qt\5.7\5.7\msvc2015_64\bin。</p>
+<p>MSVC的bin目录也要放到环境变量中，防止Cmake找不到编译器。</p>
+<p>cmake也要安装低版本的，否则也会编译失败。</p>
+<hr />
+<h2 id="2-获取源码"><a class="anchor" href="#2-获取源码">#</a> 2. 获取源码</h2>
+<p><a target="_blank" rel="noopener" href="https://www.mitk.org/download/releases/MITK-2016.11/">https://www.mitk.org/download/releases/MITK-2016.11/</a></p>
+<p>直接下载windows版本的源码</p>
+<hr />
+<h2 id="3-创建构建目录"><a class="anchor" href="#3-创建构建目录">#</a> 3. 创建构建目录</h2>
+<p>推荐使用独立目录组织源码和编译输出，最好在盘符的根目录创建build目录。</p>
+<p>这种结构可避免路径过长导致的问题。</p>
+<hr />
+<h2 id="4-配置-superbuildcmake-gui"><a class="anchor" href="#4-配置-superbuildcmake-gui">#</a> 4. 配置 superbuild（CMake GUI）</h2>
+<ol>
+<li>
+<p>打开 CMake GUI，设置：</p>
+<ul>
+<li><strong>Where is the source code</strong>：<code>D:\MITK-2016.11-src</code></li>
+<li><strong>Where to build binaries</strong>：<code>D:\MITK-2016.11-superbuild</code></li>
+</ul>
+</li>
+<li>
+<p>选择生成器为 “Visual Studio 15 2017 Win64”</p>
+</li>
+<li>
+<p>点击 <strong>Configure</strong>，等待红色变量项加载</p>
+</li>
+<li>
+<p>点击 <strong>Configure</strong> 直到没有红色警告，再点击 <strong>Generate</strong></p>
+</li>
+</ol>
+<hr />
+<h2 id="5-编译-mitk"><a class="anchor" href="#5-编译-mitk">#</a> 5. 编译 MITK</h2>
+<p>在 <code>D:\MITK-2016.11-superbuild</code> 中，会生成一个 <code>.sln</code> 文件：</p>
+<ul>
+<li>使用 Visual Studio 打开此 <code>MITK-superbuild.sln</code></li>
+<li>设置 Release 模式，生成 <code>BUILD_ALL</code></li>
+<li>编译后，在<code>D:\MITK-2016.11-superbuild</code>中会生成 <code>MITK-build</code></li>
+<li>所有编译完之后，只有MITK-build的项目会出现错误，其他项目都可以正常编译。</li>
+<li>若其他项目仍有错误，需检查相应的错误，并查找解决办法。</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>若编译过程中出现错误，请先检查依赖是否安装正确、路径是否正确、CMake是否配置正确</li>
+<li>若编译过程中出现 <code>MSB6006 / 路径过长</code>，请尝试缩短路径、移至根目录；确保 ITK/VTK 构建无错误</li>
+<li>若编译过程中出现 <code>Qt</code>相关的错误，请确保Qt使用的是5.7.1版本，并且在环境变量中设置了路径，高版本容易出现兼容性问题</li>
+</ul>
+<hr />
+<p>下面是对你文章的补全建议，增加 superbuild 自定义模块、运行说明、打包发布等细节，结构统一清晰：</p>
+<hr />
+<h2 id="6-使用-opencv-acvd-等模块"><a class="anchor" href="#6-使用-opencv-acvd-等模块">#</a> 6. 使用 OpenCV、ACVD 等模块</h2>
+<p>如果需要启用 <strong>OpenCV</strong>、<strong>ACVD</strong>、以及如 remeshing（重网格化）相关模块，在 superbuild 的 CMake 配置阶段需要手动勾选相关选项：</p>
+<p>在 CMake GUI 或 ccmake 中，分别开启：</p>
+<ul>
+<li><code>MITK_USE_OpenCV</code>：启用 OpenCV 支持，superbuild 会自动下载并构建 OpenCV 2.4.x</li>
+<li><code>MITK_USE_ACVD</code>：启用 ACVD 重网格化算法</li>
+<li>如果更高版本 OpenCV，可以通过指定 <code>EXTERNAL_OpenCV_DIR</code> 指向本地 OpenCV 构建目录，使 MITK 使用已有安装版本 ([<a target="_blank" rel="noopener" href="http://docs.mitk.org">docs.mitk.org</a>][1])</li>
+</ul>
+<p>同时建议：</p>
+<ul>
+<li>设置 <code>CMAKE_PREFIX_PATH</code> 指向 Qt 安装目录，如 <code>D:/ProgramData/Qt/5.7/msvc2015_64</code></li>
+<li>勾选 <code>MITK_USE_Qt5</code>，确保 Qt 模块被激活 ([<a target="_blank" rel="noopener" href="http://docs.mitk.org">docs.mitk.org</a>][1])</li>
+</ul>
+<p>配置完后，重新 <strong>Configure → Generate</strong>，确保相关变量都已设置生效。</p>
+<hr />
+<h2 id="7-定制-superbuild-与注入已有库"><a class="anchor" href="#7-定制-superbuild-与注入已有库">#</a> 7. 定制 Superbuild 与注入已有库</h2>
+<p>若你已有第三方库（如 OpenCV、Boost、ITK、VTK、DCMTK 等），无需 superbuild 自动下载，可以“注入”本地版本来提高编译效率：</p>
+<p>设置变量：</p>
+<ul>
+<li><code>EXTERNAL_OpenCV_DIR</code></li>
+<li><code>EXTERNAL_ITK_DIR</code></li>
+<li><code>EXTERNAL_VTK_DIR</code></li>
+<li><code>EXTERNAL_DCMTK_DIR</code></li>
+<li><code>EXTERNAL_BOOST_ROOT</code></li>
+</ul>
+<p>CMake 会使用指定路径下的预编译版本，而不会重新构建这些库 ([<a target="_blank" rel="noopener" href="http://docs.mitk.org">docs.mitk.org</a>][1])。</p>
+<hr />
+<h2 id="8-编译过程建议"><a class="anchor" href="#8-编译过程建议">#</a> 8. 编译过程建议</h2>
+<p>在 Windows（Visual Studio）环境：</p>
+<ol>
+<li>打开 <code>MITK-superbuild.sln</code>，将模式设置为 <strong>Release</strong>。</li>
+<li>右键 <code>BUILD_ALL</code>（或 superbuild 顶级目标）→ <strong>Build</strong>。</li>
+<li>编译完成后，核心路径结构如下：</li>
+</ol>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-text"><span class="line"><span>MITK-superbuild/</span></span>
+<span class="line"><span>  ├─ src/</span></span>
+<span class="line"><span>  ├─ ep/        ← 外部库</span></span>
+<span class="line"><span>  ├─ MITK-build/ ← MITK 主项目</span></span>
+<span class="line"><span>  ├─ bin/, lib/…</span></span></code></pre>
+<hr />
+<p>当然可以，以下是你文章的 <strong>第9节“继续编译 MITK Workbench 应用”</strong> 的完整补充内容，以及后续可以加的运行、打包说明，风格与前文一致、结构清晰统一。</p>
+<hr />
+<h2 id="9-继续编译-mitk-workbench-应用"><a class="anchor" href="#9-继续编译-mitk-workbench-应用">#</a> 9. 继续编译 MITK Workbench 应用</h2>
+<p>MITK Workbench 是 MITK 的图形用户界面应用（基于 Qt），其编译步骤如下：</p>
+<h3 id="进入-mitk-主项目目录"><a class="anchor" href="#进入-mitk-主项目目录">#</a> 进入 MITK 主项目目录</h3>
+<p>打开路径：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-text"><span class="line"><span>D:\MITK-2016.11-superbuild\MITK-build</span></span></code></pre>
+<p>找到并打开 <strong>MITK.sln</strong>（不是 superbuild 的 .sln）。</p>
+<h3 id="️-配置并编译-workbench"><a class="anchor" href="#️-配置并编译-workbench">#</a> ⚙️ 配置并编译 Workbench</h3>
+<ol>
+<li>打开 Visual Studio，加载 <code>MITK.sln</code>。</li>
+<li>设置编译模式为 <code>Release</code>。</li>
+<li>右键点击解决方案中的 <strong>ALL_BUILD</strong>，选择 <strong>Build</strong>。</li>
+<li>编译过程中如果提示缺少模块，请确认 superbuild 已构建所需依赖，并配置正确路径。</li>
+<li>编译成功后，<code>bin</code> 目录下会出现可执行文件 <code>MITKWorkbench.exe</code>。</li>
+</ol>
+<hr />
+<h2 id="10-运行-mitk-workbench"><a class="anchor" href="#10-运行-mitk-workbench">#</a> 10. 运行 MITK Workbench</h2>
+<p>前往以下目录：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-text"><span class="line"><span>D:\MITK-2016.11-superbuild\MITK-build\bin\Release\</span></span></code></pre>
+<p>找到并双击运行：</p>
+<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:#ffffff;--shiki-dark-bg:#121212;color:#393a34;--shiki-dark:#dbd7caee" tabindex="0"><code class="language-text"><span class="line"><span>MITKWorkbench.exe</span></span></code></pre>
+<p>若报错缺少 DLL：</p>
+<ul>
+<li>确保 Qt 安装路径的 <code>bin</code> 目录加入了环境变量（或手动将 DLL 拷贝到可执行目录）</li>
+<li>确保外部依赖库（如 ITK、VTK）构建无误，路径引用正确</li>
+<li>若报错：Could not find QtWebEngineProcess.exe等qt相关的错误，将qt下的EXE文件拷贝到与主程序目录下同级目录，则可以解决问题</li>
+<li>若报错：QSqlDatabase: QSQLITE driver not loaded等，需将Qt安装目录下的plugin的sqldrivers目录复制到可执行文件目录下</li>
+</ul>
+<hr />
+<h2 id="11-常见问题与解决"><a class="anchor" href="#11-常见问题与解决">#</a> 11. 常见问题与解决</h2>
+<table>
+<thead>
+<tr>
+<th>问题描述</th>
+<th>解决方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qt 相关报错或运行时丢失 DLL</td>
+<td>确保 Qt 使用 5.7.1，且环境变量设置正确</td>
+</tr>
+<tr>
+<td><code>MSB6006</code> 错误 / 路径过长</td>
+<td>确保 build 路径简短，例如 <code>D:\MITK-build</code></td>
+</tr>
+<tr>
+<td>编译 ITK、VTK 失败</td>
+<td>检查 superbuild 外部项目日志：<code>ep/ITK*/CMakeFiles</code> 等</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="总结"><a class="anchor" href="#总结">#</a> 总结</h2>
+<p>MITK 2016.11 的 superbuild 机制为初学者和开发者提供了清晰的依赖管理流程，只要：</p>
+<ol>
+<li>使用合适版本（Qt 5.7.1、MSVC 2017）</li>
+<li>遵循 superbuild → MITK-build 的编译顺序</li>
+<li>适当调整路径与环境变量配置</li>
+</ol>
+<p>即可顺利完成编译，并运行 MITK Workbench。对于需要扩展模块或定制构建流程的开发者，也可以借助 <code>EXTERNAL_*</code> 变量灵活集成已有库，极大提高效率。</p>
+<div class="tags"><a href="/tags/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag"><i class="ic i-tag"></i>医学影像处理</a></div></div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i></span><span class="text">更新于 </span><time title="修改时间：2026-03-10 13:32:05" itemprop="dateModified" datetime="2026-03-10T13:32:05+08:00">2026-03-10</time></span></div><div class="reward"><button><i class="ic i-heartbeat"></i>赞赏</button><p>请我喝[茶]~(￣▽￣)~*</p><div id="qr"><div><img loading="lazy" src="/assets/wechatpay.png" alt="wayfar 微信支付"/><p>微信支付</p></div><div><img loading="lazy" src="/assets/alipay.png" alt="wayfar 支付宝"/><p>支付宝</p></div></div></div><div id="copyright"><ul><li class="author"><strong>本文作者：</strong>wayfare11<i class="ic i-at"><em>@</em></i>羽见风声</li><li class="link"><strong>本文链接：</strong><a href="https://wayfar.qzz.io/2025/06/27/2025-06-27-mitk-2016-build/" title="MITK2016.11源码编译">https://wayfar.qzz.io/2025/06/27/2025-06-27-mitk-2016-build/</a></li><li class="license"><strong>版权声明：</strong>本站所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/2025/04/25/2025-04-25-auto-seg-liver/" rel="prev" itemprop="url" data-background-image="&#x2F;assets&#x2F;th1.jpg" title="使用livermask实现自动分割肝和肝血管"><span class="type">上一篇</span><span class="category"><i class="ic i-flag"></i>图像分割</span><h3>使用livermask实现自动分割肝和肝血管</h3></a></div><div class="item right"><a href="/2026/03/09/2026-03-09-idiom-1/" rel="next" itemprop="url" data-background-image="&#x2F;assets&#x2F;th2.jpg" title="中华文化常用成语积累——中华传统文化"><span class="type">下一篇</span><span class="category"><i class="ic i-flag"></i>成语积累</span><h3>中华文化常用成语积累——中华传统文化</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#mitk201611%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91"><span class="toc-number">1.</span> <span class="toc-text"> MITK2016.11源码编译</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-number">1.1.</span> <span class="toc-text"> 1. 环境准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%8E%B7%E5%8F%96%E6%BA%90%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text"> 2. 获取源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BA%E6%9E%84%E5%BB%BA%E7%9B%AE%E5%BD%95"><span class="toc-number">1.3.</span> <span class="toc-text"> 3. 创建构建目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AE-superbuildcmake-gui"><span class="toc-number">1.4.</span> <span class="toc-text"> 4. 配置 superbuild（CMake GUI）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%BC%96%E8%AF%91-mitk"><span class="toc-number">1.5.</span> <span class="toc-text"> 5. 编译 MITK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E4%BD%BF%E7%94%A8-opencv-acvd-%E7%AD%89%E6%A8%A1%E5%9D%97"><span class="toc-number">1.6.</span> <span class="toc-text"> 6. 使用 OpenCV、ACVD 等模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%AE%9A%E5%88%B6-superbuild-%E4%B8%8E%E6%B3%A8%E5%85%A5%E5%B7%B2%E6%9C%89%E5%BA%93"><span class="toc-number">1.7.</span> <span class="toc-text"> 7. 定制 Superbuild 与注入已有库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E5%BB%BA%E8%AE%AE"><span class="toc-number">1.8.</span> <span class="toc-text"> 8. 编译过程建议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E7%BB%A7%E7%BB%AD%E7%BC%96%E8%AF%91-mitk-workbench-%E5%BA%94%E7%94%A8"><span class="toc-number">1.9.</span> <span class="toc-text"> 9. 继续编译 MITK Workbench 应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5-mitk-%E4%B8%BB%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95"><span class="toc-number">1.9.1.</span> <span class="toc-text"> 进入 MITK 主项目目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%B8%8F-%E9%85%8D%E7%BD%AE%E5%B9%B6%E7%BC%96%E8%AF%91-workbench"><span class="toc-number">1.9.2.</span> <span class="toc-text"> ⚙️ 配置并编译 Workbench</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E8%BF%90%E8%A1%8C-mitk-workbench"><span class="toc-number">1.10.</span> <span class="toc-text"> 10. 运行 MITK Workbench</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3"><span class="toc-number">1.11.</span> <span class="toc-text"> 11. 常见问题与解决</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.12.</span> <span class="toc-text"> 总结</span></a></li></ol></li></ol></div><div class="related panel pjax" data-title="系列文章"><ul><li  class="active"><a href="/2025/06/27/2025-06-27-mitk-2016-build/" rel="bookmark" title="MITK2016.11源码编译">MITK2016.11源码编译</a></li></ul></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><img class="image" loading="lazy" decoding="async" itemprop="image" alt="wayfar" src="/assets/avatar.jpg"/><p class="name" itemprop="name">wayfar</p><div class="description" itemprop="description">我的博客</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">7</span><span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">5</span><span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">7</span><span class="name">标签</span></a></div></nav><div class="social"><a target="_blank" rel="noopener" href="https://github.com/wayfare11" class="item github" title="https:&#x2F;&#x2F;github.com&#x2F;wayfare11"><i class="ic i-github"></i></a></div><div class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li><li class="item dropdown"><a href="/archives/" rel="section"><i class="ic i-feather"></i>文章</a><ul class="submenu"><li class="item"><a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a></li><li class="item"><a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a></li><li class="item"><a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a></li></ul></li><li class="item"><a href="/about/" rel="section"><i class="ic i-user"></i>关于</a></li><li class="item"><a href="/friends/" rel="section"><i class="ic i-heart"></i>友链</a></li></div></div></div></div><ul id="quick"><li class="prev pjax"><a href="/2026/03/09/2026-03-09-idiom-1/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/2025/04/25/2025-04-25-auto-seg-liver/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div><div id="player"></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>随机文章</h2><ul><li class="item"><div class="breadcrumb"><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/" title="分类于医学影像处理">医学影像处理</a><i class="ic i-angle-right"></i><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" title="分类于图像分割">图像分割</a></div><span><a href="/2025/04/25/2025-04-25-auto-seg-liver/">使用livermask实现自动分割肝和肝血管</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2026/03/10/test/">练习题与答案</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/" title="分类于医学影像处理">医学影像处理</a><i class="ic i-angle-right"></i><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/MITK/" title="分类于MITK">MITK</a></div><span><a href="/2025/06/27/2025-06-27-mitk-2016-build/">MITK2016.11源码编译</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/" title="分类于医学影像处理">医学影像处理</a><i class="ic i-angle-right"></i><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" title="分类于图像分割">图像分割</a></div><span><a href="/2025/04/25/2025-04-25-auto-seg-lung/">使用lungmask实现自动分割肺部</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/" title="分类于医学影像处理">医学影像处理</a><i class="ic i-angle-right"></i><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" title="分类于图像分割">图像分割</a></div><span><a href="/2025/04/24/2025-04-24-lung-seg-by-traditional-way/">用Otsu阈值与形态学方法实现分割医学CT中的肺部</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/" title="分类于资料分析">资料分析</a></div><span><a href="/2026/03/10/2026-03-10-dataAnalysis/">资料分析常用公式与速算技巧整理——技巧示例补全版</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/%E6%88%90%E8%AF%AD%E7%A7%AF%E7%B4%AF/" title="分类于成语积累">成语积累</a></div><span><a href="/2026/03/09/2026-03-09-idiom-1/">中华文化常用成语积累——中华传统文化</a></span></li></ul></div><div class="rpost pjax"><h2>最新评论</h2></div></div><div class="status"><div class="copyright">&copy; 2022 -<span itemprop="copyrightYear">2026</span><span class="with-love"><i class="ic i-sakura rotate"></i></span><span class="author" itemprop="copyrightHolder">wayfar @ wayfar</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i></span><span title="站点总字数">29k 字</span><span class="post-meta-divider"> | </span><span class="post-meta-item-icon"><i class="ic i-coffee"></i></span><span title="站点阅读时长">26 分钟</span></div><div class="powered-by">基于 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & Theme.<a target="_blank" rel="noopener" href="https://github.com/theme-shoka-x/hexo-theme-shokaX/">ShokaX</a></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL = {
+    ispost: true,
+    path: `2025/06/27/2025-06-27-mitk-2016-build/`,
+    favicon: {
+        show: `（●´3｀●）やれやれだぜ`,
+        hide: `(´Д｀)大変だ！`
+    },
+    search: {
+        placeholder: "文章搜索",
+        empty: "关于 「 ${query} 」，什么也没搜到",
+        stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    nocopy: "false",
+    copyright: `复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。`,
+    copy_tex: false,
+    katex: false,
+    mermaid: false,
+    audio: undefined,
+    nocopy: false,
+    outime: true,
+    template: `<div class="note warning"><p><span class="label warning">文章时效性提示</span><br>这是一篇发布于 {{publish}} 天前，最后一次更新在 {{updated}} 天前的文章，部分信息可能已经发生改变，请注意甄别。</p></div>`,
+    quiz: {
+        choice: `单选题`,
+        multiple: `多选题`,
+        true_false: `判断题`,
+        essay: `问答题`,
+        gap_fill: `填空题`,
+        mistake: `错题备注`
+    }
+};
+</script><script src="/js/siteInit.js?v=0.5.4" type="module" fetchpriority="high" defer></script><!-- hexo injector body_end start -->
+<script>
+(function () {
+  // true：使用我们自己的 Pointer 拖拽（鼠标/触摸都能拖，最稳）
+  // false：使用库自带拖拽（drag: true），但容易被 tips/遮罩层影响
+  var USE_POINTER_DRAG = true;
+
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
+
+  function loadScriptOnce(src, id) {
+    // 手机端不加载
+    if (isMobile()) return Promise.resolve();
+
+    // 已经有同 src / id 的 script 就不重复加载
+    if (id && document.getElementById(id)) return Promise.resolve();
+    var exists = Array.prototype.slice.call(document.scripts).some(function (s) { return s.src === src; });
+    if (exists) return Promise.resolve();
+
+    return new Promise(function (resolve, reject) {
+      var s = document.createElement("script");
+      if (id) s.id = id;
+      s.src = src;
+      s.async = false; // 保证顺序
+      s.onload = resolve;
+      s.onerror = function () { reject(new Error("Failed to load: " + src)); };
+      document.body.appendChild(s);
+    });
+  }
+
+  function cleanupOld() {
+    var old = document.getElementById("waifu");
+    if (old && old.parentNode) old.parentNode.removeChild(old);
+  }
+
+  function applyEventFix() {
+    var tips = document.getElementById("waifu-tips");
+    if (tips) tips.style.pointerEvents = "none";
+
+    var tool = document.getElementById("waifu-tool");
+    if (tool) tool.style.pointerEvents = "auto";
+
+    var canvas = document.getElementById("live2d");
+    if (canvas) canvas.style.pointerEvents = "auto";
+  }
+
+  function enablePointerDrag() {
+    var waifu = document.getElementById("waifu");
+    var canvas = document.getElementById("live2d") || (waifu ? waifu.querySelector("canvas") : null);
+    if (!waifu || !canvas) return;
+
+    // 避免重复绑定（如果某些主题没有真正销毁节点）
+    if (canvas.dataset && canvas.dataset.pointerDragBound === "1") return;
+    if (canvas.dataset) canvas.dataset.pointerDragBound = "1";
+
+    // 允许触摸拖拽（阻止浏览器默认手势/滚动抢事件）
+    canvas.style.touchAction = "none";
+
+    var dragging = false;
+    var offsetX = 0, offsetY = 0;
+
+    function start(e) {
+      // 右键不处理
+      if (typeof e.button === "number" && e.button === 2) return;
+
+      dragging = true;
+
+      // 一旦开始拖，改用 top/left 定位更稳定
+      waifu.style.bottom = "auto";
+      waifu.style.right = "auto";
+
+      var rect = waifu.getBoundingClientRect();
+      offsetX = e.clientX - rect.left;
+      offsetY = e.clientY - rect.top;
+
+      if (canvas.setPointerCapture) canvas.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    }
+
+    function move(e) {
+      if (!dragging) return;
+
+      var maxLeft = window.innerWidth - waifu.offsetWidth;
+      var maxTop  = window.innerHeight - waifu.offsetHeight;
+
+      var left = e.clientX - offsetX;
+      var top  = e.clientY - offsetY;
+
+      // 限制在视口内
+      left = Math.max(0, Math.min(maxLeft, left));
+      top  = Math.max(0, Math.min(maxTop, top));
+
+      waifu.style.left = left + "px";
+      waifu.style.top  = top + "px";
+
+      e.preventDefault();
+    }
+
+    function end() {
+      dragging = false;
+    }
+
+    canvas.addEventListener("pointerdown", start);
+    window.addEventListener("pointermove", move, { passive: false });
+    window.addEventListener("pointerup", end);
+    window.addEventListener("pointercancel", end);
+  }
+
+  function boot() {
+    // 手机端不显示，且清理已有节点
+    if (isMobile()) {
+      cleanupOld();
+      return;
+    }
+
+    console.log("[Live2D] boot fired. initWidget =", typeof window.initWidget);
+
+    if (typeof window.initWidget !== "function") {
+      console.warn("[Live2D] initWidget missing. waifu-tips.js may not be executed.");
+      return;
+    }
+
+    try {
+      cleanupOld();
+
+      window.initWidget({
+        waifuPath: "https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/waifu-tips.json",
+        cdnPath: "https://cdn.jsdelivr.net/gh/fghrsh/live2d_api/",
+
+        // 如果用 Pointer 拖拽兜底，这里建议关掉原生拖拽避免双监听冲突
+        drag: USE_POINTER_DRAG ? false : true,
+
+        modelId: 0,
+        logLevel: "warn"
+      });
+
+      // DOM 出来后再做事件修复 & 拖拽绑定
+      setTimeout(function () {
+        console.log("[Live2D] waifu node =", document.getElementById("waifu"));
+        applyEventFix();
+        if (USE_POINTER_DRAG) enablePointerDrag();
+      }, 0);
+
+    } catch (e) {
+      console.error("[Live2D] initWidget threw:", e);
+    }
+  }
+
+  // 手机端直接跳过，不加载脚本
+  if (isMobile()) {
+    cleanupOld();
+    return;
+  }
+
+  // 确保核心脚本加载后再 init（只加载一次）
+  window.__LIVE2D_WIDGET_LOAD__ = window.__LIVE2D_WIDGET_LOAD__ || Promise.resolve()
+    .then(function () { return loadScriptOnce("https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/live2d.min.js", "__live2d_core__"); })
+    .then(function () { return loadScriptOnce("https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/waifu-tips.js", "__live2d_widget__"); });
+
+  window.__LIVE2D_WIDGET_LOAD__
+    .then(function () { boot(); })
+    .catch(function (e) { console.error("[Live2D] load error:", e); });
+
+  // ShokaX PJAX：切页后重挂（脚本不重复加载，只重 init）
+  document.addEventListener("pjax:complete", boot);
+  document.addEventListener("pjax:success", boot);
+})();
+</script>
+<!-- hexo injector body_end end --></body></html>
