@@ -10,13 +10,13 @@
         </author>
         <description>我的博客</description>
         <language>zh-CN</language>
-        <pubDate>Tue, 10 Mar 2026 14:33:01 +0800</pubDate>
-        <lastBuildDate>Tue, 10 Mar 2026 14:33:01 +0800</lastBuildDate>
+        <pubDate>Tue, 10 Mar 2026 14:39:09 +0800</pubDate>
+        <lastBuildDate>Tue, 10 Mar 2026 14:39:09 +0800</lastBuildDate>
         <item>
             <guid isPermalink="true">https://wayfar.qzz.io/2026/03/10/test/</guid>
             <title>练习题与答案</title>
             <link>https://wayfar.qzz.io/2026/03/10/test/</link>
-            <pubDate>Tue, 10 Mar 2026 14:33:01 +0800</pubDate>
+            <pubDate>Tue, 10 Mar 2026 14:39:09 +0800</pubDate>
             <description><![CDATA[ &lt;ol&gt;
 &lt;li class=&#34;quiz true&#34;&gt;
 &lt;p&gt;编译时多态主要指运算符重载与函数重载，而运行时多态主要指虚函数。&lt;/p&gt;
