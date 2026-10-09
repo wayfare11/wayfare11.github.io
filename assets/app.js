@@ -127,33 +127,41 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
     }
 
     function renderFilters() {
-      const options = [[null,'全部文字'],['tech','技术博客'],['life','生活日记']];
+      const options = [[null,'全部文章'],['tech','技术'],['life','生活']];
       $('#channel-filters').innerHTML = options.map(([channel,label]) => {
         const total = posts.filter(post => !channel || post.channel === channel).length;
         const selected = activeChannel === channel;
-        return `<button class="channel-filter ${selected ? 'active' : ''}" type="button" data-channel="${channel || 'all'}" aria-pressed="${selected}"><span>${escapeHtml(label)}</span><small>${total}</small></button>`;
+        return `<button class="channel-filter ${selected ? 'active' : ''}" type="button" data-channel="${channel || 'all'}" aria-pressed="${selected}">${escapeHtml(label)} <small>${total}</small></button>`;
       }).join('');
 
-      $('#taxonomy-panel').hidden = !activeChannel;
-      if (activeChannel) {
-        const list = posts.filter(post => post.channel === activeChannel);
-        const items = Object.entries(categories[activeChannel] || {});
-        $('#subcategory-filters').innerHTML = `<button class="filter-button ${activeSubcategory === 'all' ? 'active' : ''}" type="button" data-subcategory="all" aria-pressed="${activeSubcategory === 'all'}">全部子分类 <small>${list.length}</small></button>` +
-          items.map(([key,label]) => {
-            const count = list.filter(post => post.subcategory === key).length;
-            const active = key === activeSubcategory;
-            return `<button class="filter-button ${active ? 'active' : ''}" type="button" data-subcategory="${escapeHtml(key)}" aria-pressed="${active}">${escapeHtml(label)} <small>${count}</small></button>`;
-          }).join('');
+      const countFor = (channel,id) => posts.filter(p => p.channel === channel && p.subcategory === id).length;
+      const scopeLabel = activeChannel === 'tech' ? '全部技术' : activeChannel === 'life' ? '全部生活' : '全部主题';
+      const scopeTotal = posts.filter(p => !activeChannel || p.channel === activeChannel).length;
+      const selectedAll = activeSubcategory === 'all';
+      const nav = [`<button type="button" class="filter-button toc-all ${selectedAll ? 'active' : ''}" data-subcategory="all" data-entry-channel="${activeChannel || 'all'}" aria-pressed="${selectedAll}"><span>${scopeLabel}</span><small>${scopeTotal}</small></button>`];
+      for (const [channel,name] of [['tech','技术笔记'],['life','生活手记']]) {
+        if (activeChannel && activeChannel !== channel) continue;
+        const available = Object.entries(categories[channel] || {}).map(([id,label]) => ({id,label,count:countFor(channel,id)})).filter(x => x.count > 0);
+        if (!available.length) continue;
+        if (!activeChannel) nav.push(`<div class="toc-group-heading">${name}<span>${posts.filter(p => p.channel === channel).length}</span></div>`);
+        nav.push(...available.map(item => {
+          const selected = activeChannel === channel && activeSubcategory === item.id;
+          return `<button type="button" class="filter-button ${selected ? 'active' : ''}" data-subcategory="${escapeHtml(item.id)}" data-entry-channel="${channel}" aria-pressed="${selected}"><span>${escapeHtml(item.label)}</span><small>${item.count}</small></button>`;
+        }));
       }
-      const withinChannel = posts.filter(post => !activeChannel || post.channel === activeChannel);
+      $('#subcategory-filters').innerHTML = nav.join('');
+      $('#taxonomy-panel').hidden = false;
+      const withinChannel = posts.filter(post => (!activeChannel || post.channel === activeChannel) && (activeSubcategory === 'all' || post.subcategory === activeSubcategory));
       const tagCounts = new Map();
       withinChannel.forEach(post => (post.tags || []).forEach(tag => tagCounts.set(tag,(tagCounts.get(tag) || 0)+1)));
       const entries = [...tagCounts].sort((a,b) => b[1]-a[1] || a[0].localeCompare(b[0],'zh-CN'));
       $('#tag-panel').hidden = entries.length === 0;
-      const visibleTags = showAllTags ? entries : entries.slice(0,10);
+      const visibleTags = showAllTags || (activeTag && !entries.slice(0,10).some(([tag]) => tag === activeTag)) ? entries : entries.slice(0,10);
       $('#tag-filters').innerHTML = `<button class="tag-filter ${!activeTag ? 'active' : ''}" type="button" data-tag="all" aria-pressed="${!activeTag}">全部标签</button>` +
         visibleTags.map(([tag,count]) => `<button class="tag-filter ${activeTag === tag ? 'active' : ''}" type="button" data-tag="${escapeHtml(tag)}" aria-pressed="${activeTag === tag}">#${escapeHtml(tag)} <small>${count}</small></button>`).join('') +
-        (entries.length > 10 ? `<button class="tag-expand" type="button" data-expand-tags="true">${showAllTags ? '收起' : '更多标签 +'}</button>` : '');
+        (entries.length > 10 ? `<button class="tag-expand" type="button" data-expand-tags="true">${showAllTags ? '收起标签' : '更多标签 +'}</button>` : '');
+      $('#archive-tag-mark').textContent = activeTag ? '#' + activeTag : '选择';
+      $('#archive-tag-mark').classList.toggle('is-chosen',!!activeTag);
     }
 
     function makeCard(post, featured = false) {
@@ -168,7 +176,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
             <div class="post-overline"><span>${escapeHtml(CHANNEL_NAMES[post.channel])}</span><span class="dot"></span><span>${escapeHtml(post.subcategoryLabel)}</span></div>
             <h3><a href="${href}">${escapeHtml(post.title)}</a></h3>
             <p>${escapeHtml(post.excerpt)}</p>
-            <div class="post-tags">${(post.tags || []).slice(0,3).map(t => `<span>#${escapeHtml(t)}</span>`).join('')}</div>
+            <div class="post-tags">${(post.tags || []).slice(0,3).map(t => `<button type="button" class="post-tag-link" data-card-tag="${escapeHtml(t)}" data-card-channel="${post.channel}" aria-label="按 ${escapeHtml(t)} 标签筛选">#${escapeHtml(t)}</button>`).join('')}</div>
             <div class="post-footer"><time datetime="${post.date}">${dateLabel(post.date)}</time><a class="read-link" href="${href}">阅读全文 <span aria-hidden="true">↗</span></a></div>
           </div>
         </article>`;
@@ -301,7 +309,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       }).sort((a,b) => state.sort === 'oldest' ? a.date.localeCompare(b.date) : b.date.localeCompare(a.date));
       document.getElementById(page+'-page-total').textContent = String(all.length).padStart(2,'0');
       document.getElementById(page+'-page-filters').innerHTML =
-        [['all','\u5168\u90e8\u4e3b\u9898'],...Object.entries(categories[channel] || {})].map(([id,label]) => {
+        [['all','\u5168\u90e8\u4e3b\u9898'],...Object.entries(categories[channel] || {}).filter(([id]) => all.some(post => post.subcategory === id))].map(([id,label]) => {
           const selected = state.subcategory === id;
           const count = id === 'all' ? all.length : all.filter(post => post.subcategory === id).length;
           return `<button type="button" class="filter-button ${selected ? 'active' : ''}" data-channel-topic="${page}" data-topic="${escapeHtml(id)}" aria-pressed="${selected}">${escapeHtml(label)} <small>${count}</small></button>`;
@@ -315,6 +323,9 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       tagsElement.hidden = tags.length === 0;
       tagsElement.innerHTML = tags.length ? `<button type="button" class="tag-filter ${!state.tag ? 'active' : ''}" data-channel-tag="${page}" data-tag="all" aria-pressed="${!state.tag}">\u5168\u90e8\u6807\u7b7e</button>` + tags.map(([tag,num]) =>
         `<button type="button" class="tag-filter ${state.tag === tag ? 'active' : ''}" data-channel-tag="${page}" data-tag="${escapeHtml(tag)}" aria-pressed="${state.tag === tag}">#${escapeHtml(tag)} <small>${num}</small></button>`).join('') : '';
+      const mark = document.getElementById(page+'-tag-mark');
+      mark.textContent = state.tag ? '#' + state.tag : '选择';
+      mark.classList.toggle('is-chosen',!!state.tag);
       const filtered = state.tag ? found.filter(p => (p.tags || []).includes(state.tag)) : found;
       document.getElementById(page+'-page-posts').innerHTML = filtered.map(post => makeCard(post)).join('');
       document.getElementById(page+'-page-results').textContent = `\u5171 ${filtered.length} \u7bc7${channel === 'tech' ? '\u6280\u672f\u6587\u7ae0' : '\u751f\u6d3b\u65e5\u8bb0'}`;
@@ -538,7 +549,11 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       $('#subcategory-filters').addEventListener('click', event => {
         const btn = event.target.closest('[data-subcategory]');
         if (!btn) return;
+        const entryChannel = btn.dataset.entryChannel;
+        if (entryChannel) activeChannel = entryChannel === 'all' ? null : entryChannel;
         activeSubcategory = btn.dataset.subcategory;
+        activeTag = null;
+        showAllTags = false;
         renderPosts();
       });
       $('#tag-filters').addEventListener('click', event => {
@@ -547,6 +562,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
         if (!btn) return;
         activeTag = btn.dataset.tag === 'all' || btn.dataset.tag === activeTag ? null : btn.dataset.tag;
         renderPosts();
+        $('#tag-panel').open = false;
       });
       document.addEventListener('click', event => {
         const link = event.target.closest('[data-article-channel]');
@@ -561,6 +577,25 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
         if (location.hash === '#articles') $('#articles').scrollIntoView({behavior:'smooth'});
       });
       $('#search-input').addEventListener('input', event => { keyword = event.target.value; renderPosts(); });
+      document.querySelectorAll('[data-tag-disclosure]').forEach(detail => {
+        detail.addEventListener('toggle', () => {
+          if (!detail.open) return;
+          document.querySelectorAll('[data-tag-disclosure]').forEach(other => { if (other !== detail) other.open = false; });
+        });
+      });
+      document.addEventListener('click', event => {
+        if (!event.target.closest('[data-tag-disclosure]')) {
+          document.querySelectorAll('[data-tag-disclosure]').forEach(detail => { detail.open = false; });
+        }
+      });
+      document.addEventListener('keydown', event => {
+        if (event.key !== 'Escape') return;
+        document.querySelectorAll('[data-tag-disclosure]').forEach(detail => {
+          if (!detail.open) return;
+          detail.open = false;
+          detail.querySelector('summary').focus({preventScroll:true});
+        });
+      });
       setupSortMenus();
       $('#reset-filters').addEventListener('click', () => {
         activeChannel = null; activeSubcategory = 'all'; activeTag = null; showAllTags = false; keyword = ''; sortOrder = 'newest';
@@ -586,6 +621,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
           const selected = tag.dataset.tag;
           channelPageState[page].tag = selected === 'all' || channelPageState[page].tag === selected ? null : selected;
           renderChannelPage(page);
+          document.querySelector(`[data-tag-disclosure="${page}"]`).open = false;
         } else if (reset) {
           const page = reset.dataset.resetChannel;
           Object.assign(channelPageState[page],{subcategory:'all',tag:null,search:'',sort:'newest'});
@@ -593,6 +629,26 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
           renderChannelPage(page);
         }
       }));
+      document.addEventListener('click', event => {
+        const tag = event.target.closest('[data-card-tag]');
+        if (!tag) return;
+        const chosen = tag.dataset.cardTag;
+        const channel = tag.dataset.cardChannel;
+        const page = location.hash === '#tech' ? 'tech' : location.hash === '#journal' ? 'journal' : null;
+        if (page && channel === (page === 'tech' ? 'tech' : 'life')) {
+          channelPageState[page].tag = chosen;
+          renderChannelPage(page);
+        } else {
+          activeChannel = channel;
+          activeSubcategory = 'all';
+          activeTag = chosen;
+          showAllTags = true;
+          keyword = '';
+          $('#search-input').value = '';
+          renderPosts();
+          if (location.hash !== '#articles') location.hash = '#articles';
+        }
+      });
       $('#album-detail').addEventListener('click', event => {
         const photo = event.target.closest('[data-album-photo]');
         if (photo) openPhoto(Number(photo.dataset.albumPhoto));

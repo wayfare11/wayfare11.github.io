@@ -175,26 +175,29 @@
                     <div class="filter-content-layout" data-filter-layout="tech">
             <aside class="filter-sidebar channel-page-facets" id="tech-filter-sidebar" data-filter-panel="tech" aria-label="技术分类">
               <header class="filter-sidebar-heading">
-                <span class="filter-sidebar-icon" aria-hidden="true">✳</span><div><small>EXPLORE / TOPICS</small><strong>技术分类</strong></div>
-                <button type="button" class="filter-sidebar-close" data-filter-close="tech" aria-label="关闭筛选面板">×</button>
+                <div><small>TECH / CONTENTS</small><strong>技术目录</strong></div>
+                <button type="button" class="filter-sidebar-close" data-filter-close="tech" aria-label="关闭目录">×</button>
               </header>
               <div class="filter-sidebar-body">
 
-            <div class="channel-facet-label">TOPICS / 子分类</div>
-            <div class="category-filters" id="tech-page-filters" role="group" aria-label="技术实验室子分类"></div>
-            <div class="tag-filters channel-page-tags" id="tech-page-tags" role="group" aria-label="技术实验室文章标签"></div>
+            <p class="toc-description">按主题阅读，慢慢翻阅。</p>
+            <div class="category-filters toc-links" id="tech-page-filters" role="group" aria-label="技术实验室子分类"></div>
               </div>
               <div class="filter-sidebar-footer"><button type="button" data-filter-close="tech" class="filter-sidebar-done">查看文章结果 <span aria-hidden="true">→</span></button></div>
             </aside>
             <div class="filter-main">
               <div class="filter-mobile-toolbar">
                 <button type="button" class="filter-mobile-toggle" data-filter-toggle="tech" aria-controls="tech-filter-sidebar" aria-expanded="false">
-                  <span class="filter-toggle-icon" aria-hidden="true">☷</span><span>分类筛选</span><small data-filter-count="tech">全部</small>
+                  <span class="filter-toggle-icon" aria-hidden="true">☷</span><span>文章目录</span><small data-filter-count="tech">全部</small>
                 </button>
-                <span class="filter-mobile-hint">按主题和标签查找</span>
+                <span class="filter-mobile-hint">按主题浏览</span>
               </div>
 <div class="channel-page-tools">
             <label class="search-box" for="tech-page-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="tech-page-search" data-channel-search="tech" type="search" autocomplete="off" placeholder="搜索本栏文章..." /></label>
+            <details class="tag-disclosure" data-tag-disclosure="tech">
+              <summary aria-label="按文章标签筛选"># 标签 <span class="tag-selected-label" id="tech-tag-mark">选择</span></summary>
+              <div class="tag-popover"><p>按标签查找</p><div class="tag-filters channel-page-tags" id="tech-page-tags" role="group" aria-label="技术实验室文章标签"></div></div>
+            </details>
             <div class="sort-control" data-sort-control="tech">
                 <button type="button" class="sort-trigger" data-sort-trigger="tech" aria-label="文章时间排序" aria-haspopup="menu" aria-expanded="false" aria-controls="tech-sort-menu"><span class="sort-current">最新发布</span><span class="sort-chevron" aria-hidden="true"></span></button>
                 <div class="sort-menu" id="tech-sort-menu" role="menu" aria-label="文章时间排序" hidden>
@@ -230,26 +233,29 @@
                     <div class="filter-content-layout" data-filter-layout="journal">
             <aside class="filter-sidebar channel-page-facets" id="journal-filter-sidebar" data-filter-panel="journal" aria-label="生活分类">
               <header class="filter-sidebar-heading">
-                <span class="filter-sidebar-icon" aria-hidden="true">✳</span><div><small>EXPLORE / TOPICS</small><strong>生活分类</strong></div>
-                <button type="button" class="filter-sidebar-close" data-filter-close="journal" aria-label="关闭筛选面板">×</button>
+                <div><small>LIFE / CONTENTS</small><strong>生活目录</strong></div>
+                <button type="button" class="filter-sidebar-close" data-filter-close="journal" aria-label="关闭目录">×</button>
               </header>
               <div class="filter-sidebar-body">
 
-            <div class="channel-facet-label">TOPICS / 子分类</div>
-            <div class="category-filters" id="journal-page-filters" role="group" aria-label="生活日记本子分类"></div>
-            <div class="tag-filters channel-page-tags" id="journal-page-tags" role="group" aria-label="生活日记本文章标签"></div>
+            <p class="toc-description">按主题阅读，慢慢翻阅。</p>
+            <div class="category-filters toc-links" id="journal-page-filters" role="group" aria-label="生活日记本子分类"></div>
               </div>
               <div class="filter-sidebar-footer"><button type="button" data-filter-close="journal" class="filter-sidebar-done">查看文章结果 <span aria-hidden="true">→</span></button></div>
             </aside>
             <div class="filter-main">
               <div class="filter-mobile-toolbar">
                 <button type="button" class="filter-mobile-toggle" data-filter-toggle="journal" aria-controls="journal-filter-sidebar" aria-expanded="false">
-                  <span class="filter-toggle-icon" aria-hidden="true">☷</span><span>分类筛选</span><small data-filter-count="journal">全部</small>
+                  <span class="filter-toggle-icon" aria-hidden="true">☷</span><span>文章目录</span><small data-filter-count="journal">全部</small>
                 </button>
-                <span class="filter-mobile-hint">按主题和标签查找</span>
+                <span class="filter-mobile-hint">按主题浏览</span>
               </div>
 <div class="channel-page-tools">
             <label class="search-box" for="journal-page-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="journal-page-search" data-channel-search="journal" type="search" autocomplete="off" placeholder="搜索本栏文章..." /></label>
+            <details class="tag-disclosure" data-tag-disclosure="journal">
+              <summary aria-label="按文章标签筛选"># 标签 <span class="tag-selected-label" id="journal-tag-mark">选择</span></summary>
+              <div class="tag-popover"><p>按标签查找</p><div class="tag-filters channel-page-tags" id="journal-page-tags" role="group" aria-label="生活日记本文章标签"></div></div>
+            </details>
             <div class="sort-control" data-sort-control="journal">
                 <button type="button" class="sort-trigger" data-sort-trigger="journal" aria-label="文章时间排序" aria-haspopup="menu" aria-expanded="false" aria-controls="journal-sort-menu"><span class="sort-current">最新发布</span><span class="sort-chevron" aria-hidden="true"></span></button>
                 <div class="sort-menu" id="journal-sort-menu" role="menu" aria-label="文章时间排序" hidden>
@@ -309,20 +315,14 @@
                     <div class="filter-content-layout" data-filter-layout="archive">
             <aside class="filter-sidebar archive-taxonomy" id="archive-filter-sidebar" data-filter-panel="archive" aria-label="全部文章分类">
               <header class="filter-sidebar-heading">
-                <span class="filter-sidebar-icon" aria-hidden="true">✳</span><div><small>EXPLORE / TOPICS</small><strong>全部文章分类</strong></div>
-                <button type="button" class="filter-sidebar-close" data-filter-close="archive" aria-label="关闭筛选面板">×</button>
+                <div><small>CONTENTS / INDEX</small><strong>文章目录</strong></div>
+                <button type="button" class="filter-sidebar-close" data-filter-close="archive" aria-label="关闭目录">×</button>
               </header>
               <div class="filter-sidebar-body">
 
-            <div class="taxonomy-eyebrow"><span>01 / 选择大类</span><span>CHOOSE YOUR WORLD</span></div>
-            <div class="channel-filters" id="channel-filters" role="group" aria-label="选择文章大类"></div>
-            <div class="taxonomy-subpanel" id="taxonomy-panel" hidden>
-              <div class="taxonomy-eyebrow"><span>02 / 子分类</span><span>EXPLORE TOPICS</span></div>
-              <div class="category-filters" id="subcategory-filters" role="group" aria-label="选择子分类"></div>
-            </div>
-            <div class="taxonomy-tags" id="tag-panel" hidden>
-              <div class="taxonomy-eyebrow"><span>03 / 文章标签</span><span>FIND BY TAG</span></div>
-              <div class="tag-filters" id="tag-filters" role="group" aria-label="选择文章标签"></div>
+            <p class="toc-description">每一个分类，都是一段小小的记录。</p>
+            <div class="taxonomy-subpanel" id="taxonomy-panel">
+              <div class="category-filters toc-links" id="subcategory-filters" role="group" aria-label="文章子分类目录"></div>
             </div>
               </div>
               <div class="filter-sidebar-footer"><button type="button" data-filter-close="archive" class="filter-sidebar-done">查看文章结果 <span aria-hidden="true">→</span></button></div>
@@ -330,16 +330,24 @@
             <div class="filter-main">
               <div class="filter-mobile-toolbar">
                 <button type="button" class="filter-mobile-toggle" data-filter-toggle="archive" aria-controls="archive-filter-sidebar" aria-expanded="false">
-                  <span class="filter-toggle-icon" aria-hidden="true">☷</span><span>分类筛选</span><small data-filter-count="archive">全部</small>
+                  <span class="filter-toggle-icon" aria-hidden="true">☷</span><span>文章目录</span><small data-filter-count="archive">全部</small>
                 </button>
-                <span class="filter-mobile-hint">按主题和标签查找</span>
+                <span class="filter-mobile-hint">按主题浏览</span>
               </div>
-<div class="article-toolbar">
+<div class="channel-tabs-row">
+              <div class="channel-filters" id="channel-filters" role="group" aria-label="切换文章栏目"></div>
+              <span class="channel-tabs-note">IDEAS / STORIES</span>
+            </div>
+            <div class="article-toolbar">
             <div class="search-sort">
               <label class="search-box" for="search-input">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg>
                 <input id="search-input" type="search" autocomplete="off" placeholder="搜索一些关键词..." aria-label="搜索文章标题和内容" />
               </label>
+              <details class="tag-disclosure" id="tag-panel" data-tag-disclosure="archive">
+                <summary aria-label="按文章标签筛选"># 标签 <span class="tag-selected-label" id="archive-tag-mark">选择</span></summary>
+                <div class="tag-popover"><p>按标签查找</p><div class="tag-filters" id="tag-filters" role="group" aria-label="选择文章标签"></div></div>
+              </details>
               <div class="sort-control" data-sort-control="archive">
                 <button type="button" class="sort-trigger" data-sort-trigger="archive" aria-label="文章时间排序" aria-haspopup="menu" aria-expanded="false" aria-controls="archive-sort-menu"><span class="sort-current">最新发布</span><span class="sort-chevron" aria-hidden="true"></span></button>
                 <div class="sort-menu" id="archive-sort-menu" role="menu" aria-label="文章时间排序" hidden>
