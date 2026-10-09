@@ -95,7 +95,7 @@
           </div>
         </section>
 
-        <section class="section tech-section" id="tech" aria-labelledby="tech-heading">
+        <section class="section tech-section" id="home-tech" aria-labelledby="tech-heading">
           <div class="section-top">
             <div><span class="eyebrow">01 / DEVELOPMENT NOTES</span><h2 class="section-title" id="tech-heading">用代码，造点好玩的<span style="color:var(--accent)">.</span></h2><p class="section-description">认真写代码，也认真记录那些「原来还可以这样」的瞬间。</p></div>
             <span class="section-index">CODE & CURIOSITY</span>
@@ -106,19 +106,19 @@
               <div class="tech-project-code" aria-label="代码展示示例"><span class="line-number">01</span><span class="code-purple">const</span> <span class="code-white">me</span> <span class="code-muted">=</span> {<br><span class="line-number">02</span> &nbsp; <span class="code-peach">interests</span>: [<span class="code-green">'coding'</span>, <span class="code-green">'life'</span>, <span class="code-green">'photos'</span>],<br><span class="line-number">03</span> &nbsp; <span class="code-peach">status</span>: <span class="code-green">'always learning'</span>,<br><span class="line-number">04</span> &nbsp; <span class="code-peach">motto</span>: <span class="code-green">'build & enjoy'</span><br><span class="line-number">05</span> };<br><span class="line-number">06</span> <span class="code-muted">// Keep making, keep exploring.</span><span class="terminal-cursor"> ▌</span></div>
               <div class="tech-project-bottom"><div><small>FEATURED / 实验项目</small><h3 id="featured-tech-title">最新技术文章</h3><p id="featured-tech-summary">持续探索值得记录的代码与实践。</p></div><a id="featured-tech-link" href="#articles" aria-label="阅读最新技术文章">读文章 ↗</a></div>
             </div>
-            <div class="tech-note-stack"><span class="stack-eyebrow">LATEST DEVLOGS / 最近的技术笔记</span><div id="tech-posts"></div><a class="mini-more-link" href="#articles" data-filter-jump="tech">更多技术文章 <span aria-hidden="true">↗</span></a></div>
+            <div class="tech-note-stack"><span class="stack-eyebrow">LATEST DEVLOGS / 最近的技术笔记</span><div id="tech-posts"></div><a class="mini-more-link" href="#tech">更多技术文章 <span aria-hidden="true">↗</span></a></div>
           </div>
         </section>
 
-        <section class="section journal-section" id="journal" aria-labelledby="journal-heading">
+        <section class="section journal-section" id="home-journal" aria-labelledby="journal-heading">
           <div class="section-top"><div><span class="eyebrow">02 / PERSONAL JOURNAL</span><h2 class="section-title" id="journal-heading">生活的小事，也值得记下来<span style="color:var(--accent)">.</span></h2><p class="section-description">不必每天都高光。琐碎的星期三，也是好故事。</p></div><span class="section-index">EVERYDAY STORIES</span></div>
           <div class="journal-layout">
             <div class="journal-cover"><span class="journal-label">A NOTE TO MYSELF · 2026</span><span class="journal-flower" aria-hidden="true">✳</span><p>日子慢慢走，<br />故事慢慢写。<span>—— 随手记</span></p><span class="journal-footnote">SMALL DAYS / BIG FEELINGS</span></div>
-            <div class="journal-feed"><div id="journal-posts"></div><a class="mini-more-link" href="#articles" data-filter-jump="life">翻开日记本 <span aria-hidden="true">↗</span></a></div>
+            <div class="journal-feed"><div id="journal-posts"></div><a class="mini-more-link" href="#journal">翻开日记本 <span aria-hidden="true">↗</span></a></div>
           </div>
         </section>
 
-        <section class="section gallery-section" id="gallery" aria-labelledby="gallery-heading">
+        <section class="section gallery-section" id="home-gallery" aria-labelledby="gallery-heading">
           <div class="section-top"><div><span class="eyebrow">03 / THROUGH MY LENS</span><h2 class="section-title" id="gallery-heading">按下快门的那些瞬间<span style="color:var(--accent)">.</span></h2><p class="section-description">照片让偶然变成永恒。点开一张，慢慢看。</p></div><span class="section-index">VISUAL DIARY / 2026</span></div>
           <div class="gallery-toolbar"><div class="category-filters" id="photo-filters" role="group" aria-label="筛选摄影分类"></div><span class="gallery-sample-note">点击照片可放大查看</span></div>
           <div class="gallery-grid" id="gallery-grid" aria-live="polite"></div>
@@ -132,7 +132,97 @@
       </div>
     </div>
 
-    <!-- 文章归档是独立视图：点击「文章」导航时才显示。 -->
+
+    <!-- tech: independent channel route -->
+    <div id="tech-view" class="interior-view channel-page-view channel-page-tech" hidden>
+      <div class="container">
+        <div class="interior-topline"><a href="#home">← 返回首页</a><span>01 / CODE / PROJECTS</span></div>
+        <header class="channel-landing channel-landing-tech">
+          <div class="channel-landing-copy">
+            <span class="eyebrow">01 / CODE / PROJECTS</span>
+            <h1 id="tech-page-heading">技术实验室<span class="landing-period">.</span></h1>
+            <p>记录代码、实践和一次次的问题解决。不止于跑通，也想写清楚为什么。</p>
+            <div class="landing-counter"><strong id="tech-page-total">00</strong><span>篇技术笔记</span></div>
+          </div>
+          <div class="channel-landing-visual" aria-hidden="true"><span class="landing-visual-index">01 / THREE SIDES</span><span class="landing-visual-art">&lt;/&gt;</span><span class="landing-visual-end">KEEP EXPLORING ↗</span></div>
+        </header>
+        <section class="section channel-page-section" aria-labelledby="tech-page-list-heading">
+          <div class="section-top"><div><span class="eyebrow">BROWSE / ALL NOTES</span><h2 class="section-title" id="tech-page-list-heading">全部技术文章<span class="landing-period">.</span></h2></div><span class="section-index">EXPLORE BY TOPIC</span></div>
+          <div class="channel-page-facets">
+            <div class="channel-facet-label">TOPICS / 子分类</div>
+            <div class="category-filters" id="tech-page-filters" role="group" aria-label="技术实验室子分类"></div>
+            <div class="tag-filters channel-page-tags" id="tech-page-tags" role="group" aria-label="技术实验室文章标签"></div>
+          </div>
+          <div class="channel-page-tools">
+            <label class="search-box" for="tech-page-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="tech-page-search" data-channel-search="tech" type="search" autocomplete="off" placeholder="搜索本栏文章..." /></label>
+            <select class="sort-select" data-channel-sort="tech" aria-label="按时间排序"><option value="newest">最新发布</option><option value="oldest">最早发布</option></select>
+          </div>
+          <div class="results-meta"><span id="tech-page-results" aria-live="polite"></span><span>KEEP READING ↓</span></div>
+          <div class="posts-grid" id="tech-page-posts"></div>
+          <div class="empty-state" id="tech-page-empty" hidden><div class="empty-icon" aria-hidden="true">✳</div><h3>暂时没有找到文章</h3><p>试试其他分类或搜索词。</p><button type="button" data-reset-channel="tech">查看全部→</button></div>
+        </section>
+      </div>
+    </div>
+
+    <!-- journal: independent channel route -->
+    <div id="journal-view" class="interior-view channel-page-view channel-page-journal" hidden>
+      <div class="container">
+        <div class="interior-topline"><a href="#home">← 返回首页</a><span>02 / LIFE / JOURNAL</span></div>
+        <header class="channel-landing channel-landing-journal">
+          <div class="channel-landing-copy">
+            <span class="eyebrow">02 / LIFE / JOURNAL</span>
+            <h1 id="journal-page-heading">生活日记本<span class="landing-period">.</span></h1>
+            <p>给平凡的一天留下句子。旅行、阅读、心情，都值得好好记录。</p>
+            <div class="landing-counter"><strong id="journal-page-total">00</strong><span>篇生活日记</span></div>
+          </div>
+          <div class="channel-landing-visual" aria-hidden="true"><span class="landing-visual-index">02 / THREE SIDES</span><span class="landing-visual-art">✳</span><span class="landing-visual-end">KEEP EXPLORING ↗</span></div>
+        </header>
+        <section class="section channel-page-section" aria-labelledby="journal-page-list-heading">
+          <div class="section-top"><div><span class="eyebrow">BROWSE / ALL NOTES</span><h2 class="section-title" id="journal-page-list-heading">日常的每一篇<span class="landing-period">.</span></h2></div><span class="section-index">EXPLORE BY TOPIC</span></div>
+          <div class="channel-page-facets">
+            <div class="channel-facet-label">TOPICS / 子分类</div>
+            <div class="category-filters" id="journal-page-filters" role="group" aria-label="生活日记本子分类"></div>
+            <div class="tag-filters channel-page-tags" id="journal-page-tags" role="group" aria-label="生活日记本文章标签"></div>
+          </div>
+          <div class="channel-page-tools">
+            <label class="search-box" for="journal-page-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="journal-page-search" data-channel-search="journal" type="search" autocomplete="off" placeholder="搜索本栏文章..." /></label>
+            <select class="sort-select" data-channel-sort="journal" aria-label="按时间排序"><option value="newest">最新发布</option><option value="oldest">最早发布</option></select>
+          </div>
+          <div class="results-meta"><span id="journal-page-results" aria-live="polite"></span><span>KEEP READING ↓</span></div>
+          <div class="posts-grid" id="journal-page-posts"></div>
+          <div class="empty-state" id="journal-page-empty" hidden><div class="empty-icon" aria-hidden="true">✳</div><h3>暂时没有找到文章</h3><p>试试其他分类或搜索词。</p><button type="button" data-reset-channel="journal">查看全部→</button></div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Photography: its own gallery + photo-only essays. -->
+    <div id="gallery-page-view" class="interior-view channel-page-view channel-page-gallery" hidden>
+      <div class="container">
+        <div class="interior-topline"><a href="#home">← 返回首页</a><span>03 / PHOTO / VISUAL DIARY</span></div>
+        <header class="channel-landing channel-landing-gallery">
+          <div class="channel-landing-copy">
+            <span class="eyebrow">03 / THROUGH MY LENS</span>
+            <h1 id="gallery-page-heading">摄影作品集<span class="landing-period">.</span></h1>
+            <p>用镜头收集光影与故事，记住那些不想错过的瞬间。</p>
+            <div class="landing-counter"><strong id="gallery-page-total">00</strong><span>张摄影作品</span></div>
+          </div>
+          <div class="channel-landing-visual" aria-hidden="true"><span class="landing-visual-index">03 / THREE SIDES</span><span class="landing-visual-art">◎</span><span class="landing-visual-end">CAPTURE THE MOMENT ↗</span></div>
+        </header>
+        <section class="section gallery-page-section" aria-labelledby="gallery-page-list-heading">
+          <div class="section-top"><div><span class="eyebrow">A COLLECTION OF MOMENTS</span><h2 class="section-title" id="gallery-page-list-heading">作品画廊<span class="landing-period">.</span></h2><p class="section-description">点击照片放大预览，可以左右切换。</p></div><span class="section-index">VISUAL ARCHIVE</span></div>
+          <div class="gallery-toolbar"><div class="category-filters" id="gallery-page-filters" role="group" aria-label="摄影作品分类"></div><span id="gallery-page-sample-note" class="gallery-sample-note">点击照片可放大查看</span></div>
+          <div class="gallery-grid" id="gallery-page-grid" aria-live="polite"></div>
+          <div class="empty-state" id="gallery-page-empty" hidden><div class="empty-icon">◎</div><h3>这个分类还没有照片</h3><p>换一个分类看看吧。</p></div>
+        </section>
+        <section class="section gallery-essay-section" aria-labelledby="photo-page-notes-heading">
+          <div class="section-top"><div><span class="eyebrow">STORIES BEHIND THE LENS</span><h2 class="section-title" id="photo-page-notes-heading">摄影随笔<span class="landing-period">.</span></h2><p class="section-description">一张照片背后，有时候还有一篇想讲的故事。</p></div><span class="section-index">PHOTO NOTES</span></div>
+          <div class="posts-grid" id="photo-page-posts"></div>
+          <p id="photo-page-empty" class="section-description" hidden>还没有摄影随笔，可以先看看上面的作品。</p>
+        </section>
+      </div>
+    </div>
+
+        <!-- 文章归档是独立视图：点击「文章」导航时才显示。 -->
     <div id="articles-view" class="interior-view" hidden>
       <div class="container">
         <div class="interior-topline"><a href="#home">← 返回首页</a><span>THE WRITING ARCHIVE / 文章归档</span></div>

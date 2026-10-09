@@ -6,10 +6,17 @@ const posts = window.BLOG_DATA.posts;
 const photos = window.BLOG_DATA.photos;
 const categories = window.BLOG_DATA.categories || {};
 const CHANNEL_NAMES = {tech:'技术博客',life:'生活日记',photo:'摄影随笔'};
+const CHANNEL_ROUTES = {tech:'tech',life:'journal',photo:'gallery'};
 
 
     let photoCategory = 'all';
     let visiblePhotos = photos;
+    let galleryPageCategory = 'all';
+    const photoBuckets = {home: [], gallery: []};
+    const channelPageState = {
+      tech: {subcategory:'all', tag:null, search:'', sort:'newest'},
+      journal: {subcategory:'all', tag:null, search:'', sort:'newest'}
+    };
     let activePhotoIndex = 0;
 
     let activeSubcategory = 'all';
@@ -20,6 +27,7 @@ const CHANNEL_NAMES = {tech:'技术博客',life:'生活日记',photo:'摄影随�
     let sortOrder = 'newest';
     let toastTimer;
     let currentPostId = null;
+    let lastListingRoute = '#articles';
 
     const $ = selector => document.querySelector(selector);
     const dateLabel = iso => new Date(iso + 'T12:00:00').toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric'});
@@ -129,21 +137,70 @@ const CHANNEL_NAMES = {tech:'技术博客',life:'生活日记',photo:'摄影随�
         <a class="journal-entry" href="#post/${encodeURIComponent(post.id)}"><span class="journal-date">${escapeHtml(post.date.slice(5).replace('-','.'))}<small>${escapeHtml(post.date.slice(0,4))}</small></span><span class="journal-entry-text"><small>${escapeHtml(post.subcategoryLabel)}</small><strong>${escapeHtml(post.title)}</strong><span>${escapeHtml(post.excerpt)}</span></span><span class="journal-entry-arrow" aria-hidden="true">↗</span></a>`).join('');
     }
 
+    function renderChannelPage(page) {
+      const channel = page === 'journal' ? 'life' : 'tech';
+      const state = channelPageState[page];
+      const all = posts.filter(post => post.channel === channel);
+      const found = all.filter(post => {
+        if (state.subcategory !== 'all' && post.subcategory !== state.subcategory) return false;
+        const text = state.search.trim().toLocaleLowerCase();
+        if (!text) return true;
+        const content = post.content.replace(/<[^>]*>/g,' ');
+        return [post.title,post.excerpt,post.subcategoryLabel,content,...(post.tags || [])]
+          .some(part => String(part).toLocaleLowerCase().includes(text));
+      }).sort((a,b) => state.sort === 'oldest' ? a.date.localeCompare(b.date) : b.date.localeCompare(a.date));
+      document.getElementById(page+'-page-total').textContent = String(all.length).padStart(2,'0');
+      document.getElementById(page+'-page-filters').innerHTML =
+        [['all','\u5168\u90e8\u4e3b\u9898'],...Object.entries(categories[channel] || {})].map(([id,label]) => {
+          const selected = state.subcategory === id;
+          const count = id === 'all' ? all.length : all.filter(post => post.subcategory === id).length;
+          return `<button type="button" class="filter-button ${selected ? 'active' : ''}" data-channel-topic="${page}" data-topic="${escapeHtml(id)}" aria-pressed="${selected}">${escapeHtml(label)} <small>${count}</small></button>`;
+        }).join('');
+      const tagCounts = new Map();
+      all.filter(p => state.subcategory === 'all' || p.subcategory === state.subcategory)
+        .forEach(p => (p.tags || []).forEach(t => tagCounts.set(t, (tagCounts.get(t) || 0)+1)));
+      const tags = [...tagCounts].sort((a,b) => b[1]-a[1] || a[0].localeCompare(b[0],'zh-CN'));
+      if (state.tag && !tagCounts.has(state.tag)) state.tag = null;
+      const tagsElement = document.getElementById(page+'-page-tags');
+      tagsElement.hidden = tags.length === 0;
+      tagsElement.innerHTML = tags.length ? `<button type="button" class="tag-filter ${!state.tag ? 'active' : ''}" data-channel-tag="${page}" data-tag="all" aria-pressed="${!state.tag}">\u5168\u90e8\u6807\u7b7e</button>` + tags.map(([tag,num]) =>
+        `<button type="button" class="tag-filter ${state.tag === tag ? 'active' : ''}" data-channel-tag="${page}" data-tag="${escapeHtml(tag)}" aria-pressed="${state.tag === tag}">#${escapeHtml(tag)} <small>${num}</small></button>`).join('') : '';
+      const filtered = state.tag ? found.filter(p => (p.tags || []).includes(state.tag)) : found;
+      document.getElementById(page+'-page-posts').innerHTML = filtered.map(post => makeCard(post)).join('');
+      document.getElementById(page+'-page-results').textContent = `\u5171 ${filtered.length} \u7bc7${channel === 'tech' ? '\u6280\u672f\u6587\u7ae0' : '\u751f\u6d3b\u65e5\u8bb0'}`;
+      document.getElementById(page+'-page-empty').hidden = filtered.length !== 0;
+    }
+
     function renderGallery() {
       const used = new Set(photos.map(photo => photo.subcategory));
-      const kinds = [['all','全部照片'],...Object.entries(categories.photo || {}).filter(([key]) => used.has(key))];
-      $('#photo-filters').innerHTML = kinds.map(([key,label]) => {
-        const active = key === photoCategory;
-        return `<button type="button" class="filter-button ${active ? 'active' : ''}" data-photo-filter="${escapeHtml(key)}" aria-pressed="${active}">${escapeHtml(label)} <small>${key === 'all' ? photos.length : photos.filter(photo => photo.subcategory === key).length}</small></button>`;
-      }).join('');
-      $('.gallery-sample-note').textContent = photos.length && photos.every(photo => photo.note.startsWith('示例素材')) ? '当前为演示图片，请替换成自己的作品' : '点击照片可放大查看';
-      visiblePhotos = photoCategory === 'all' ? [...photos] : photos.filter(photo => photo.subcategory === photoCategory);
-      $('#gallery-grid').innerHTML = visiblePhotos.map((photo,index) => `
-        <button class="photo-card photo-card-${index}" type="button" data-photo-index="${index}" aria-label="放大照片：${escapeHtml(photo.title)}">
-          <img src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.alt)}" loading="lazy" decoding="async" />
-          <span class="photo-badge">${escapeHtml(photo.subcategoryLabel)} / ${String(index+1).padStart(2,'0')}</span>
-          <span class="photo-overlay"><strong>${escapeHtml(photo.title)}</strong><span aria-hidden="true">↗</span></span>
-        </button>`).join('');
+      const kinds = [['all','\u5168\u90e8\u7167\u7247'],...Object.entries(categories.photo || {}).filter(([key]) => used.has(key))];
+      const sampleNote = photos.length && photos.every(photo => photo.note.startsWith('\u793a\u4f8b\u7d20\u6750'))
+        ? '\u5f53\u524d\u4e3a\u6f14\u793a\u56fe\u7247\uff0c\u8bf7\u66ff\u6362\u6210\u81ea\u5df1\u7684\u4f5c\u54c1' : '\u70b9\u51fb\u7167\u7247\u53ef\u653e\u5927\u67e5\u770b';
+      for (const [scope, category, filtersId, gridId] of [
+        ['home',photoCategory,'photo-filters','gallery-grid'],
+        ['gallery',galleryPageCategory,'gallery-page-filters','gallery-page-grid']
+      ]) {
+        const list = category === 'all' ? [...photos] : photos.filter(photo => photo.subcategory === category);
+        photoBuckets[scope] = list;
+        document.getElementById(filtersId).innerHTML = kinds.map(([key,label]) => {
+          const selected = key === category;
+          const count = key === 'all' ? photos.length : photos.filter(p => p.subcategory === key).length;
+          return `<button type="button" class="filter-button ${selected ? 'active' : ''}" data-photo-filter="${escapeHtml(key)}" data-photo-scope="${scope}" aria-pressed="${selected}">${escapeHtml(label)} <small>${count}</small></button>`;
+        }).join('');
+        document.getElementById(gridId).innerHTML = list.map((photo,index) => `
+          <button class="photo-card photo-card-${index}" type="button" data-photo-index="${index}" data-photo-scope="${scope}" aria-label="\u653e\u5927\u7167\u7247\uff1a${escapeHtml(photo.title)}">
+            <img src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.alt)}" loading="lazy" decoding="async" />
+            <span class="photo-badge">${escapeHtml(photo.subcategoryLabel)} / ${String(index+1).padStart(2,'0')}</span>
+            <span class="photo-overlay"><strong>${escapeHtml(photo.title)}</strong><span aria-hidden="true">\u2197</span></span>
+          </button>`).join('');
+        if (scope === 'gallery') document.getElementById('gallery-page-empty').hidden = list.length !== 0;
+      }
+      document.querySelector('#home-gallery .gallery-sample-note').textContent = sampleNote;
+      document.getElementById('gallery-page-sample-note').textContent = sampleNote;
+      document.getElementById('gallery-page-total').textContent = String(photos.length).padStart(2,'0');
+      const essays = posts.filter(post => post.channel === 'photo').sort((a,b) => b.date.localeCompare(a.date));
+      document.getElementById('photo-page-posts').innerHTML = essays.map(post => makeCard(post)).join('');
+      document.getElementById('photo-page-empty').hidden = essays.length !== 0;
     }
 
     function showPhoto(index) {
@@ -158,21 +215,11 @@ const CHANNEL_NAMES = {tech:'技术博客',life:'生活日记',photo:'摄影随�
       $('#photo-large-count').textContent = `${activePhotoIndex+1} / ${visiblePhotos.length}`;
     }
 
-    function openPhoto(index) {
+    function openPhoto(index, scope = 'home') {
+      visiblePhotos = photoBuckets[scope] || [];
+      if (!visiblePhotos.length) return;
       showPhoto(index);
       if (!$('#photo-dialog').open) $('#photo-dialog').showModal();
-    }
-
-    function jumpToChannel(channel) {
-      activeChannel = channel;
-      activeSubcategory = 'all';
-      activeTag = null;
-      showAllTags = false;
-      keyword = '';
-      sortOrder = 'newest';
-      $('#search-input').value = '';
-      $('#sort-select').value = 'newest';
-      renderPosts();
     }
 
     function makeToc(content) {
@@ -181,13 +228,20 @@ const CHANNEL_NAMES = {tech:'技术博客',life:'生活日记',photo:'摄影随�
     }
 
     function renderPost(post) {
+      const channelHref = '#' + CHANNEL_ROUTES[post.channel];
+      const backHref = ['#home','#tech','#journal','#gallery','#articles'].includes(lastListingRoute) ? lastListingRoute : channelHref;
+      const backLabel = {
+        '#home':'\u8fd4\u56de\u9996\u9875','#tech':'\u8fd4\u56de\u6280\u672f',
+        '#journal':'\u8fd4\u56de\u65e5\u8bb0','#gallery':'\u8fd4\u56de\u6444\u5f71',
+        '#articles':'\u8fd4\u56de\u6587\u7ae0\u5217\u8868'
+      }[backHref];
       const toc = makeToc(post.content);
       let tocIndex = 0;
       const bodyHtml = post.content.replace(/<h2>/g, () => '<h2 id="section-' + (tocIndex++) + '">');
       const recs = posts.filter(p => p.id !== post.id).sort((a,b) => (b.channel === post.channel) - (a.channel === post.channel) || b.date.localeCompare(a.date)).slice(0,2);
       $('#post-view').innerHTML = `
         <div class="container article-shell">
-          <nav class="article-breadcrumb" aria-label="面包屑导航"><a href="#home">首页</a><span class="slash">/</span><a href="#articles" data-article-channel="${post.channel}">${escapeHtml(CHANNEL_NAMES[post.channel])}</a><span class="slash">/</span><a href="#articles" data-article-channel="${post.channel}" data-article-subcategory="${escapeHtml(post.subcategory)}">${escapeHtml(post.subcategoryLabel)}</a></nav>
+          <nav class="article-breadcrumb" aria-label="面包屑导航"><a href="#home">首页</a><span class="slash">/</span><a href="${channelHref}">${escapeHtml(CHANNEL_NAMES[post.channel])}</a><span class="slash">/</span><a href="#articles" data-article-channel="${post.channel}" data-article-subcategory="${escapeHtml(post.subcategory)}">${escapeHtml(post.subcategoryLabel)}</a></nav>
           <header class="article-heading">
             <span class="eyebrow">${escapeHtml(CHANNEL_NAMES[post.channel])} / ${escapeHtml(post.subcategoryLabel)}</span>
             <h1>${escapeHtml(post.title)}</h1>
@@ -201,7 +255,7 @@ const CHANNEL_NAMES = {tech:'技术博客',life:'生活日记',photo:'摄影随�
           <div class="article-body-layout">
             <div>
               <article class="prose">${bodyHtml}</article>
-              <div class="article-bottom"><button type="button" id="share-post"><span aria-hidden="true">↗</span> 复制文章链接</button><a href="#articles">← 返回文章列表</a></div>
+              <div class="article-bottom"><button type="button" id="share-post"><span aria-hidden="true">↗</span> 复制文章链接</button><a href="${backHref}">← ${backLabel}</a></div>
             </div>
             <aside class="reading-aside" aria-label="文章目录">
               <span>IN THIS ARTICLE / 阅读目录</span><nav class="toc-list">${toc.map(t => `<a href="#${t.id}" data-section="${t.id}">${escapeHtml(t.label)}</a>`).join('')}</nav>
@@ -224,40 +278,36 @@ const CHANNEL_NAMES = {tech:'技术博客',life:'生活日记',photo:'摄影随�
       const hash = decodeURIComponent(location.hash.slice(1));
       const isPost = hash.startsWith('post/');
       const post = isPost ? getPost(hash.slice(5)) : null;
-      const page = post ? 'post' : (hash === 'articles' || hash === 'about' ? hash : 'home');
-      $('#home-view').hidden = page !== 'home';
-      $('#articles-view').hidden = page !== 'articles';
-      $('#about-view').hidden = page !== 'about';
-      $('#post-view').hidden = page !== 'post';
+      const allowed = ['home','tech','journal','gallery','articles','about'];
+      const page = post ? 'post' : allowed.includes(hash) ? hash : 'home';
+      if (!post && ['home','tech','journal','gallery','articles'].includes(page)) lastListingRoute = '#' + page;
+      const pageViews = {
+        home:'home-view',tech:'tech-view',journal:'journal-view',gallery:'gallery-page-view',
+        articles:'articles-view',about:'about-view',post:'post-view'
+      };
+      Object.entries(pageViews).forEach(([key,id]) => {
+        document.getElementById(id).hidden = page !== key;
+      });
       currentPostId = post ? post.id : null;
-      document.title = post ? post.title + ' · ' + SITE.name :
-        page === 'articles' ? '文章 · ' + SITE.name :
-        page === 'about' ? '关于 · ' + SITE.name : SITE.name + ' · 代码、生活与光影';
-      document.querySelectorAll('[data-nav]').forEach(a => {
-        const active = !post && (hash || 'home') === a.dataset.nav;
-        a.classList.toggle('active', active);
-        if (active) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
+      const labels = {tech:'\u6280\u672f\u5b9e\u9a8c\u5ba4',journal:'\u751f\u6d3b\u65e5\u8bb0',gallery:'\u6444\u5f71\u4f5c\u54c1',articles:'\u6587\u7ae0',about:'\u5173\u4e8e'};
+      document.title = post ? post.title + ' \u00b7 ' + SITE.name : labels[page] ? labels[page] + ' \u00b7 ' + SITE.name : SITE.name + ' \u00b7 \u4ee3\u7801\u3001\u751f\u6d3b\u4e0e\u5149\u5f71';
+      document.querySelectorAll('[data-nav]').forEach(link => {
+        const active = !post && page === link.dataset.nav;
+        link.classList.toggle('active', active);
+        if (active) link.setAttribute('aria-current','page'); else link.removeAttribute('aria-current');
       });
       $('#site-header').classList.remove('nav-open');
       $('#menu-toggle').setAttribute('aria-expanded','false');
-      $('#menu-toggle').setAttribute('aria-label','打开导航菜单');
-      if (post) {
-        renderPost(post);
-        window.scrollTo({top:0,behavior:'instant'});
-      } else {
+      $('#menu-toggle').setAttribute('aria-label','\u6253\u5f00\u5bfc\u822a\u83dc\u5355');
+      if ($('#photo-dialog').open) $('#photo-dialog').close();
+      if (post) renderPost(post);
+      else {
         $('#post-view').innerHTML = '';
-        requestAnimationFrame(() => {
-          // Archive / About are actual standalone pages, not homepage anchors.
-          if (page === 'articles' || page === 'about' || hash === 'home' || !hash) {
-            window.scrollTo({top:0,behavior:'instant'});
-          } else if (['tech','journal','gallery'].includes(hash)) {
-            document.getElementById(hash)?.scrollIntoView({behavior:'instant'});
-          } else {
-            window.scrollTo({top:0,behavior:'instant'});
-          }
-        });
-        if (isPost && !post) showToast('这篇文章暂时不存在，已返回首页');
+        if (page === 'tech' || page === 'journal') renderChannelPage(page);
+        if (page === 'gallery') renderGallery();
+        if (isPost && !post) showToast('\u8fd9\u7bc7\u6587\u7ae0\u6682\u65f6\u4e0d\u5b58\u5728\uff0c\u5df2\u8fd4\u56de\u9996\u9875');
       }
+      requestAnimationFrame(() => window.scrollTo({top:0,behavior:'instant'}));
       updateProgress();
     }
 
@@ -303,7 +353,7 @@ const CHANNEL_NAMES = {tech:'技术博客',life:'生活日记',photo:'摄影随�
       setSiteInfo();
       document.querySelector('.skip-link').addEventListener('click', event => {
         event.preventDefault();
-        const title = document.querySelector('#post-view:not([hidden]) h1, #articles-view:not([hidden]) h2, #about-view:not([hidden]) h2, #home-view:not([hidden]) h1');
+        const title = document.querySelector('#post-view:not([hidden]) h1, #tech-view:not([hidden]) h1, #journal-view:not([hidden]) h1, #gallery-page-view:not([hidden]) h1, #articles-view:not([hidden]) h2, #about-view:not([hidden]) h2, #home-view:not([hidden]) h1');
         if (title) {
           title.setAttribute('tabindex','-1');
           title.focus({preventScroll:true});
@@ -312,6 +362,8 @@ const CHANNEL_NAMES = {tech:'技术博客',life:'生活日记',photo:'摄影随�
       });
       renderPosts();
       renderTechAndJournal();
+      renderChannelPage('tech');
+      renderChannelPage('journal');
       renderGallery();
       $('#channel-filters').addEventListener('click', event => {
         const btn = event.target.closest('[data-channel]');
@@ -354,17 +406,49 @@ const CHANNEL_NAMES = {tech:'技术博客',life:'生活日记',photo:'摄影随�
         $('#search-input').value = ''; $('#sort-select').value = 'newest'; renderPosts();
       });
       $('#search-jump').addEventListener('click', focusSearch);
-      document.querySelectorAll('[data-filter-jump]').forEach(link => link.addEventListener('click', () => jumpToChannel(link.dataset.filterJump)));
-      $('#photo-filters').addEventListener('click', event => {
+      document.querySelectorAll('[data-channel-search]').forEach(input => input.addEventListener('input', event => {
+        const page = event.target.dataset.channelSearch;
+        channelPageState[page].search = event.target.value;
+        renderChannelPage(page);
+      }));
+      document.querySelectorAll('[data-channel-sort]').forEach(input => input.addEventListener('change', event => {
+        const page = event.target.dataset.channelSort;
+        channelPageState[page].sort = event.target.value;
+        renderChannelPage(page);
+      }));
+      document.querySelectorAll('.channel-page-view').forEach(view => view.addEventListener('click', event => {
+        const topic = event.target.closest('[data-channel-topic]');
+        const tag = event.target.closest('[data-channel-tag]');
+        const reset = event.target.closest('[data-reset-channel]');
+        if (topic) {
+          const page = topic.dataset.channelTopic;
+          channelPageState[page].subcategory = topic.dataset.topic;
+          channelPageState[page].tag = null;
+          renderChannelPage(page);
+        } else if (tag) {
+          const page = tag.dataset.channelTag;
+          const selected = tag.dataset.tag;
+          channelPageState[page].tag = selected === 'all' || channelPageState[page].tag === selected ? null : selected;
+          renderChannelPage(page);
+        } else if (reset) {
+          const page = reset.dataset.resetChannel;
+          Object.assign(channelPageState[page],{subcategory:'all',tag:null,search:'',sort:'newest'});
+          document.getElementById(page+'-page-search').value = '';
+          document.querySelector(`[data-channel-sort="${page}"]`).value = 'newest';
+          renderChannelPage(page);
+        }
+      }));
+      document.querySelectorAll('#photo-filters,#gallery-page-filters').forEach(group => group.addEventListener('click', event => {
         const button = event.target.closest('[data-photo-filter]');
         if (!button) return;
-        photoCategory = button.dataset.photoFilter;
+        if (button.dataset.photoScope === 'gallery') galleryPageCategory = button.dataset.photoFilter;
+        else photoCategory = button.dataset.photoFilter;
         renderGallery();
-      });
-      $('#gallery-grid').addEventListener('click', event => {
+      }));
+      document.querySelectorAll('#gallery-grid,#gallery-page-grid').forEach(grid => grid.addEventListener('click', event => {
         const photo = event.target.closest('[data-photo-index]');
-        if (photo) openPhoto(Number(photo.dataset.photoIndex));
-      });
+        if (photo) openPhoto(Number(photo.dataset.photoIndex), photo.dataset.photoScope);
+      }));
       $('#photo-close').addEventListener('click', () => $('#photo-dialog').close());
       $('#photo-prev').addEventListener('click', () => showPhoto(activePhotoIndex-1));
       $('#photo-next').addEventListener('click', () => showPhoto(activePhotoIndex+1));
