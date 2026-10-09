@@ -47,6 +47,85 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       $('#photo-total').textContent = String(albums.reduce((sum, a) => sum + a.photos.length, 0)).padStart(2,'0');
     }
 
+    // V10: sticky desktop taxonomy sidebars and a focus-managed mobile drawer.
+    let openFilterScope = null;
+    let returnFilterFocus = null;
+
+    function syncFilterCount(scope) {
+      const badge = document.querySelector(`[data-filter-count="${scope}"]`);
+      if (!badge) return;
+      let count = 0;
+      if (scope === 'archive') {
+        count = Number(Boolean(activeChannel)) + Number(activeSubcategory !== 'all') + Number(Boolean(activeTag));
+      } else {
+        const state = channelPageState[scope];
+        count = Number(state.subcategory !== 'all') + Number(Boolean(state.tag));
+      }
+      badge.textContent = count ? `${count} 项已选` : '全部';
+      badge.classList.toggle('has-selection',count > 0);
+    }
+
+    function closeFilterDrawer(restoreFocus = false) {
+      if (!openFilterScope) return;
+      const previous = openFilterScope;
+      const panel = document.querySelector(`[data-filter-panel="${previous}"]`);
+      panel?.classList.remove('is-open');
+      panel?.removeAttribute('role');
+      panel?.removeAttribute('aria-modal');
+      document.querySelector(`[data-filter-toggle="${previous}"]`)?.setAttribute('aria-expanded','false');
+      document.body.classList.remove('filter-drawer-open');
+      $('#filter-backdrop').hidden = true;
+      openFilterScope = null;
+      if (restoreFocus && returnFilterFocus?.isConnected) returnFilterFocus.focus({preventScroll:true});
+      returnFilterFocus = null;
+    }
+
+    function openFilterDrawer(scope) {
+      if (!['tech','journal','archive'].includes(scope)) return;
+      if (window.innerWidth > 920) return;
+      if (openFilterScope) closeFilterDrawer();
+      const panel = document.querySelector(`[data-filter-panel="${scope}"]`);
+      const trigger = document.querySelector(`[data-filter-toggle="${scope}"]`);
+      if (!panel || !trigger) return;
+      returnFilterFocus = trigger;
+      openFilterScope = scope;
+      panel.classList.add('is-open');
+      panel.setAttribute('role','dialog');
+      panel.setAttribute('aria-modal','true');
+      trigger.setAttribute('aria-expanded','true');
+      $('#filter-backdrop').hidden = false;
+      document.body.classList.add('filter-drawer-open');
+      panel.querySelector('.filter-sidebar-close')?.focus({preventScroll:true});
+    }
+
+    function setupFilterDrawers() {
+      document.addEventListener('click', event => {
+        const trigger = event.target.closest('[data-filter-toggle]');
+        if (trigger) {
+          const scope = trigger.dataset.filterToggle;
+          if (openFilterScope === scope) closeFilterDrawer(true);
+          else openFilterDrawer(scope);
+          return;
+        }
+        const close = event.target.closest('[data-filter-close]');
+        if (close) closeFilterDrawer(true);
+      });
+      $('#filter-backdrop').addEventListener('click',() => closeFilterDrawer(true));
+      document.addEventListener('keydown', event => {
+        if (!openFilterScope) return;
+        if (event.key === 'Escape') { event.preventDefault(); closeFilterDrawer(true); return; }
+        if (event.key !== 'Tab') return;
+        const panel = document.querySelector(`[data-filter-panel="${openFilterScope}"]`);
+        const focusable = [...panel.querySelectorAll('button:not([disabled])')]
+          .filter(el => el.getClientRects().length && getComputedStyle(el).visibility !== 'hidden');
+        if (!focusable.length) return;
+        const first = focusable[0], last = focusable[focusable.length-1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      });
+      window.addEventListener('resize',() => { if (window.innerWidth > 920) closeFilterDrawer(); });
+    }
+
     function renderFilters() {
       const options = [[null,'全部文字'],['tech','技术博客'],['life','生活日记']];
       $('#channel-filters').innerHTML = options.map(([channel,label]) => {
@@ -185,6 +264,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       $('#results-count').textContent = `共找到 ${list.length} 篇文章${activeChannel ? ' · ' + CHANNEL_NAMES[activeChannel] : ''}${currentLabel ? ' · ' + currentLabel : ''}${activeTag ? ' · #' + activeTag : ''}`;
       $('#empty-state').hidden = list.length !== 0;
       renderFilters();
+      syncFilterCount('archive');
       updateSortUI('archive');
     }
 
@@ -240,6 +320,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       document.getElementById(page+'-page-results').textContent = `\u5171 ${filtered.length} \u7bc7${channel === 'tech' ? '\u6280\u672f\u6587\u7ae0' : '\u751f\u6d3b\u65e5\u8bb0'}`;
       document.getElementById(page+'-page-empty').hidden = filtered.length !== 0;
       updateSortUI(page);
+      syncFilterCount(page);
     }
 
     function albumCard(album, index) {
@@ -376,6 +457,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       $('#menu-toggle').setAttribute('aria-expanded','false');
       $('#menu-toggle').setAttribute('aria-label','\u6253\u5f00\u5bfc\u822a\u83dc\u5355');
       closeSortMenus();
+      closeFilterDrawer();
       if ($('#photo-dialog').open) $('#photo-dialog').close();
       if (post) renderPost(post);
       else {
@@ -429,6 +511,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
 
     function init() {
       setSiteInfo();
+      setupFilterDrawers();
       document.querySelector('.skip-link').addEventListener('click', event => {
         event.preventDefault();
         const title = document.querySelector('#post-view:not([hidden]) h1, #tech-view:not([hidden]) h1, #journal-view:not([hidden]) h1, #gallery-page-view:not([hidden]) h1, #articles-view:not([hidden]) h2, #about-view:not([hidden]) h2, #home-view:not([hidden]) h1');
