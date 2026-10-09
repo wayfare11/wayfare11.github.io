@@ -1202,3 +1202,66 @@ body::before{background:radial-gradient(circle at center,var(--garden-peach-soft
 @media (prefers-reduced-motion:reduce) {
   .filter-sidebar.archive-taxonomy,.filter-sidebar.channel-page-facets {transition:none;}
 }
+
+
+/* V11 -- editorial library grid. Sidebar lives OUTSIDE the content column on wide screens. */
+.filter-main .post-card {display:flex;flex-direction:column;min-width:0;border-radius:14px;}
+.filter-main .post-cover,
+.channel-page-view .filter-main .post-cover {height:135px;min-height:0;flex:none;}
+.filter-main .post-cover .cover-deco {font-size:clamp(56px,5.1vw,78px);top:26%;left:38%;}
+.filter-main .post-cover .cover-nr {font-size:9px;top:13px;left:14px;}
+.filter-main .post-cover .cover-word {font-size:8px;left:14px;bottom:13px;letter-spacing:.1em;}
+.filter-main .post-content {padding:16px 15px 14px;flex:1;display:flex;flex-direction:column;}
+.filter-main .post-overline {gap:6px;font-size:9px;line-height:1.5;flex-wrap:wrap;}
+.filter-main .post-content h3 {font-size:17px;line-height:1.5;margin:9px 0 8px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;min-height:51px;}
+.filter-main .post-content p {font-size:11px;line-height:1.72;min-height:38px;max-height:38px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;}
+.filter-main .post-tags {font-size:9px;gap:4px 7px;min-height:16px;margin-top:9px;max-height:18px;overflow:hidden;}
+.filter-main .post-footer {margin-top:auto;padding-top:11px;gap:7px;align-items:center;flex-direction:row;}
+.filter-main .post-footer time {font-size:9px;white-space:nowrap;}
+.filter-main .read-link {font-size:10px;white-space:nowrap;}
+.filter-main .read-link span {margin-left:1px;}
+.filter-main .posts-grid {grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;}
+.filter-main .post-card.is-featured {grid-column:auto;display:flex;flex-direction:column;min-height:0;}
+.filter-main .post-card.is-featured .post-cover {height:135px;min-height:0;}
+.filter-main .post-card.is-featured .post-content {justify-content:flex-start;padding:16px 15px 14px;}
+.filter-main .post-card.is-featured .post-content h3 {font-size:17px;line-height:1.5;margin:9px 0 8px;}
+.filter-main .post-card.is-featured .post-footer {margin-top:auto;}
+
+@media (min-width:1200px) {
+  /* A reserved outer gutter keeps the taxonomy off the main article canvas. */
+  #articles-view > .container,
+  #tech-view > .container,
+  #journal-view > .container {width:min(1140px,calc(100% - 512px));}
+  .filter-content-layout {width:calc(100% + 234px);margin-left:-234px;grid-template-columns:212px minmax(0,1fr);gap:22px;}
+  .filter-main .posts-grid {grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;}
+  .filter-sidebar.archive-taxonomy,.filter-sidebar.channel-page-facets {top:103px;}
+}
+@media (min-width:1200px) and (max-width:1399px) {
+  .filter-main .posts-grid {grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;}
+}
+@media (min-width:921px) and (max-width:1199px) {
+  .filter-content-layout {grid-template-columns:190px minmax(0,1fr);gap:18px;}
+  .filter-main .posts-grid {grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
+  .filter-main .post-content {padding:13px 12px;}
+  .filter-sidebar-heading {padding:16px 12px;}
+  .filter-sidebar-body {padding:14px 11px;}
+}
+@media (min-width:921px) and (max-width:1020px) {
+  .filter-main .posts-grid {grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media (min-width:600px) and (max-width:920px) {
+  .filter-main .posts-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;}
+}
+@media (max-width:599px) {
+  .filter-main .posts-grid {grid-template-columns:1fr;gap:17px;}
+  .filter-main .post-cover,.channel-page-view .filter-main .post-cover {height:178px;}
+  .filter-main .post-content {padding:20px;}
+  .filter-main .post-content h3 {font-size:20px;min-height:0;}
+  .filter-main .post-content p {font-size:12px;}
+  .filter-main .post-footer time {font-size:10px;}
+  .filter-main .read-link {font-size:11px;}
+}
+
+@media (min-width:780px) and (max-width:920px) {
+  .filter-main .posts-grid {grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;}
+}

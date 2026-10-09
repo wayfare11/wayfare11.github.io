@@ -258,8 +258,8 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
           .some(value => String(value).toLocaleLowerCase().includes(normalized));
         return matchChannel && matchSub && matchTag && matchKeyword;
       }));
-      const featured = !keyword.trim() && !activeChannel && !activeTag && activeSubcategory === 'all' && sortOrder === 'newest';
-      $('#posts-grid').innerHTML = list.map((post,index) => makeCard(post, featured && index === 0)).join('');
+      // The archive is a compact index: keep every card equal-sized.
+      $('#posts-grid').innerHTML = list.map(post => makeCard(post)).join('');
       const currentLabel = activeChannel && categories[activeChannel]?.[activeSubcategory];
       $('#results-count').textContent = `共找到 ${list.length} 篇文章${activeChannel ? ' · ' + CHANNEL_NAMES[activeChannel] : ''}${currentLabel ? ' · ' + currentLabel : ''}${activeTag ? ' · #' + activeTag : ''}`;
       $('#empty-state').hidden = list.length !== 0;
