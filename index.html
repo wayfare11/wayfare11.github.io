@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f5f7fc" />
+  <meta name="theme-color" content="#f7f7f4" />
   <meta name="description" content="写代码、记生活、拍世界：技术文章、生活日记与摄影作品的个人博客。" />
   <title>小满的手记 · 代码、生活与光影</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%234a5add'/%3E%3Ccircle cx='32' cy='32' r='13' fill='%23fff5e8'/%3E%3Cpath d='M32 8v9M32 47v9M8 32h9M47 32h9' stroke='%23fff5e8' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%232c302c'/%3E%3Ccircle cx='32' cy='32' r='13' fill='%23fff5e8'/%3E%3Cpath d='M32 8v9M32 47v9M8 32h9M47 32h9' stroke='%23fff5e8' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
   <link rel="stylesheet" href="assets/style.css" />
   <script>
-    try { if (localStorage.getItem('xiaoman-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (_) {}
+    try { if (localStorage.getItem('xiaoman-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; var p = localStorage.getItem('xiaoman-palette'); document.documentElement.dataset.palette = ['mono','moss','plum','coral'].includes(p) ? p : 'mono'; } catch (_) { document.documentElement.dataset.palette = 'mono'; }
   </script>
 </head>
 <body>
@@ -33,6 +33,19 @@
         <button class="icon-button" id="search-jump" aria-label="搜索文章" title="搜索文章">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg>
         </button>
+        <div class="palette-control" id="palette-control">
+          <button class="icon-button palette-trigger" id="palette-toggle" type="button" aria-label="&#26356;&#25442;&#32593;&#31449;&#37197;&#33394;" title="&#36873;&#25321;&#32593;&#31449;&#37197;&#33394;" aria-haspopup="true" aria-controls="palette-menu" aria-expanded="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="7" r="2.5"/><circle cx="7" cy="17" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg>
+          </button>
+          <div class="palette-menu" id="palette-menu" role="group" aria-label="&#32593;&#31449;&#37197;&#33394;" hidden>
+            <div class="palette-menu-heading"><strong>&#36873;&#25321;&#37197;&#33394;</strong><small>COLOR / STYLE</small></div>
+          <button class="palette-option" type="button" data-palette-option="mono" aria-pressed="true"><span class="palette-dot palette-dot-mono" aria-hidden="true"></span><span class="palette-option-label">&#40657;&#30333;&#26497;&#31616;</span><span class="palette-option-check" aria-hidden="true">&#10003;</span></button>
+          <button class="palette-option" type="button" data-palette-option="moss" aria-pressed="false"><span class="palette-dot palette-dot-moss" aria-hidden="true"></span><span class="palette-option-label">&#33492;&#32511;</span><span class="palette-option-check" aria-hidden="true">&#10003;</span></button>
+          <button class="palette-option" type="button" data-palette-option="plum" aria-pressed="false"><span class="palette-dot palette-dot-plum" aria-hidden="true"></span><span class="palette-option-label">&#38654;&#32043;</span><span class="palette-option-check" aria-hidden="true">&#10003;</span></button>
+          <button class="palette-option" type="button" data-palette-option="coral" aria-pressed="false"><span class="palette-dot palette-dot-coral" aria-hidden="true"></span><span class="palette-option-label">&#29642;&#29786;&#32418;</span><span class="palette-option-check" aria-hidden="true">&#10003;</span></button>
+            <div class="palette-menu-footnote">&#37197;&#33394;&#20250;&#33258;&#21160;&#35760;&#20303;&#65292;&#20063;&#21487;&#20999;&#25442;&#26126;&#26263;&#27169;&#24335;</div>
+          </div>
+        </div>
         <button class="icon-button" id="theme-toggle" aria-label="切换深色模式" title="切换深色模式" aria-pressed="false">
           <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
           <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.3A8.7 8.7 0 0 1 9.7 3.5 8.7 8.7 0 1 0 20.5 14.3Z"/></svg>

@@ -518,18 +518,67 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       $('#photo-prev').addEventListener('click', () => showPhoto(activePhotoIndex-1));
       $('#photo-next').addEventListener('click', () => showPhoto(activePhotoIndex+1));
       $('#photo-dialog').addEventListener('click', event => { if (event.target === $('#photo-dialog')) $('#photo-dialog').close(); });
+      // Independently selectable palettes (default monochrome), persisted locally.
+      const PALETTES = ['mono','moss','plum','coral'];
+      const paletteToggle = $('#palette-toggle');
+      const paletteMenu = $('#palette-menu');
+      const updateThemeColor = () => {
+        document.querySelector('meta[name="theme-color"]').content = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#f7f7f4';
+      };
+      const closePalette = (focus) => {
+        paletteMenu.hidden = true;
+        paletteToggle.setAttribute('aria-expanded','false');
+        if (focus) paletteToggle.focus();
+      };
+      const syncPalette = () => {
+        const current = document.documentElement.dataset.palette || 'mono';
+        paletteMenu.querySelectorAll('[data-palette-option]').forEach(button => {
+          button.setAttribute('aria-pressed',String(button.dataset.paletteOption === current));
+        });
+        updateThemeColor();
+      };
+      if (!PALETTES.includes(document.documentElement.dataset.palette)) document.documentElement.dataset.palette = 'mono';
+      syncPalette();
+      paletteToggle.addEventListener('click', () => {
+        const opening = paletteMenu.hidden;
+        paletteMenu.hidden = !opening;
+        paletteToggle.setAttribute('aria-expanded',String(opening));
+        if (opening) paletteMenu.querySelector('[aria-pressed="true"]')?.focus();
+      });
+      paletteMenu.addEventListener('click', event => {
+        const option = event.target.closest('[data-palette-option]');
+        if (!option) return;
+        const chosen = option.dataset.paletteOption;
+        if (!PALETTES.includes(chosen)) return;
+        document.documentElement.dataset.palette = chosen;
+        try { localStorage.setItem('xiaoman-palette', chosen); } catch (_) {}
+        syncPalette();
+        closePalette(true);
+      });
+      document.addEventListener('click', event => {
+        if (!$('#palette-control').contains(event.target)) closePalette(false);
+      });
+      paletteMenu.addEventListener('keydown', event => {
+        if (event.key === 'Escape') { event.preventDefault(); closePalette(true); }
+        const options = [...paletteMenu.querySelectorAll('[data-palette-option]')];
+        const index = options.indexOf(document.activeElement);
+        if (index >= 0 && (event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
+          event.preventDefault();
+          options[(index + (event.key === 'ArrowDown' ? 1 : -1) + options.length) % options.length].focus();
+        }
+      });
       $('#theme-toggle').addEventListener('click', () => {
         const dark = document.documentElement.dataset.theme !== 'dark';
         document.documentElement.dataset.theme = dark ? 'dark' : 'light';
         $('#theme-toggle').setAttribute('aria-label', dark ? '切换浅色模式' : '切换深色模式');
         $('#theme-toggle').setAttribute('aria-pressed',String(dark));
-        document.querySelector('meta[name="theme-color"]').content = dark ? '#0d1426' : '#f5f7fc';
+        updateThemeColor();
         try { localStorage.setItem('xiaoman-theme',dark ? 'dark' : 'light'); } catch (_) {}
       });
       if (document.documentElement.dataset.theme === 'dark') {
         $('#theme-toggle').setAttribute('aria-label','切换浅色模式');
         $('#theme-toggle').setAttribute('aria-pressed','true');
-        document.querySelector('meta[name="theme-color"]').content = '#0d1426';
+        updateThemeColor();
       }
       $('#menu-toggle').addEventListener('click', () => {
         const open = $('#site-header').classList.toggle('nav-open');
