@@ -518,12 +518,12 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       $('#photo-prev').addEventListener('click', () => showPhoto(activePhotoIndex-1));
       $('#photo-next').addEventListener('click', () => showPhoto(activePhotoIndex+1));
       $('#photo-dialog').addEventListener('click', event => { if (event.target === $('#photo-dialog')) $('#photo-dialog').close(); });
-      // Independently selectable palettes (default monochrome), persisted locally.
-      const PALETTES = ['mono','moss','plum','coral'];
+      // Independently selectable palettes (default warm garden), persisted locally.
+      const PALETTES = ['garden','moss','plum','coral','mono'];
       const paletteToggle = $('#palette-toggle');
       const paletteMenu = $('#palette-menu');
       const updateThemeColor = () => {
-        document.querySelector('meta[name="theme-color"]').content = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#f7f7f4';
+        document.querySelector('meta[name="theme-color"]').content = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#fff9ef';
       };
       const closePalette = (focus) => {
         paletteMenu.hidden = true;
@@ -531,13 +531,13 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
         if (focus) paletteToggle.focus();
       };
       const syncPalette = () => {
-        const current = document.documentElement.dataset.palette || 'mono';
+        const current = document.documentElement.dataset.palette || 'garden';
         paletteMenu.querySelectorAll('[data-palette-option]').forEach(button => {
           button.setAttribute('aria-pressed',String(button.dataset.paletteOption === current));
         });
         updateThemeColor();
       };
-      if (!PALETTES.includes(document.documentElement.dataset.palette)) document.documentElement.dataset.palette = 'mono';
+      if (!PALETTES.includes(document.documentElement.dataset.palette)) document.documentElement.dataset.palette = 'garden';
       syncPalette();
       paletteToggle.addEventListener('click', () => {
         const opening = paletteMenu.hidden;
