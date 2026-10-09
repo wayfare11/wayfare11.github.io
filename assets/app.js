@@ -3,16 +3,14 @@
 // Avoid editing this file when publishing a new post.
 const SITE = window.BLOG_DATA.site;
 const posts = window.BLOG_DATA.posts;
-const photos = window.BLOG_DATA.photos;
+const albums = window.BLOG_DATA.albums || [];
 const categories = window.BLOG_DATA.categories || {};
-const CHANNEL_NAMES = {tech:'技术博客',life:'生活日记',photo:'摄影随笔'};
-const CHANNEL_ROUTES = {tech:'tech',life:'journal',photo:'gallery'};
+const CHANNEL_NAMES = {tech:'技术博客',life:'生活日记'};
+const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
 
 
-    let photoCategory = 'all';
-    let visiblePhotos = photos;
-    let galleryPageCategory = 'all';
-    const photoBuckets = {home: [], gallery: []};
+    let visiblePhotos = [];
+    let selectedAlbum = null;
     const channelPageState = {
       tech: {subcategory:'all', tag:null, search:'', sort:'newest'},
       journal: {subcategory:'all', tag:null, search:'', sort:'newest'}
@@ -46,11 +44,11 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal',photo:'gallery'};
       const githubLink = $('#footer-github');
       if (SITE.github) { githubLink.href = SITE.github; githubLink.hidden = false; }
       $('#article-total').textContent = String(posts.length).padStart(2,'0');
-      $('#photo-total').textContent = String(photos.length).padStart(2,'0');
+      $('#photo-total').textContent = String(albums.reduce((sum, a) => sum + a.photos.length, 0)).padStart(2,'0');
     }
 
     function renderFilters() {
-      const options = [[null,'全部文字'],['tech','技术博客'],['life','生活日记'],['photo','摄影随笔']];
+      const options = [[null,'全部文字'],['tech','技术博客'],['life','生活日记']];
       $('#channel-filters').innerHTML = options.map(([channel,label]) => {
         const total = posts.filter(post => !channel || post.channel === channel).length;
         const selected = activeChannel === channel;
@@ -97,6 +95,79 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal',photo:'gallery'};
         </article>`;
     }
 
+    function sortValue(scope) {
+      return scope === 'archive' ? sortOrder : channelPageState[scope].sort;
+    }
+
+    function updateSortUI(scope) {
+      const control = document.querySelector(`[data-sort-control="${scope}"]`);
+      if (!control) return;
+      const value = sortValue(scope);
+      control.querySelector('.sort-current').textContent = value === 'oldest' ? '\u6700\u65e9\u53d1\u5e03' : '\u6700\u65b0\u53d1\u5e03';
+      control.querySelectorAll('[data-sort-option]').forEach(option => option.setAttribute('aria-checked',String(option.dataset.sortOption === value)));
+    }
+
+    function closeSortMenus(exceptScope = null) {
+      document.querySelectorAll('[data-sort-control]').forEach(control => {
+        if (control.dataset.sortControl === exceptScope) return;
+        control.querySelector('.sort-menu').hidden = true;
+        control.querySelector('.sort-trigger').setAttribute('aria-expanded','false');
+      });
+    }
+
+    function chooseSort(scope, value) {
+      if (value !== 'newest' && value !== 'oldest') return;
+      if (scope === 'archive') { sortOrder = value; renderPosts(); }
+      else { channelPageState[scope].sort = value; renderChannelPage(scope); }
+      updateSortUI(scope);
+      closeSortMenus();
+    }
+
+    function setupSortMenus() {
+      document.addEventListener('click', event => {
+        const trigger = event.target.closest('[data-sort-trigger]');
+        if (trigger) {
+          const scope = trigger.dataset.sortTrigger;
+          const control = trigger.closest('[data-sort-control]');
+          const menu = control.querySelector('.sort-menu');
+          const wasOpen = !menu.hidden;
+          closeSortMenus();
+          menu.hidden = wasOpen;
+          trigger.setAttribute('aria-expanded',String(!wasOpen));
+          return;
+        }
+        const option = event.target.closest('[data-sort-option]');
+        if (option) {
+          const scope = option.closest('[data-sort-control]').dataset.sortControl;
+          chooseSort(scope, option.dataset.sortOption);
+          document.querySelector(`[data-sort-trigger="${scope}"]`).focus({preventScroll:true});
+          return;
+        }
+        if (!event.target.closest('.sort-control')) closeSortMenus();
+      });
+      document.addEventListener('keydown', event => {
+        const control = event.target.closest?.('[data-sort-control]');
+        if (event.key === 'Escape') {
+          const wasOpen = [...document.querySelectorAll('.sort-menu')].some(menu => !menu.hidden);
+          if (wasOpen) { closeSortMenus(); control?.querySelector('.sort-trigger').focus({preventScroll:true}); event.preventDefault(); }
+        }
+        if (!control) return;
+        const trigger = control.querySelector('.sort-trigger');
+        const menu = control.querySelector('.sort-menu');
+        const items = [...menu.querySelectorAll('[data-sort-option]')];
+        if ((event.key === 'ArrowDown' || event.key === 'ArrowUp') && items.length) {
+          event.preventDefault();
+          closeSortMenus(control.dataset.sortControl);
+          menu.hidden = false;
+          trigger.setAttribute('aria-expanded','true');
+          const current = items.indexOf(document.activeElement);
+          const next = current === -1 ? (event.key === 'ArrowDown' ? 0 : items.length-1) : (current + (event.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length;
+          items[next].focus();
+        }
+        if (event.key === 'Tab' && !menu.hidden) closeSortMenus();
+      });
+    }
+
     function renderPosts() {
       const normalized = keyword.trim().toLocaleLowerCase();
       const list = sortedPosts(posts.filter(post => {
@@ -114,6 +185,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal',photo:'gallery'};
       $('#results-count').textContent = `共找到 ${list.length} 篇文章${activeChannel ? ' · ' + CHANNEL_NAMES[activeChannel] : ''}${currentLabel ? ' · ' + currentLabel : ''}${activeTag ? ' · #' + activeTag : ''}`;
       $('#empty-state').hidden = list.length !== 0;
       renderFilters();
+      updateSortUI('archive');
     }
 
     function renderTechAndJournal() {
@@ -130,8 +202,6 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal',photo:'gallery'};
         $('#featured-tech-summary').textContent = '把 Markdown 文件放进 content/tech/，运行更新脚本就会展示在这里。';
         $('#featured-tech-link').href = '#articles';
       }
-      const featuredPhoto = posts.filter(post => post.channel === 'photo').sort((a,b) => b.date.localeCompare(a.date))[0];
-      $('#featured-photo-link').href = featuredPhoto ? '#post/' + encodeURIComponent(featuredPhoto.id) : '#articles';
       const life = posts.filter(post => post.channel === 'life').sort((a,b) => b.date.localeCompare(a.date));
       $('#journal-posts').innerHTML = life.slice(0,3).map(post => `
         <a class="journal-entry" href="#post/${encodeURIComponent(post.id)}"><span class="journal-date">${escapeHtml(post.date.slice(5).replace('-','.'))}<small>${escapeHtml(post.date.slice(0,4))}</small></span><span class="journal-entry-text"><small>${escapeHtml(post.subcategoryLabel)}</small><strong>${escapeHtml(post.title)}</strong><span>${escapeHtml(post.excerpt)}</span></span><span class="journal-entry-arrow" aria-hidden="true">↗</span></a>`).join('');
@@ -169,54 +239,60 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal',photo:'gallery'};
       document.getElementById(page+'-page-posts').innerHTML = filtered.map(post => makeCard(post)).join('');
       document.getElementById(page+'-page-results').textContent = `\u5171 ${filtered.length} \u7bc7${channel === 'tech' ? '\u6280\u672f\u6587\u7ae0' : '\u751f\u6d3b\u65e5\u8bb0'}`;
       document.getElementById(page+'-page-empty').hidden = filtered.length !== 0;
+      updateSortUI(page);
     }
 
-    function renderGallery() {
-      const used = new Set(photos.map(photo => photo.subcategory));
-      const kinds = [['all','\u5168\u90e8\u7167\u7247'],...Object.entries(categories.photo || {}).filter(([key]) => used.has(key))];
-      const sampleNote = photos.length && photos.every(photo => photo.note.startsWith('\u793a\u4f8b\u7d20\u6750'))
-        ? '\u5f53\u524d\u4e3a\u6f14\u793a\u56fe\u7247\uff0c\u8bf7\u66ff\u6362\u6210\u81ea\u5df1\u7684\u4f5c\u54c1' : '\u70b9\u51fb\u7167\u7247\u53ef\u653e\u5927\u67e5\u770b';
-      for (const [scope, category, filtersId, gridId] of [
-        ['home',photoCategory,'photo-filters','gallery-grid'],
-        ['gallery',galleryPageCategory,'gallery-page-filters','gallery-page-grid']
-      ]) {
-        const list = category === 'all' ? [...photos] : photos.filter(photo => photo.subcategory === category);
-        photoBuckets[scope] = list;
-        document.getElementById(filtersId).innerHTML = kinds.map(([key,label]) => {
-          const selected = key === category;
-          const count = key === 'all' ? photos.length : photos.filter(p => p.subcategory === key).length;
-          return `<button type="button" class="filter-button ${selected ? 'active' : ''}" data-photo-filter="${escapeHtml(key)}" data-photo-scope="${scope}" aria-pressed="${selected}">${escapeHtml(label)} <small>${count}</small></button>`;
-        }).join('');
-        document.getElementById(gridId).innerHTML = list.map((photo,index) => `
-          <button class="photo-card photo-card-${index}" type="button" data-photo-index="${index}" data-photo-scope="${scope}" aria-label="\u653e\u5927\u7167\u7247\uff1a${escapeHtml(photo.title)}">
-            <img src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.alt)}" loading="lazy" decoding="async" />
-            <span class="photo-badge">${escapeHtml(photo.subcategoryLabel)} / ${String(index+1).padStart(2,'0')}</span>
-            <span class="photo-overlay"><strong>${escapeHtml(photo.title)}</strong><span aria-hidden="true">\u2197</span></span>
-          </button>`).join('');
-        if (scope === 'gallery') document.getElementById('gallery-page-empty').hidden = list.length !== 0;
-      }
-      document.querySelector('#home-gallery .gallery-sample-note').textContent = sampleNote;
-      document.getElementById('gallery-page-sample-note').textContent = sampleNote;
-      document.getElementById('gallery-page-total').textContent = String(photos.length).padStart(2,'0');
-      const essays = posts.filter(post => post.channel === 'photo').sort((a,b) => b.date.localeCompare(a.date));
-      document.getElementById('photo-page-posts').innerHTML = essays.map(post => makeCard(post)).join('');
-      document.getElementById('photo-page-empty').hidden = essays.length !== 0;
+    function albumCard(album, index) {
+      return `<a class="album-card" href="#album/${encodeURIComponent(album.id)}" aria-label="\u67e5\u770b\u76f8\u518c\uff1a${escapeHtml(album.title)}">
+          <span class="album-card-image"><img src="${escapeHtml(album.cover)}" alt="${escapeHtml(album.title)}" loading="lazy" decoding="async" /></span>
+          <span class="album-card-info"><span class="album-card-upper">COLLECTION / ${String(index+1).padStart(2,'0')}</span><strong>${escapeHtml(album.title)}</strong><span class="album-card-desc">${escapeHtml(album.description)}</span><span class="album-card-meta">${album.count} \u5f20\u7167\u7247 <span aria-hidden="true">\u2197</span></span></span>
+        </a>`;
+    }
+
+    function renderAlbums() {
+      $('#home-albums-grid').innerHTML = albums.slice(0,3).map(albumCard).join('');
+      $('#gallery-albums-grid').innerHTML = albums.map(albumCard).join('');
+      $('#gallery-albums-empty').hidden = albums.length !== 0;
+      $('#gallery-page-total').textContent = String(albums.length).padStart(2,'0');
+    }
+
+    function renderAlbumDetail(album) {
+      selectedAlbum = album;
+      if (!album) return;
+      const date = album.date.replace(/-/g, '.');
+      $('#album-detail-content').innerHTML = `
+        <div class="interior-topline"><a href="#gallery">\u2190 \u8fd4\u56de\u5168\u90e8\u76f8\u518c</a><span>COLLECTION / ${escapeHtml(date)}</span></div>
+        <header class="album-detail-hero">
+          <div class="album-detail-copy"><span class="eyebrow">PHOTO ESSENTIALS / ${escapeHtml(date)}</span>
+            <h1>${escapeHtml(album.title)}<span class="landing-period">.</span></h1>
+            <p>${escapeHtml(album.description)}</p>
+            <div class="album-detail-meta"><span>${album.count} \u5e27\u753b\u9762</span><span>${escapeHtml(date)}</span></div>
+          </div>
+          <div class="album-detail-cover"><img src="${escapeHtml(album.cover)}" alt="${escapeHtml(album.title)}" /></div>
+        </header>
+        <div class="album-photo-heading"><div><span class="eyebrow">THE FRAMES</span><h2>\u8fd9\u672c\u76f8\u518c\u91cc\u7684\u7167\u7247<span class="landing-period">.</span></h2></div><span>${album.count} PHOTOS</span></div>
+        <div class="album-photo-grid" id="album-photo-grid">${album.photos.map((photo,index) => `
+          <button class="album-photo" type="button" data-album-photo="${index}" aria-label="\u67e5\u770b\u7167\u7247\uff1a${escapeHtml(photo.title)}">
+            <span class="album-photo-image"><img src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.alt)}" loading="lazy" decoding="async" /></span>
+            <span class="album-photo-caption"><span>${String(index+1).padStart(2,'0')} / ${escapeHtml(photo.title)}</span><span aria-hidden="true">\u2197</span></span>
+          </button>`).join('')}</div>
+        <div class="album-detail-bottom"><a href="#gallery">\u2190 \u8fd4\u56de\u4e3b\u9898\u76f8\u518c</a></div>`;
     }
 
     function showPhoto(index) {
-      if (!visiblePhotos.length) return;
+      if (!visiblePhotos.length || !selectedAlbum) return;
       activePhotoIndex = (index + visiblePhotos.length) % visiblePhotos.length;
       const photo = visiblePhotos[activePhotoIndex];
       $('#photo-large').src = photo.src;
       $('#photo-large').alt = photo.alt;
-      $('#photo-large-kind').textContent = photo.subcategoryLabel + (photo.note.startsWith('示例素材') ? ' / SAMPLE PHOTO' : ' / PHOTO');
+      $('#photo-large-kind').textContent = selectedAlbum.title + ' / PHOTO';
       $('#photo-large-title').textContent = photo.title;
-      $('#photo-large-desc').textContent = photo.note;
+      $('#photo-large-desc').textContent = photo.note || selectedAlbum.description;
       $('#photo-large-count').textContent = `${activePhotoIndex+1} / ${visiblePhotos.length}`;
     }
 
-    function openPhoto(index, scope = 'home') {
-      visiblePhotos = photoBuckets[scope] || [];
+    function openPhoto(index) {
+      visiblePhotos = selectedAlbum?.photos || [];
       if (!visiblePhotos.length) return;
       showPhoto(index);
       if (!$('#photo-dialog').open) $('#photo-dialog').showModal();
@@ -277,35 +353,37 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal',photo:'gallery'};
     function route() {
       const hash = decodeURIComponent(location.hash.slice(1));
       const isPost = hash.startsWith('post/');
+      const isAlbum = hash.startsWith('album/');
       const post = isPost ? getPost(hash.slice(5)) : null;
+      const album = isAlbum ? albums.find(item => item.id === hash.slice(6)) : null;
       const allowed = ['home','tech','journal','gallery','articles','about'];
-      const page = post ? 'post' : allowed.includes(hash) ? hash : 'home';
+      const page = post ? 'post' : album ? 'album' : allowed.includes(hash) ? hash : 'home';
       if (!post && ['home','tech','journal','gallery','articles'].includes(page)) lastListingRoute = '#' + page;
-      const pageViews = {
-        home:'home-view',tech:'tech-view',journal:'journal-view',gallery:'gallery-page-view',
-        articles:'articles-view',about:'about-view',post:'post-view'
-      };
-      Object.entries(pageViews).forEach(([key,id]) => {
-        document.getElementById(id).hidden = page !== key;
-      });
+      const views = {home:'home-view',tech:'tech-view',journal:'journal-view',articles:'articles-view',about:'about-view',post:'post-view'};
+      Object.entries(views).forEach(([key,id]) => { document.getElementById(id).hidden = page !== key; });
+      $('#gallery-page-view').hidden = !['gallery','album'].includes(page);
+      $('#album-overview').hidden = page !== 'gallery';
+      $('#album-detail').hidden = page !== 'album';
       currentPostId = post ? post.id : null;
-      const labels = {tech:'\u6280\u672f\u5b9e\u9a8c\u5ba4',journal:'\u751f\u6d3b\u65e5\u8bb0',gallery:'\u6444\u5f71\u4f5c\u54c1',articles:'\u6587\u7ae0',about:'\u5173\u4e8e'};
-      document.title = post ? post.title + ' \u00b7 ' + SITE.name : labels[page] ? labels[page] + ' \u00b7 ' + SITE.name : SITE.name + ' \u00b7 \u4ee3\u7801\u3001\u751f\u6d3b\u4e0e\u5149\u5f71';
+      const labels = {tech:'\u6280\u672f\u5b9e\u9a8c\u5ba4',journal:'\u751f\u6d3b\u65e5\u8bb0',gallery:'\u6444\u5f71\u76f8\u518c',articles:'\u6587\u7ae0',about:'\u5173\u4e8e'};
+      document.title = post ? post.title + ' \u00b7 ' + SITE.name : album ? album.title + ' \u00b7 ' + SITE.name : labels[page] ? labels[page] + ' \u00b7 ' + SITE.name : SITE.name + ' \u00b7 CODE / LIFE / PHOTOS';
       document.querySelectorAll('[data-nav]').forEach(link => {
-        const active = !post && page === link.dataset.nav;
+        const active = !post && (page === link.dataset.nav || (page === 'album' && link.dataset.nav === 'gallery'));
         link.classList.toggle('active', active);
         if (active) link.setAttribute('aria-current','page'); else link.removeAttribute('aria-current');
       });
       $('#site-header').classList.remove('nav-open');
       $('#menu-toggle').setAttribute('aria-expanded','false');
       $('#menu-toggle').setAttribute('aria-label','\u6253\u5f00\u5bfc\u822a\u83dc\u5355');
+      closeSortMenus();
       if ($('#photo-dialog').open) $('#photo-dialog').close();
       if (post) renderPost(post);
       else {
         $('#post-view').innerHTML = '';
         if (page === 'tech' || page === 'journal') renderChannelPage(page);
-        if (page === 'gallery') renderGallery();
-        if (isPost && !post) showToast('\u8fd9\u7bc7\u6587\u7ae0\u6682\u65f6\u4e0d\u5b58\u5728\uff0c\u5df2\u8fd4\u56de\u9996\u9875');
+        if (page === 'album') renderAlbumDetail(album);
+        if (isPost && !post) showToast('\u8fd9\u7bc7\u6587\u7ae0\u4e0d\u5b58\u5728');
+        if (isAlbum && !album) showToast('\u76f8\u518c\u4e0d\u5b58\u5728');
       }
       requestAnimationFrame(() => window.scrollTo({top:0,behavior:'instant'}));
       updateProgress();
@@ -364,7 +442,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal',photo:'gallery'};
       renderTechAndJournal();
       renderChannelPage('tech');
       renderChannelPage('journal');
-      renderGallery();
+      renderAlbums();
       $('#channel-filters').addEventListener('click', event => {
         const btn = event.target.closest('[data-channel]');
         if (!btn) return;
@@ -400,20 +478,15 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal',photo:'gallery'};
         if (location.hash === '#articles') $('#articles').scrollIntoView({behavior:'smooth'});
       });
       $('#search-input').addEventListener('input', event => { keyword = event.target.value; renderPosts(); });
-      $('#sort-select').addEventListener('change', event => { sortOrder = event.target.value; renderPosts(); });
+      setupSortMenus();
       $('#reset-filters').addEventListener('click', () => {
         activeChannel = null; activeSubcategory = 'all'; activeTag = null; showAllTags = false; keyword = ''; sortOrder = 'newest';
-        $('#search-input').value = ''; $('#sort-select').value = 'newest'; renderPosts();
+        $('#search-input').value = ''; renderPosts();
       });
       $('#search-jump').addEventListener('click', focusSearch);
       document.querySelectorAll('[data-channel-search]').forEach(input => input.addEventListener('input', event => {
         const page = event.target.dataset.channelSearch;
         channelPageState[page].search = event.target.value;
-        renderChannelPage(page);
-      }));
-      document.querySelectorAll('[data-channel-sort]').forEach(input => input.addEventListener('change', event => {
-        const page = event.target.dataset.channelSort;
-        channelPageState[page].sort = event.target.value;
         renderChannelPage(page);
       }));
       document.querySelectorAll('.channel-page-view').forEach(view => view.addEventListener('click', event => {
@@ -434,21 +507,13 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal',photo:'gallery'};
           const page = reset.dataset.resetChannel;
           Object.assign(channelPageState[page],{subcategory:'all',tag:null,search:'',sort:'newest'});
           document.getElementById(page+'-page-search').value = '';
-          document.querySelector(`[data-channel-sort="${page}"]`).value = 'newest';
           renderChannelPage(page);
         }
       }));
-      document.querySelectorAll('#photo-filters,#gallery-page-filters').forEach(group => group.addEventListener('click', event => {
-        const button = event.target.closest('[data-photo-filter]');
-        if (!button) return;
-        if (button.dataset.photoScope === 'gallery') galleryPageCategory = button.dataset.photoFilter;
-        else photoCategory = button.dataset.photoFilter;
-        renderGallery();
-      }));
-      document.querySelectorAll('#gallery-grid,#gallery-page-grid').forEach(grid => grid.addEventListener('click', event => {
-        const photo = event.target.closest('[data-photo-index]');
-        if (photo) openPhoto(Number(photo.dataset.photoIndex), photo.dataset.photoScope);
-      }));
+      $('#album-detail').addEventListener('click', event => {
+        const photo = event.target.closest('[data-album-photo]');
+        if (photo) openPhoto(Number(photo.dataset.albumPhoto));
+      });
       $('#photo-close').addEventListener('click', () => $('#photo-dialog').close());
       $('#photo-prev').addEventListener('click', () => showPhoto(activePhotoIndex-1));
       $('#photo-next').addEventListener('click', () => showPhoto(activePhotoIndex+1));
@@ -458,13 +523,13 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal',photo:'gallery'};
         document.documentElement.dataset.theme = dark ? 'dark' : 'light';
         $('#theme-toggle').setAttribute('aria-label', dark ? '切换浅色模式' : '切换深色模式');
         $('#theme-toggle').setAttribute('aria-pressed',String(dark));
-        document.querySelector('meta[name="theme-color"]').content = dark ? '#191e1b' : '#f8f7f2';
+        document.querySelector('meta[name="theme-color"]').content = dark ? '#0d1426' : '#f5f7fc';
         try { localStorage.setItem('xiaoman-theme',dark ? 'dark' : 'light'); } catch (_) {}
       });
       if (document.documentElement.dataset.theme === 'dark') {
         $('#theme-toggle').setAttribute('aria-label','切换浅色模式');
         $('#theme-toggle').setAttribute('aria-pressed','true');
-        document.querySelector('meta[name="theme-color"]').content = '#191e1b';
+        document.querySelector('meta[name="theme-color"]').content = '#0d1426';
       }
       $('#menu-toggle').addEventListener('click', () => {
         const open = $('#site-header').classList.toggle('nav-open');

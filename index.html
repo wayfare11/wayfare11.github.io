@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f8f7f2" />
+  <meta name="theme-color" content="#f5f7fc" />
   <meta name="description" content="写代码、记生活、拍世界：技术文章、生活日记与摄影作品的个人博客。" />
   <title>小满的手记 · 代码、生活与光影</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23c56d4f'/%3E%3Ccircle cx='32' cy='32' r='13' fill='%23fff5e8'/%3E%3Cpath d='M32 8v9M32 47v9M8 32h9M47 32h9' stroke='%23fff5e8' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%234a5add'/%3E%3Ccircle cx='32' cy='32' r='13' fill='%23fff5e8'/%3E%3Cpath d='M32 8v9M32 47v9M8 32h9M47 32h9' stroke='%23fff5e8' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
   <link rel="stylesheet" href="assets/style.css" />
   <script>
     try { if (localStorage.getItem('xiaoman-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (_) {}
@@ -19,7 +19,7 @@
     <div class="container header-inner">
       <a class="brand" href="#home" aria-label="返回首页">
         <span class="brand-emblem" aria-hidden="true">✳</span>
-        <span class="brand-text"><strong data-site-name>小满的手记</strong><small>CODE / LIFE / VISUALS</small></span>
+        <span class="brand-text"><strong data-site-name>小满的手记</strong><small>CODE  /  LIFE  /  FRAMES</small></span>
       </a>
       <nav class="nav-links" id="site-nav" aria-label="主导航">
         <a href="#home" data-nav="home" class="active">首页</a>
@@ -50,7 +50,7 @@
       <div class="container">
         <section class="hero" id="home" aria-labelledby="hero-heading">
           <div class="hero-copy">
-            <span class="eyebrow">HELLO, THIS IS MY CORNER OF THE INTERNET</span>
+            <span class="eyebrow">THE DIGITAL NOTEBOOK / EST. 2026</span>
             <h1 id="hero-heading">写点代码，<br />过点生活，<br /><em>拍点世界。</em></h1>
             <p class="hero-description">白天和代码较劲，傍晚收集生活的碎片，周末带着相机四处走走。这里是我的数字花园：有技术，也有烟火气，还有值得定格的光。</p>
             <div class="hero-buttons">
@@ -91,7 +91,7 @@
           <div class="channel-grid">
             <a class="channel-card channel-tech" href="#tech"><span class="channel-number">01 / BUILD</span><span class="channel-mark" aria-hidden="true">&lt;/&gt;</span><span class="channel-bottom"><strong>技术实验室</strong><span>前端 · 项目 · 踩坑记录</span><span class="channel-arrow" aria-hidden="true">↗</span></span></a>
             <a class="channel-card channel-life" href="#journal"><span class="channel-number">02 / LIVE</span><span class="channel-mark" aria-hidden="true">☼</span><span class="channel-bottom"><strong>生活日记本</strong><span>日常 · 城市 · 慢一点</span><span class="channel-arrow" aria-hidden="true">↗</span></span></a>
-            <a class="channel-card channel-photo" href="#gallery"><span class="channel-number">03 / SEE</span><span class="channel-mark" aria-hidden="true">◎</span><span class="channel-bottom"><strong>光影收藏夹</strong><span>摄影 · 风景 · 视觉灵感</span><span class="channel-arrow" aria-hidden="true">↗</span></span></a>
+            <a class="channel-card channel-photo" href="#gallery"><span class="channel-number">03 / SEE</span><span class="channel-mark" aria-hidden="true">◎</span><span class="channel-bottom"><strong>光影收藏夹</strong><span>主题相册 · 独立翻看</span><span class="channel-arrow" aria-hidden="true">↗</span></span></a>
           </div>
         </section>
 
@@ -118,11 +118,12 @@
           </div>
         </section>
 
-        <section class="section gallery-section" id="home-gallery" aria-labelledby="gallery-heading">
-          <div class="section-top"><div><span class="eyebrow">03 / THROUGH MY LENS</span><h2 class="section-title" id="gallery-heading">按下快门的那些瞬间<span style="color:var(--accent)">.</span></h2><p class="section-description">照片让偶然变成永恒。点开一张，慢慢看。</p></div><span class="section-index">VISUAL DIARY / 2026</span></div>
-          <div class="gallery-toolbar"><div class="category-filters" id="photo-filters" role="group" aria-label="筛选摄影分类"></div><span class="gallery-sample-note">点击照片可放大查看</span></div>
-          <div class="gallery-grid" id="gallery-grid" aria-live="polite"></div>
-          <div class="gallery-note"><span>◎</span><p>风景、街头、食物、猫咪…… 相机不挑题材，好奇心也是。</p><a id="featured-photo-link" href="#articles">读摄影札记 ↗</a></div>
+        <section class="section gallery-section home-album-section" id="home-gallery" aria-labelledby="gallery-heading">
+          <div class="section-top">
+            <div><span class="eyebrow">03 / VISUAL COLLECTIONS</span><h2 class="section-title" id="gallery-heading">把照片放进不同的故事<span style="color:var(--accent)">.</span></h2><p class="section-description">每个主题一本相册，分开收藏、慢慢翻看。</p></div>
+            <a class="section-more-link" href="#gallery">查看全部主题 <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="album-grid home-album-grid" id="home-albums-grid" aria-live="polite"></div>
         </section>
 
         <aside class="note-banner" aria-label="继续阅读">
@@ -155,7 +156,13 @@
           </div>
           <div class="channel-page-tools">
             <label class="search-box" for="tech-page-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="tech-page-search" data-channel-search="tech" type="search" autocomplete="off" placeholder="搜索本栏文章..." /></label>
-            <select class="sort-select" data-channel-sort="tech" aria-label="按时间排序"><option value="newest">最新发布</option><option value="oldest">最早发布</option></select>
+            <div class="sort-control" data-sort-control="tech">
+                <button type="button" class="sort-trigger" data-sort-trigger="tech" aria-label="文章时间排序" aria-haspopup="menu" aria-expanded="false" aria-controls="tech-sort-menu"><span class="sort-current">最新发布</span><span class="sort-chevron" aria-hidden="true"></span></button>
+                <div class="sort-menu" id="tech-sort-menu" role="menu" aria-label="文章时间排序" hidden>
+                  <button type="button" role="menuitemradio" aria-checked="true" data-sort-option="newest">最新发布<span aria-hidden="true">✓</span></button>
+                  <button type="button" role="menuitemradio" aria-checked="false" data-sort-option="oldest">最早发布<span aria-hidden="true">✓</span></button>
+                </div>
+              </div>
           </div>
           <div class="results-meta"><span id="tech-page-results" aria-live="polite"></span><span>KEEP READING ↓</span></div>
           <div class="posts-grid" id="tech-page-posts"></div>
@@ -186,7 +193,13 @@
           </div>
           <div class="channel-page-tools">
             <label class="search-box" for="journal-page-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="journal-page-search" data-channel-search="journal" type="search" autocomplete="off" placeholder="搜索本栏文章..." /></label>
-            <select class="sort-select" data-channel-sort="journal" aria-label="按时间排序"><option value="newest">最新发布</option><option value="oldest">最早发布</option></select>
+            <div class="sort-control" data-sort-control="journal">
+                <button type="button" class="sort-trigger" data-sort-trigger="journal" aria-label="文章时间排序" aria-haspopup="menu" aria-expanded="false" aria-controls="journal-sort-menu"><span class="sort-current">最新发布</span><span class="sort-chevron" aria-hidden="true"></span></button>
+                <div class="sort-menu" id="journal-sort-menu" role="menu" aria-label="文章时间排序" hidden>
+                  <button type="button" role="menuitemradio" aria-checked="true" data-sort-option="newest">最新发布<span aria-hidden="true">✓</span></button>
+                  <button type="button" role="menuitemradio" aria-checked="false" data-sort-option="oldest">最早发布<span aria-hidden="true">✓</span></button>
+                </div>
+              </div>
           </div>
           <div class="results-meta"><span id="journal-page-results" aria-live="polite"></span><span>KEEP READING ↓</span></div>
           <div class="posts-grid" id="journal-page-posts"></div>
@@ -195,34 +208,33 @@
       </div>
     </div>
 
-    <!-- Photography: its own gallery + photo-only essays. -->
+    <!-- Photography collections: a theme album opens its own page, with no photo essays. -->
     <div id="gallery-page-view" class="interior-view channel-page-view channel-page-gallery" hidden>
       <div class="container">
-        <div class="interior-topline"><a href="#home">← 返回首页</a><span>03 / PHOTO / VISUAL DIARY</span></div>
-        <header class="channel-landing channel-landing-gallery">
-          <div class="channel-landing-copy">
-            <span class="eyebrow">03 / THROUGH MY LENS</span>
-            <h1 id="gallery-page-heading">摄影作品集<span class="landing-period">.</span></h1>
-            <p>用镜头收集光影与故事，记住那些不想错过的瞬间。</p>
-            <div class="landing-counter"><strong id="gallery-page-total">00</strong><span>张摄影作品</span></div>
-          </div>
-          <div class="channel-landing-visual" aria-hidden="true"><span class="landing-visual-index">03 / THREE SIDES</span><span class="landing-visual-art">◎</span><span class="landing-visual-end">CAPTURE THE MOMENT ↗</span></div>
-        </header>
-        <section class="section gallery-page-section" aria-labelledby="gallery-page-list-heading">
-          <div class="section-top"><div><span class="eyebrow">A COLLECTION OF MOMENTS</span><h2 class="section-title" id="gallery-page-list-heading">作品画廊<span class="landing-period">.</span></h2><p class="section-description">点击照片放大预览，可以左右切换。</p></div><span class="section-index">VISUAL ARCHIVE</span></div>
-          <div class="gallery-toolbar"><div class="category-filters" id="gallery-page-filters" role="group" aria-label="摄影作品分类"></div><span id="gallery-page-sample-note" class="gallery-sample-note">点击照片可放大查看</span></div>
-          <div class="gallery-grid" id="gallery-page-grid" aria-live="polite"></div>
-          <div class="empty-state" id="gallery-page-empty" hidden><div class="empty-icon">◎</div><h3>这个分类还没有照片</h3><p>换一个分类看看吧。</p></div>
-        </section>
-        <section class="section gallery-essay-section" aria-labelledby="photo-page-notes-heading">
-          <div class="section-top"><div><span class="eyebrow">STORIES BEHIND THE LENS</span><h2 class="section-title" id="photo-page-notes-heading">摄影随笔<span class="landing-period">.</span></h2><p class="section-description">一张照片背后，有时候还有一篇想讲的故事。</p></div><span class="section-index">PHOTO NOTES</span></div>
-          <div class="posts-grid" id="photo-page-posts"></div>
-          <p id="photo-page-empty" class="section-description" hidden>还没有摄影随笔，可以先看看上面的作品。</p>
+        <div id="album-overview">
+          <div class="interior-topline"><a href="#home">← 返回首页</a><span>03 / PHOTOGRAPHY / COLLECTIONS</span></div>
+          <header class="channel-landing channel-landing-gallery">
+            <div class="channel-landing-copy">
+              <span class="eyebrow">03 / PHOTO ARCHIVE</span>
+              <h1 id="gallery-page-heading">摄影相册<span class="landing-period">.</span></h1>
+              <p>按主题整理照片，每个文件夹都是一本独立的相册。</p>
+              <div class="landing-counter"><strong id="gallery-page-total">00</strong><span>本主题相册</span></div>
+            </div>
+            <div class="channel-landing-visual" aria-hidden="true"><span class="landing-visual-index">03 / LIGHT STUDIES</span><span class="landing-visual-art">◎</span><span class="landing-visual-end">STORIES IN FRAMES ↗</span></div>
+          </header>
+          <section class="section gallery-page-section" aria-labelledby="gallery-page-list-heading">
+            <div class="section-top"><div><span class="eyebrow">CURATED BY COLLECTION</span><h2 class="section-title" id="gallery-page-list-heading">所有主题<span class="landing-period">.</span></h2><p class="section-description">点击一本相册，再查看里面的照片。</p></div><span class="section-index">COLLECTION INDEX</span></div>
+            <div class="album-grid" id="gallery-albums-grid" aria-live="polite"></div>
+            <div class="empty-state" id="gallery-albums-empty" hidden><h3>暂无主题相册</h3><p>在 photos/ 下创建一个主题文件夹就可以开始。</p></div>
+          </section>
+        </div>
+        <section class="album-detail" id="album-detail" aria-label="相册详情" hidden>
+          <div id="album-detail-content"></div>
         </section>
       </div>
     </div>
 
-        <!-- 文章归档是独立视图：点击「文章」导航时才显示。 -->
+    <!-- 文章归档是独立视图：点击「文章」导航时才显示。 -->
     <div id="articles-view" class="interior-view" hidden>
       <div class="container">
         <div class="interior-topline"><a href="#home">← 返回首页</a><span>THE WRITING ARCHIVE / 文章归档</span></div>
@@ -231,7 +243,7 @@
             <div>
               <span class="eyebrow">ALL STORIES / ARCHIVE</span>
               <h2 class="section-title" id="posts-heading">全部文字<span style="color:var(--accent)">.</span></h2>
-              <p class="section-description">所有关于代码、日常与镜头的文字，都在这里。</p>
+              <p class="section-description">技术和生活的文字都收藏在这里。</p>
             </div>
             <span class="section-index">THE WRITING INDEX</span>
           </div>
@@ -253,7 +265,13 @@
                 <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg>
                 <input id="search-input" type="search" autocomplete="off" placeholder="搜索一些关键词..." aria-label="搜索文章标题和内容" />
               </label>
-              <select id="sort-select" class="sort-select" aria-label="文章排序"><option value="newest">最新发布</option><option value="oldest">最早发布</option></select>
+              <div class="sort-control" data-sort-control="archive">
+                <button type="button" class="sort-trigger" data-sort-trigger="archive" aria-label="文章时间排序" aria-haspopup="menu" aria-expanded="false" aria-controls="archive-sort-menu"><span class="sort-current">最新发布</span><span class="sort-chevron" aria-hidden="true"></span></button>
+                <div class="sort-menu" id="archive-sort-menu" role="menu" aria-label="文章时间排序" hidden>
+                  <button type="button" role="menuitemradio" aria-checked="true" data-sort-option="newest">最新发布<span aria-hidden="true">✓</span></button>
+                  <button type="button" role="menuitemradio" aria-checked="false" data-sort-option="oldest">最早发布<span aria-hidden="true">✓</span></button>
+                </div>
+              </div>
             </div>
           </div>
           <div class="results-meta"><span id="results-count" aria-live="polite">正在加载文章…</span><span>KEEP READING ↓</span></div>
