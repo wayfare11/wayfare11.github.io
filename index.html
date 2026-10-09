@@ -1,247 +1,217 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"/><meta name="theme-color" content="#222"/><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/><meta name="renderer" content="webkit"/><link rel="icon" type="image/ico" sizes="32x32" href="/assets/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/><link rel="alternate" href="/rss.xml" title="羽见风声" type="application/rss+xml"><link rel="alternate" href="/atom.xml" title="羽见风声" type="application/atom+xml"><link rel="alternate" type="application/json" title="羽见风声" href="https://wayfar.qzz.io/feed.json"/><link rel="preconnect" href="https://s4.zstatic.net"/><link rel="preconnect" href="https://at.alicdn.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CFredericka%20the%20Great:400,400italic,700,700italic%7CNoto%20Serif%20JP:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CInconsolata:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="none" onload="this.media&#x3D;&#39;all&#39;"><link rel="modulepreload" href="/js/siteInit.js"></link><link rel="modulepreload" href="/js/nyx-player-UFEBMXAY.js"></link><link rel="modulepreload" href="/js/copy-tex-JNJFBT44.js"></link><link rel="modulepreload" href="/js/post-EOOCIZET.js"></link><link rel="modulepreload" href="/js/chunk-ZJPYQMLQ.js"></link><link rel="modulepreload" href="/js/index.esm-UN4B2S2R.js"></link><link rel="modulepreload" href="/js/chunk-HJSTZ4VX.js"></link><link rel="modulepreload" href="/js/chunk-YNTJXH5W.js"></link><link rel="stylesheet" href="/css/siteInit.css" media="none" onload="this.media&#x3D;&#39;all&#39;"></link><link rel="preload" href="/assets/th5.jpg" as="image" fetchpriority="high"><link rel="preload" href="/assets/th2.jpg" as="image" fetchpriority="high"><link rel="preload" href="/assets/th1.jpg" as="image" fetchpriority="high"><link rel="preload" href="/assets/th1.jpg" as="image" fetchpriority="high"><link rel="preload" href="/assets/th6.jpg" as="image" fetchpriority="high"><link rel="preload" href="/assets/th6.jpg" as="image" fetchpriority="high"><meta name="description" content="我的博客"/><link rel="canonical" href="https://wayfar.qzz.io/"><link rel="stylesheet" href="/css/page.css?v=0.5.4"><title>wayfar = 羽见风声 = 羽落风起，书尽人间</title><!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/waifu.css">
-<style>
-  /* 置顶，避免被主题遮住 */
-  #waifu { z-index: 999999 !important; }
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f8f7f2" />
+  <meta name="description" content="写代码、记生活、拍世界：技术文章、生活日记与摄影作品的个人博客。" />
+  <title>小满的手记 · 代码、生活与光影</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23c56d4f'/%3E%3Ccircle cx='32' cy='32' r='13' fill='%23fff5e8'/%3E%3Cpath d='M32 8v9M32 47v9M8 32h9M47 32h9' stroke='%23fff5e8' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script>
+    try { if (localStorage.getItem('xiaoman-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (_) {}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳转到正文</a>
+  <div class="progress" id="read-progress" aria-hidden="true"></div>
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#home" aria-label="返回首页">
+        <span class="brand-emblem" aria-hidden="true">✳</span>
+        <span class="brand-text"><strong data-site-name>小满的手记</strong><small>CODE / LIFE / VISUALS</small></span>
+      </a>
+      <nav class="nav-links" id="site-nav" aria-label="主导航">
+        <a href="#home" data-nav="home" class="active">首页</a>
+        <a href="#tech" data-nav="tech">技术</a>
+        <a href="#journal" data-nav="journal">日记</a>
+        <a href="#gallery" data-nav="gallery">摄影</a>
+        <a href="#articles" data-nav="articles">文章</a>
+        <a href="#about" data-nav="about">关于</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-button" id="search-jump" aria-label="搜索文章" title="搜索文章">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg>
+        </button>
+        <button class="icon-button" id="theme-toggle" aria-label="切换深色模式" title="切换深色模式" aria-pressed="false">
+          <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+          <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.3A8.7 8.7 0 0 1 9.7 3.5 8.7 8.7 0 1 0 20.5 14.3Z"/></svg>
+        </button>
+        <a class="header-contact" href="#about"><span>关于我</span><span aria-hidden="true">↗</span></a>
+        <button class="icon-button menu-button" id="menu-toggle" aria-label="打开导航菜单" aria-controls="site-nav" aria-expanded="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
 
-  /* 手机端隐藏看板娘 */
-  @media (max-width: 768px) {
-    #waifu { display: none !important; }
-  }
-
-  /* ====== 关键修复：tips 层不要拦截鼠标/触摸事件，否则点不到 canvas 就无法触发拖拽 ====== */
-  #waifu-tips, .waifu-tips-active { pointer-events: none !important; }
-
-  /* 工具栏依然需要可点击 */
-  #waifu-tool { pointer-events: auto !important; }
-
-  /* 保险：canvas 必须能接收事件 */
-  #live2d { pointer-events: auto !important; }
-</style>
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="pagefind_mount"></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><a class="logo" href="/" rel="start"><p class="artboard">wayfar</p><h1 class="title" itemprop="name headline">羽见风声</h1></a><p class="meta" itemprop="description">= 羽落风起，书尽人间 =</p></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span><span class="line"></span><span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">wayfar</a></li></ul><ul class="right" id="rightNav"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div class="pjax" id="imgs"><ul><li class="item" style="background-image: url(&quot;/assets/th5.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;/assets/th2.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;/assets/th1.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;/assets/th1.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;/assets/th6.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;/assets/th6.jpg&quot;);"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><main><div class="inner"><div class="pjax" id="main"><div class="index wrap"><h2 class="divider">文章列表</h2><div class="segments posts"><article class="item"><div class="cover"><a href="/2026/10/09/test/" itemprop="url" title="练习题与答案"><img loading="lazy" decoding="async" src="/assets/th4.jpg" alt="article cover"></a></div><div class="info"><div class="meta"><span class="item" title="创建时间：2026-10-09 09:29:41"><span class="icon"><i class="ic i-calendar"></i></span><time itemprop="dateCreated datePublished" datetime="2026-10-09T09:29:41+08:00">2026-10-09</time></span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i></span><span>1.1k</span><span class="text">字</span></span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i></span><span>1 分钟</span></span></div><h3><a href="/2026/10/09/test/" itemprop="url" title="练习题与答案">练习题与答案</a></h3><div class="excerpt">
-
-编译时多态主要指运算符重载与函数重载，而运行时多态主要指虚函数。
-
-
-有基类SHAPE，派生类CIRCLE，声明如下变量： 
-SHAPE shape1,*p1;
-CIRCLE circle1,*q1;
-下列哪些项是“派生类对象替换基类对象”。
-
-p1&#x3D;&amp;circle1;
-q1&#x3D;&amp;shape1;
-shape1&#x3D;circle1;
-circle1&#x3D;shape1;
-
-
-
-✔️ 令基类对象的指针指向派生类对象
-❌ 派生类指针指向基类的引用
-✔️ 派生类对象给基类对象赋值
-❌ 基类对象给派生类对象赋值
-
+  <main id="main-content">
+    <div id="home-view">
+      <div class="container">
+        <section class="hero" id="home" aria-labelledby="hero-heading">
+          <div class="hero-copy">
+            <span class="eyebrow">HELLO, THIS IS MY CORNER OF THE INTERNET</span>
+            <h1 id="hero-heading">写点代码，<br />过点生活，<br /><em>拍点世界。</em></h1>
+            <p class="hero-description">白天和代码较劲，傍晚收集生活的碎片，周末带着相机四处走走。这里是我的数字花园：有技术，也有烟火气，还有值得定格的光。</p>
+            <div class="hero-buttons">
+              <a class="button-primary" href="#tech">逛逛技术区 <span class="arrow" aria-hidden="true">↗</span></a>
+              <a class="button-secondary" href="#gallery">看看摄影集 <span class="arrow" aria-hidden="true">→</span></a>
+            </div>
+            <div class="hero-signature">
+              <div class="mini-avatars" aria-hidden="true"><span>&lt;/&gt;</span><span>☼</span><span>◎</span></div>
+              <p><strong>一个人，三种热爱</strong><br />Code · Journal · Photography</p>
+            </div>
+          </div>
+          <div class="hero-art" role="img" aria-label="日落山丘插画，叠加记录代码与光影的标签">
+            <div class="art-card">
+              <span class="art-bookmark">A PERSONAL SPACE / 2026</span>
+              <div class="art-sun"></div>
+              <div class="art-mountain-back"></div>
+              <div class="art-mountain-front"></div>
+              <div class="art-hill-line"></div>
+              <span class="art-title">让灵感落地，<br />让日子发光。</span>
+            </div>
+            <div class="art-stamp" aria-hidden="true"><strong>常更新</strong><small>KEEP CREATING</small></div><div class="hero-code-note" aria-hidden="true"><span class="code-dot">● ● ●</span><code>const life = [<br>&nbsp; 'code', 'photo', 'coffee'<br>];</code></div>
+            <span class="art-side-note" aria-hidden="true">BUILD THINGS · LIVE SLOW · LOOK CLOSER</span>
+          </div>
+        </section>
+        <section class="intro-band" aria-label="博客简介">
+          <p class="intro-quote"><span aria-hidden="true">“</span>让技术有温度，让日常有回声，让镜头替我说话。</p>
+          <div class="intro-counts"><div class="intro-count"><strong>03</strong><small>个频道</small></div><div class="intro-count"><strong id="article-total">00</strong><small>篇文章</small></div><div class="intro-count"><strong id="photo-total">00</strong><small>张照片</small></div></div>
+        </section>
 
 
 
-下列叙述正确的是  。
+        <!-- 三个频道：技术 / 生活 / 摄影 -->
+        <section class="section channels-section" aria-labelledby="channels-heading">
+          <div class="section-top">
+            <div><span class="eyebrow">THREE SIDES, ONE PERSON</span><h2 class="section-title" id="channels-heading">我的三个小世界<span style="color:var(--accent)">.</span></h2><p class="section-description">不是三选一。喜欢的事情，本来就可以同时发生。</p></div>
+            <span class="section-index">PICK YOUR PATH ↓</span>
+          </div>
+          <div class="channel-grid">
+            <a class="channel-card channel-tech" href="#tech"><span class="channel-number">01 / BUILD</span><span class="channel-mark" aria-hidden="true">&lt;/&gt;</span><span class="channel-bottom"><strong>技术实验室</strong><span>前端 · 项目 · 踩坑记录</span><span class="channel-arrow" aria-hidden="true">↗</span></span></a>
+            <a class="channel-card channel-life" href="#journal"><span class="channel-number">02 / LIVE</span><span class="channel-mark" aria-hidden="true">☼</span><span class="channel-bottom"><strong>生活日记本</strong><span>日常 · 城市 · 慢一点</span><span class="channel-arrow" aria-hidden="true">↗</span></span></a>
+            <a class="channel-card channel-photo" href="#gallery"><span class="channel-number">03 / SEE</span><span class="channel-mark" aria-hidden="true">◎</span><span class="channel-bottom"><strong>光影收藏夹</strong><span>摄影 · 风景 · 视觉灵感</span><span class="channel-arrow" aria-hidden="true">↗</span></span></a>
+          </div>
+        </section>
 
-虚函数只能</div><a href="/2026/10/09/test/" class="btn" itemprop="url" title="练习题与答案">more...</a></div></article><article class="item"><div class="cover"><a href="/2026/03/10/2026-03-10-dataAnalysis/" itemprop="url" title="资料分析常用公式与速算技巧整理——技巧示例补全版"><img loading="lazy" decoding="async" src="/assets/th3.jpg" alt="article cover"></a></div><div class="info"><div class="meta"><span class="item" title="创建时间：2026-03-10 08:00:00"><span class="icon"><i class="ic i-calendar"></i></span><time itemprop="dateCreated datePublished" datetime="2026-03-10T08:00:00+08:00">2026-03-10</time></span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i></span><span>13k</span><span class="text">字</span></span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i></span><span>12 分钟</span></span></div><h3><a href="/2026/03/10/2026-03-10-dataAnalysis/" itemprop="url" title="资料分析常用公式与速算技巧整理——技巧示例补全版">资料分析常用公式与速算技巧整理——技巧示例补全版</a></h3><div class="excerpt">资料分析常用公式与速算技巧整理：截位直除、分数比较、基期量、现期量、增长量、增长率、比重、平均数、倍数、间隔增长率、年均增长率、混合增长率，并补全各方法对应示例。</div><div class="meta footer"><span><a href="/categories/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/" itemprop="url" title="资料分析"><i class="ic i-flag"></i>资料分析</a></span></div><a href="/2026/03/10/2026-03-10-dataAnalysis/" class="btn" itemprop="url" title="资料分析常用公式与速算技巧整理——技巧示例补全版">more...</a></div></article><article class="item"><div class="cover"><a href="/2026/03/09/2026-03-09-idiom-1/" itemprop="url" title="中华文化常用成语积累——中华传统文化"><img loading="lazy" decoding="async" src="/assets/th4.jpg" alt="article cover"></a></div><div class="info"><div class="meta"><span class="item" title="创建时间：2026-03-09 08:00:00"><span class="icon"><i class="ic i-calendar"></i></span><time itemprop="dateCreated datePublished" datetime="2026-03-09T08:00:00+08:00">2026-03-09</time></span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i></span><span>1.8k</span><span class="text">字</span></span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i></span><span>2 分钟</span></span></div><h3><a href="/2026/03/09/2026-03-09-idiom-1/" itemprop="url" title="中华文化常用成语积累——中华传统文化">中华文化常用成语积累——中华传统文化</a></h3><div class="excerpt">中华文化常用成语积累：源远流长、连绵不绝、博大精深、历久弥新、兼收并蓄。</div><div class="meta footer"><span><a href="/categories/%E6%88%90%E8%AF%AD%E7%A7%AF%E7%B4%AF/" itemprop="url" title="成语积累"><i class="ic i-flag"></i>成语积累</a></span></div><a href="/2026/03/09/2026-03-09-idiom-1/" class="btn" itemprop="url" title="中华文化常用成语积累——中华传统文化">more...</a></div></article><article class="item"><div class="cover"><a href="/2025/06/27/2025-06-27-mitk-2016-build/" itemprop="url" title="MITK2016.11源码编译"><img loading="lazy" decoding="async" src="/assets/th2.jpg" alt="article cover"></a></div><div class="info"><div class="meta"><span class="item" title="创建时间：2025-06-27 10:00:00"><span class="icon"><i class="ic i-calendar"></i></span><time itemprop="dateCreated datePublished" datetime="2025-06-27T10:00:00+08:00">2025-06-27</time></span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i></span><span>4k</span><span class="text">字</span></span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i></span><span>4 分钟</span></span></div><h3><a href="/2025/06/27/2025-06-27-mitk-2016-build/" itemprop="url" title="MITK2016.11源码编译">MITK2016.11源码编译</a></h3><div class="excerpt">编译MITK2016.11源码。</div><div class="meta footer"><span><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/MITK/" itemprop="url" title="MITK"><i class="ic i-flag"></i>MITK</a></span></div><a href="/2025/06/27/2025-06-27-mitk-2016-build/" class="btn" itemprop="url" title="MITK2016.11源码编译">more...</a></div></article><article class="item"><div class="cover"><a href="/2025/04/25/2025-04-25-auto-seg-liver/" itemprop="url" title="使用livermask实现自动分割肝和肝血管"><img loading="lazy" decoding="async" src="/assets/th6.jpg" alt="article cover"></a></div><div class="info"><div class="meta"><span class="item" title="创建时间：2025-04-25 18:00:00"><span class="icon"><i class="ic i-calendar"></i></span><time itemprop="dateCreated datePublished" datetime="2025-04-25T18:00:00+08:00">2025-04-25</time></span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i></span><span>33</span><span class="text">字</span></span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i></span><span>1 分钟</span></span></div><h3><a href="/2025/04/25/2025-04-25-auto-seg-liver/" itemprop="url" title="使用livermask实现自动分割肝和肝血管">使用livermask实现自动分割肝和肝血管</a></h3><div class="excerpt">介绍livermask的用法，以及如何使用livermask实现肝部自动分割。</div><div class="meta footer"><span><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" itemprop="url" title="图像分割"><i class="ic i-flag"></i>图像分割</a></span></div><a href="/2025/04/25/2025-04-25-auto-seg-liver/" class="btn" itemprop="url" title="使用livermask实现自动分割肝和肝血管">more...</a></div></article><article class="item"><div class="cover"><a href="/2025/04/25/2025-04-25-auto-seg-lung/" itemprop="url" title="使用lungmask实现自动分割肺部"><img loading="lazy" decoding="async" src="/assets/th4.jpg" alt="article cover"></a></div><div class="info"><div class="meta"><span class="item" title="创建时间：2025-04-25 17:00:00"><span class="icon"><i class="ic i-calendar"></i></span><time itemprop="dateCreated datePublished" datetime="2025-04-25T17:00:00+08:00">2025-04-25</time></span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i></span><span>1.8k</span><span class="text">字</span></span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i></span><span>2 分钟</span></span></div><h3><a href="/2025/04/25/2025-04-25-auto-seg-lung/" itemprop="url" title="使用lungmask实现自动分割肺部">使用lungmask实现自动分割肺部</a></h3><div class="excerpt">介绍lungmask的用法，以及如何使用lungmask实现肺部自动分割。</div><div class="meta footer"><span><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" itemprop="url" title="图像分割"><i class="ic i-flag"></i>图像分割</a></span></div><a href="/2025/04/25/2025-04-25-auto-seg-lung/" class="btn" itemprop="url" title="使用lungmask实现自动分割肺部">more...</a></div></article><article class="item"><div class="cover"><a href="/2025/04/24/2025-04-24-lung-seg-by-traditional-way/" itemprop="url" title="用Otsu阈值与形态学方法实现分割医学CT中的肺部"><img loading="lazy" decoding="async" src="/assets/th3.jpg" alt="article cover"></a></div><div class="info"><div class="meta"><span class="item" title="创建时间：2025-04-24 08:00:00"><span class="icon"><i class="ic i-calendar"></i></span><time itemprop="dateCreated datePublished" datetime="2025-04-24T08:00:00+08:00">2025-04-24</time></span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i></span><span>6.6k</span><span class="text">字</span></span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i></span><span>6 分钟</span></span></div><h3><a href="/2025/04/24/2025-04-24-lung-seg-by-traditional-way/" itemprop="url" title="用Otsu阈值与形态学方法实现分割医学CT中的肺部">用Otsu阈值与形态学方法实现分割医学CT中的肺部</a></h3><div class="excerpt">本教程介绍如何用Otsu阈值与形态学方法实现分割医学CT中的肺部。本方法无需深度学习，完全基于传统图像处理算法，可自动获得三维肺部掩码，适合医学影像处理初学者和进阶用户。</div><div class="meta footer"><span><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" itemprop="url" title="图像分割"><i class="ic i-flag"></i>图像分割</a></span></div><a href="/2025/04/24/2025-04-24-lung-seg-by-traditional-way/" class="btn" itemprop="url" title="用Otsu阈值与形态学方法实现分割医学CT中的肺部">more...</a></div></article></div></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"></div><div class="related panel pjax" data-title="系列文章"></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><img class="image" loading="lazy" decoding="async" itemprop="image" alt="wayfar" src="/assets/avatar.jpg"/><p class="name" itemprop="name">wayfar</p><div class="description" itemprop="description">我的博客</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">7</span><span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">5</span><span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">7</span><span class="name">标签</span></a></div></nav><div class="social"><a target="_blank" rel="noopener" href="https://github.com/wayfare11" class="item github" title="https:&#x2F;&#x2F;github.com&#x2F;wayfare11"><i class="ic i-github"></i></a></div><div class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li><li class="item dropdown"><a href="/archives/" rel="section"><i class="ic i-feather"></i>文章</a><ul class="submenu"><li class="item"><a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a></li><li class="item"><a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a></li><li class="item"><a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a></li></ul></li><li class="item"><a href="/about/" rel="section"><i class="ic i-user"></i>关于</a></li><li class="item"><a href="/friends/" rel="section"><i class="ic i-heart"></i>友链</a></li></div></div></div></div><ul id="quick"><li class="prev pjax"></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div><div id="player"></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>随机文章</h2><ul><li class="item"><div class="breadcrumb"></div><span><a href="/2026/10/09/test/">练习题与答案</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/%E6%88%90%E8%AF%AD%E7%A7%AF%E7%B4%AF/" title="分类于成语积累">成语积累</a></div><span><a href="/2026/03/09/2026-03-09-idiom-1/">中华文化常用成语积累——中华传统文化</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/" title="分类于资料分析">资料分析</a></div><span><a href="/2026/03/10/2026-03-10-dataAnalysis/">资料分析常用公式与速算技巧整理——技巧示例补全版</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/" title="分类于医学影像处理">医学影像处理</a><i class="ic i-angle-right"></i><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" title="分类于图像分割">图像分割</a></div><span><a href="/2025/04/25/2025-04-25-auto-seg-liver/">使用livermask实现自动分割肝和肝血管</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/" title="分类于医学影像处理">医学影像处理</a><i class="ic i-angle-right"></i><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" title="分类于图像分割">图像分割</a></div><span><a href="/2025/04/24/2025-04-24-lung-seg-by-traditional-way/">用Otsu阈值与形态学方法实现分割医学CT中的肺部</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/" title="分类于医学影像处理">医学影像处理</a><i class="ic i-angle-right"></i><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" title="分类于图像分割">图像分割</a></div><span><a href="/2025/04/25/2025-04-25-auto-seg-lung/">使用lungmask实现自动分割肺部</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/" title="分类于医学影像处理">医学影像处理</a><i class="ic i-angle-right"></i><a href="/categories/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E5%A4%84%E7%90%86/MITK/" title="分类于MITK">MITK</a></div><span><a href="/2025/06/27/2025-06-27-mitk-2016-build/">MITK2016.11源码编译</a></span></li></ul></div><div class="rpost pjax"><h2>最新评论</h2></div></div><div class="status"><div class="copyright">&copy; 2022 -<span itemprop="copyrightYear">2026</span><span class="with-love"><i class="ic i-sakura rotate"></i></span><span class="author" itemprop="copyrightHolder">wayfar @ wayfar</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i></span><span title="站点总字数">29k 字</span><span class="post-meta-divider"> | </span><span class="post-meta-item-icon"><i class="ic i-coffee"></i></span><span title="站点阅读时长">26 分钟</span></div><div class="powered-by">基于 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & Theme.<a target="_blank" rel="noopener" href="https://github.com/theme-shoka-x/hexo-theme-shokaX/">ShokaX</a></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL = {
-    ispost: false,
-    path: ``,
-    favicon: {
-        show: `（●´3｀●）やれやれだぜ`,
-        hide: `(´Д｀)大変だ！`
-    },
-    search: {
-        placeholder: "文章搜索",
-        empty: "关于 「 ${query} 」，什么也没搜到",
-        stats: "${time} ms 内找到 ${hits} 条结果"
-    },
-    nocopy: "false",
-    copyright: `复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。`,
-    copy_tex: false,
-    katex: false,
-    mermaid: false,
-    audio: undefined,
-    nocopy: false,
-    outime: true,
-    template: `<div class="note warning"><p><span class="label warning">文章时效性提示</span><br>这是一篇发布于 {{publish}} 天前，最后一次更新在 {{updated}} 天前的文章，部分信息可能已经发生改变，请注意甄别。</p></div>`,
-    quiz: {
-        choice: `单选题`,
-        multiple: `多选题`,
-        true_false: `判断题`,
-        essay: `问答题`,
-        gap_fill: `填空题`,
-        mistake: `错题备注`
-    }
-};
-</script><script src="/js/siteInit.js?v=0.5.4" type="module" fetchpriority="high" defer></script><!-- hexo injector body_end start -->
-<script>
-(function () {
-  // true：使用我们自己的 Pointer 拖拽（鼠标/触摸都能拖，最稳）
-  // false：使用库自带拖拽（drag: true），但容易被 tips/遮罩层影响
-  var USE_POINTER_DRAG = true;
+        <section class="section tech-section" id="tech" aria-labelledby="tech-heading">
+          <div class="section-top">
+            <div><span class="eyebrow">01 / DEVELOPMENT NOTES</span><h2 class="section-title" id="tech-heading">用代码，造点好玩的<span style="color:var(--accent)">.</span></h2><p class="section-description">认真写代码，也认真记录那些「原来还可以这样」的瞬间。</p></div>
+            <span class="section-index">CODE & CURIOSITY</span>
+          </div>
+          <div class="tech-showcase">
+            <div class="tech-project">
+              <div class="tech-project-top"><span class="terminal-controls" aria-hidden="true"><i></i><i></i><i></i></span><span>hello-world.js</span><span>⌘ 2026</span></div>
+              <div class="tech-project-code" aria-label="代码展示示例"><span class="line-number">01</span><span class="code-purple">const</span> <span class="code-white">me</span> <span class="code-muted">=</span> {<br><span class="line-number">02</span> &nbsp; <span class="code-peach">interests</span>: [<span class="code-green">'coding'</span>, <span class="code-green">'life'</span>, <span class="code-green">'photos'</span>],<br><span class="line-number">03</span> &nbsp; <span class="code-peach">status</span>: <span class="code-green">'always learning'</span>,<br><span class="line-number">04</span> &nbsp; <span class="code-peach">motto</span>: <span class="code-green">'build & enjoy'</span><br><span class="line-number">05</span> };<br><span class="line-number">06</span> <span class="code-muted">// Keep making, keep exploring.</span><span class="terminal-cursor"> ▌</span></div>
+              <div class="tech-project-bottom"><div><small>FEATURED / 实验项目</small><h3 id="featured-tech-title">最新技术文章</h3><p id="featured-tech-summary">持续探索值得记录的代码与实践。</p></div><a id="featured-tech-link" href="#articles" aria-label="阅读最新技术文章">读文章 ↗</a></div>
+            </div>
+            <div class="tech-note-stack"><span class="stack-eyebrow">LATEST DEVLOGS / 最近的技术笔记</span><div id="tech-posts"></div><a class="mini-more-link" href="#articles" data-filter-jump="tech">更多技术文章 <span aria-hidden="true">↗</span></a></div>
+          </div>
+        </section>
 
-  function isMobile() {
-    return window.innerWidth <= 768;
-  }
+        <section class="section journal-section" id="journal" aria-labelledby="journal-heading">
+          <div class="section-top"><div><span class="eyebrow">02 / PERSONAL JOURNAL</span><h2 class="section-title" id="journal-heading">生活的小事，也值得记下来<span style="color:var(--accent)">.</span></h2><p class="section-description">不必每天都高光。琐碎的星期三，也是好故事。</p></div><span class="section-index">EVERYDAY STORIES</span></div>
+          <div class="journal-layout">
+            <div class="journal-cover"><span class="journal-label">A NOTE TO MYSELF · 2026</span><span class="journal-flower" aria-hidden="true">✳</span><p>日子慢慢走，<br />故事慢慢写。<span>—— 随手记</span></p><span class="journal-footnote">SMALL DAYS / BIG FEELINGS</span></div>
+            <div class="journal-feed"><div id="journal-posts"></div><a class="mini-more-link" href="#articles" data-filter-jump="life">翻开日记本 <span aria-hidden="true">↗</span></a></div>
+          </div>
+        </section>
 
-  function loadScriptOnce(src, id) {
-    // 手机端不加载
-    if (isMobile()) return Promise.resolve();
+        <section class="section gallery-section" id="gallery" aria-labelledby="gallery-heading">
+          <div class="section-top"><div><span class="eyebrow">03 / THROUGH MY LENS</span><h2 class="section-title" id="gallery-heading">按下快门的那些瞬间<span style="color:var(--accent)">.</span></h2><p class="section-description">照片让偶然变成永恒。点开一张，慢慢看。</p></div><span class="section-index">VISUAL DIARY / 2026</span></div>
+          <div class="gallery-toolbar"><div class="category-filters" id="photo-filters" role="group" aria-label="筛选摄影分类"></div><span class="gallery-sample-note">点击照片可放大查看</span></div>
+          <div class="gallery-grid" id="gallery-grid" aria-live="polite"></div>
+          <div class="gallery-note"><span>◎</span><p>风景、街头、食物、猫咪…… 相机不挑题材，好奇心也是。</p><a id="featured-photo-link" href="#articles">读摄影札记 ↗</a></div>
+        </section>
 
-    // 已经有同 src / id 的 script 就不重复加载
-    if (id && document.getElementById(id)) return Promise.resolve();
-    var exists = Array.prototype.slice.call(document.scripts).some(function (s) { return s.src === src; });
-    if (exists) return Promise.resolve();
+        <aside class="note-banner" aria-label="继续阅读">
+          <div><span class="eyebrow">KEEP MAKING & KEEP SEEING</span><h2>世界那么大，代码那么多，<br />还有那么多故事想慢慢记录。</h2></div>
+          <a class="button-secondary" href="#articles">继续探索 <span aria-hidden="true">↗</span></a>
+        </aside>
+      </div>
+    </div>
 
-    return new Promise(function (resolve, reject) {
-      var s = document.createElement("script");
-      if (id) s.id = id;
-      s.src = src;
-      s.async = false; // 保证顺序
-      s.onload = resolve;
-      s.onerror = function () { reject(new Error("Failed to load: " + src)); };
-      document.body.appendChild(s);
-    });
-  }
+    <!-- 文章归档是独立视图：点击「文章」导航时才显示。 -->
+    <div id="articles-view" class="interior-view" hidden>
+      <div class="container">
+        <div class="interior-topline"><a href="#home">← 返回首页</a><span>THE WRITING ARCHIVE / 文章归档</span></div>
+        <section class="section" id="articles" aria-labelledby="posts-heading">
+          <div class="section-top">
+            <div>
+              <span class="eyebrow">ALL STORIES / ARCHIVE</span>
+              <h2 class="section-title" id="posts-heading">全部文字<span style="color:var(--accent)">.</span></h2>
+              <p class="section-description">所有关于代码、日常与镜头的文字，都在这里。</p>
+            </div>
+            <span class="section-index">THE WRITING INDEX</span>
+          </div>
+          <div class="archive-taxonomy">
+            <div class="taxonomy-eyebrow"><span>01 / 选择大类</span><span>CHOOSE YOUR WORLD</span></div>
+            <div class="channel-filters" id="channel-filters" role="group" aria-label="选择文章大类"></div>
+            <div class="taxonomy-subpanel" id="taxonomy-panel" hidden>
+              <div class="taxonomy-eyebrow"><span>02 / 子分类</span><span>EXPLORE TOPICS</span></div>
+              <div class="category-filters" id="subcategory-filters" role="group" aria-label="选择子分类"></div>
+            </div>
+            <div class="taxonomy-tags" id="tag-panel" hidden>
+              <div class="taxonomy-eyebrow"><span>03 / 文章标签</span><span>FIND BY TAG</span></div>
+              <div class="tag-filters" id="tag-filters" role="group" aria-label="选择文章标签"></div>
+            </div>
+          </div>
+          <div class="article-toolbar">
+            <div class="search-sort">
+              <label class="search-box" for="search-input">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg>
+                <input id="search-input" type="search" autocomplete="off" placeholder="搜索一些关键词..." aria-label="搜索文章标题和内容" />
+              </label>
+              <select id="sort-select" class="sort-select" aria-label="文章排序"><option value="newest">最新发布</option><option value="oldest">最早发布</option></select>
+            </div>
+          </div>
+          <div class="results-meta"><span id="results-count" aria-live="polite">正在加载文章…</span><span>KEEP READING ↓</span></div>
+          <div class="posts-grid" id="posts-grid"></div>
+          <div class="empty-state" id="empty-state" hidden><div class="empty-icon" aria-hidden="true">✳</div><h3>还没有找到合适的文章</h3><p>换个关键词，或者看看全部文章吧。</p><button id="reset-filters" type="button">查看全部文章 →</button></div>
+        </section>
+      </div>
+    </div>
 
-  function cleanupOld() {
-    var old = document.getElementById("waifu");
-    if (old && old.parentNode) old.parentNode.removeChild(old);
-  }
+    <!-- 关于页面独立于首页，仅在点击「关于」时显示。 -->
+    <div id="about-view" class="interior-view" hidden>
+      <div class="container">
+        <div class="interior-topline"><a href="#home">← 返回首页</a><span>A LITTLE ABOUT ME / 关于</span></div>
+        <section class="about-section" id="about" aria-labelledby="about-heading">
+          <div class="about-layout">
+            <div class="about-image" role="img" aria-label="以汉字「满」设计的暖色抽象肖像">
+              <div class="about-flower" aria-hidden="true">满</div>
+              <span class="about-image-caption">NICE TO MEET YOU · XIAOMAN</span>
+            </div>
+            <div class="about-text">
+              <span class="eyebrow">THE PERSON BEHIND THE WORDS</span>
+              <h2 id="about-heading">嗨，我是<span data-author>小满</span>。<br />很高兴，<span>在这里遇见你。</span></h2>
+              <p>你好！这是一个程序员的数字小屋。工作时喜欢把想法写成可以运行的代码，生活里习惯用文字收集灵感，遇到喜欢的光影就拿起相机。</p>
+              <p>我不想只被某一个标签定义，所以把技术、生活和摄影放在了同一个地方。它们看起来不同，其实都关于同一件事：认真观察，持续创造。</p>
+              <div class="about-tags"><span>⌨️ 写代码</span><span>☕ 过生活</span><span>◎ 拍照片</span><span>✳ 不断学习</span></div>
+              <div class="about-sign">with love, <span data-author>小满</span>.</div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div id="post-view" hidden></div>
+  </main>
 
-  function applyEventFix() {
-    var tips = document.getElementById("waifu-tips");
-    if (tips) tips.style.pointerEvents = "none";
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top"><div><p data-site-name>小满的手记</p><small>用代码创造，用文字记录，用镜头留住光。</small></div><nav class="footer-links" aria-label="页脚导航"><a href="#tech">技术</a><a href="#journal">日记</a><a href="#gallery">摄影</a><a href="#articles">文章</a><a href="#about">关于</a><a id="footer-email" href="" hidden>联系我 ↗</a><a id="footer-github" href="" target="_blank" rel="noopener noreferrer" hidden>GitHub ↗</a></nav></div>
+      <div class="footer-bottom"><span>© <span id="copyright-year">2026</span> <span data-site-name>小满的手记</span>. All stories are my own.</span><span>Made with code, coffee & curiosity ✳</span></div>
+    </div>
+  </footer>
+  <dialog class="photo-dialog" id="photo-dialog" aria-label="摄影作品预览">
+    <button type="button" class="photo-dialog-close" id="photo-close" aria-label="关闭照片预览">×</button>
+    <div class="photo-dialog-stage"><button type="button" id="photo-prev" class="photo-dialog-arrow" aria-label="上一张照片">←</button><img id="photo-large" src="" alt="" /><button type="button" id="photo-next" class="photo-dialog-arrow" aria-label="下一张照片">→</button></div>
+    <div class="photo-dialog-caption"><div><span id="photo-large-kind"></span><h3 id="photo-large-title"></h3><p id="photo-large-desc"></p></div><span id="photo-large-count"></span></div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-    var tool = document.getElementById("waifu-tool");
-    if (tool) tool.style.pointerEvents = "auto";
-
-    var canvas = document.getElementById("live2d");
-    if (canvas) canvas.style.pointerEvents = "auto";
-  }
-
-  function enablePointerDrag() {
-    var waifu = document.getElementById("waifu");
-    var canvas = document.getElementById("live2d") || (waifu ? waifu.querySelector("canvas") : null);
-    if (!waifu || !canvas) return;
-
-    // 避免重复绑定（如果某些主题没有真正销毁节点）
-    if (canvas.dataset && canvas.dataset.pointerDragBound === "1") return;
-    if (canvas.dataset) canvas.dataset.pointerDragBound = "1";
-
-    // 允许触摸拖拽（阻止浏览器默认手势/滚动抢事件）
-    canvas.style.touchAction = "none";
-
-    var dragging = false;
-    var offsetX = 0, offsetY = 0;
-
-    function start(e) {
-      // 右键不处理
-      if (typeof e.button === "number" && e.button === 2) return;
-
-      dragging = true;
-
-      // 一旦开始拖，改用 top/left 定位更稳定
-      waifu.style.bottom = "auto";
-      waifu.style.right = "auto";
-
-      var rect = waifu.getBoundingClientRect();
-      offsetX = e.clientX - rect.left;
-      offsetY = e.clientY - rect.top;
-
-      if (canvas.setPointerCapture) canvas.setPointerCapture(e.pointerId);
-      e.preventDefault();
-    }
-
-    function move(e) {
-      if (!dragging) return;
-
-      var maxLeft = window.innerWidth - waifu.offsetWidth;
-      var maxTop  = window.innerHeight - waifu.offsetHeight;
-
-      var left = e.clientX - offsetX;
-      var top  = e.clientY - offsetY;
-
-      // 限制在视口内
-      left = Math.max(0, Math.min(maxLeft, left));
-      top  = Math.max(0, Math.min(maxTop, top));
-
-      waifu.style.left = left + "px";
-      waifu.style.top  = top + "px";
-
-      e.preventDefault();
-    }
-
-    function end() {
-      dragging = false;
-    }
-
-    canvas.addEventListener("pointerdown", start);
-    window.addEventListener("pointermove", move, { passive: false });
-    window.addEventListener("pointerup", end);
-    window.addEventListener("pointercancel", end);
-  }
-
-  function boot() {
-    // 手机端不显示，且清理已有节点
-    if (isMobile()) {
-      cleanupOld();
-      return;
-    }
-
-    console.log("[Live2D] boot fired. initWidget =", typeof window.initWidget);
-
-    if (typeof window.initWidget !== "function") {
-      console.warn("[Live2D] initWidget missing. waifu-tips.js may not be executed.");
-      return;
-    }
-
-    try {
-      cleanupOld();
-
-      window.initWidget({
-        waifuPath: "https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/waifu-tips.json",
-        cdnPath: "https://cdn.jsdelivr.net/gh/fghrsh/live2d_api/",
-
-        // 如果用 Pointer 拖拽兜底，这里建议关掉原生拖拽避免双监听冲突
-        drag: USE_POINTER_DRAG ? false : true,
-
-        modelId: 0,
-        logLevel: "warn"
-      });
-
-      // DOM 出来后再做事件修复 & 拖拽绑定
-      setTimeout(function () {
-        console.log("[Live2D] waifu node =", document.getElementById("waifu"));
-        applyEventFix();
-        if (USE_POINTER_DRAG) enablePointerDrag();
-      }, 0);
-
-    } catch (e) {
-      console.error("[Live2D] initWidget threw:", e);
-    }
-  }
-
-  // 手机端直接跳过，不加载脚本
-  if (isMobile()) {
-    cleanupOld();
-    return;
-  }
-
-  // 确保核心脚本加载后再 init（只加载一次）
-  window.__LIVE2D_WIDGET_LOAD__ = window.__LIVE2D_WIDGET_LOAD__ || Promise.resolve()
-    .then(function () { return loadScriptOnce("https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/live2d.min.js", "__live2d_core__"); })
-    .then(function () { return loadScriptOnce("https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/waifu-tips.js", "__live2d_widget__"); });
-
-  window.__LIVE2D_WIDGET_LOAD__
-    .then(function () { boot(); })
-    .catch(function (e) { console.error("[Live2D] load error:", e); });
-
-  // ShokaX PJAX：切页后重挂（脚本不重复加载，只重 init）
-  document.addEventListener("pjax:complete", boot);
-  document.addEventListener("pjax:success", boot);
-})();
-</script>
-<!-- hexo injector body_end end --></body></html>
+  <script src="assets/content.js"></script>
+  <script defer src="assets/app.js"></script>
+</body>
+</html>
