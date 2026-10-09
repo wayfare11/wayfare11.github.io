@@ -1342,3 +1342,12 @@ body::before{background:radial-gradient(circle at center,var(--garden-peach-soft
   .filter-main .channel-page-tools {flex-wrap:wrap;}
   .filter-main .channel-page-tools .search-box {width:100%;flex-basis:100%;}
 }
+
+/* V12: keep selected directory links legible in dark mode. */
+:root[data-theme='dark'] .filter-sidebar .toc-links .filter-button.active {
+  color:var(--accent)!important;
+  border-left-color:var(--accent)!important;
+}
+:root[data-theme='dark'] .filter-sidebar .toc-links .filter-button.active small {
+  color:var(--muted);
+}
