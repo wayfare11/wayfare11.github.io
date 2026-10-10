@@ -1657,3 +1657,20 @@ body::before{background:radial-gradient(circle at center,var(--garden-peach-soft
 /* Clear photos: a faint frosted text panel preserves readability without darkening the whole image. */
 .article-hero.has-photo .article-hero-content{padding:clamp(15px,2.6vw,28px);margin:calc(-1 * clamp(15px,2.6vw,28px));border-radius:15px;background:linear-gradient(90deg,rgba(15,30,37,.28),rgba(15,30,37,.08));backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);}
 .article-hero.has-photo h1{text-shadow:0 2px 12px rgba(0,0,0,.6),0 1px 3px rgba(0,0,0,.55);}
+
+/* Center article hero text over the photo, for both desktop and mobile. */
+.article-hero{align-items:center;justify-content:center;}
+.article-hero-content{width:min(100%,850px);max-width:850px;text-align:center;margin-inline:auto;}
+.article-hero h1{text-align:center;}
+.article-hero p{margin-left:auto;margin-right:auto;text-align:center;}
+.article-hero .article-tags{justify-content:center;}
+.article-hero .article-meta{justify-content:center;}
+.article-hero.has-photo .article-hero-content{margin:0 auto;padding:clamp(16px,2.6vw,28px);}
+@media(max-width:760px){.article-hero{align-items:center;justify-content:center;}.article-hero-content{width:100%;}}
+
+/* Explicitly center the article hero and its child rows. */
+#post-view .article-cover.article-hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+#post-view .article-hero .article-hero-content{width:min(100%,850px);max-width:850px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;margin:0 auto;}
+#post-view .article-hero .article-hero-content > *{text-align:center;}
+#post-view .article-hero .article-tags,#post-view .article-hero .article-meta{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:100%;}
+#post-view .article-hero .article-hero-content p{margin-inline:auto;}
