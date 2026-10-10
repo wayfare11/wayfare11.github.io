@@ -14,10 +14,10 @@
       var p = localStorage.getItem('xiaoman-palette');
       // Upgrade the V8 black/white default once, without overriding later deliberate choices.
       if (localStorage.getItem('feather-default-v1') !== '1') {
-        if (!p || p === 'garden') { p = 'feather'; localStorage.setItem('xiaoman-palette','feather'); }
-        localStorage.setItem('xiaoman-palette-v9','1');
+        if (!p || p === 'garden' || p === 'mono') { p = 'feather'; localStorage.setItem('xiaoman-palette','feather'); }
+        localStorage.setItem('feather-default-v1','1');
       }
-      document.documentElement.dataset.palette = ['feather','garden','moss','plum','coral','mono'].includes(p) ? p : 'feather';
+      document.documentElement.dataset.palette = ['feather','garden','moss','plum','coral'].includes(p) ? p : 'feather';
     } catch (_) { document.documentElement.dataset.palette = 'feather'; }
   </script>
 </head>
@@ -54,7 +54,6 @@
           <button class="palette-option" type="button" data-palette-option="moss" aria-pressed="false"><span class="palette-dot palette-dot-moss" aria-hidden="true"></span><span class="palette-option-label">森林午后</span><span class="palette-option-check" aria-hidden="true">✓</span></button>
           <button class="palette-option" type="button" data-palette-option="plum" aria-pressed="false"><span class="palette-dot palette-dot-plum" aria-hidden="true"></span><span class="palette-option-label">薰衣草梦</span><span class="palette-option-check" aria-hidden="true">✓</span></button>
           <button class="palette-option" type="button" data-palette-option="coral" aria-pressed="false"><span class="palette-dot palette-dot-coral" aria-hidden="true"></span><span class="palette-option-label">杏桃暖阳</span><span class="palette-option-check" aria-hidden="true">✓</span></button>
-          <button class="palette-option" type="button" data-palette-option="mono" aria-pressed="false"><span class="palette-dot palette-dot-mono" aria-hidden="true"></span><span class="palette-option-label">黑白留白 · 备选</span><span class="palette-option-check" aria-hidden="true">✓</span></button>
             <div class="palette-menu-footnote">&#37197;&#33394;&#20250;&#33258;&#21160;&#35760;&#20303;&#65292;&#20063;&#21487;&#20999;&#25442;&#26126;&#26263;&#27169;&#24335;</div>
           </div>
         </div>
