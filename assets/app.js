@@ -906,7 +906,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       $('#photo-next').addEventListener('click', () => showPhoto(activePhotoIndex+1));
       $('#photo-dialog').addEventListener('click', event => { if (event.target === $('#photo-dialog')) $('#photo-dialog').close(); });
       // Independently selectable palettes (default warm garden), persisted locally.
-      const PALETTES = ['feather','garden','moss','plum','coral','mono'];
+      const PALETTES = ['feather','garden','moss','plum','coral'];
       const paletteToggle = $('#palette-toggle');
       const paletteMenu = $('#palette-menu');
       const updateThemeColor = () => {
