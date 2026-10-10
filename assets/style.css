@@ -1845,3 +1845,79 @@ body::before{background:radial-gradient(circle at center,var(--garden-peach-soft
 :root[data-theme='dark'] #post-view .prose strong{
  color:#f1f2ef;
 }
+
+
+/* Four new reading-first palettes. Every theme also supports dark mode. */
+:root[data-palette='amberlight']{
+ --bg:#fff8ed;--surface:#fffdf9;--surface-soft:#fcf0e2;--surface-muted:#f2dfc9;
+ --ink:#342b2c;--ink-soft:#514648;--muted:#847476;--line:#ecdccc;
+ --accent:#ad6647;--accent-dark:#894b34;--accent-pale:#f8e5d7;--forest:#985b52;
+ --header-glass:rgba(255,248,237,.94);
+ --garden-peach:#db896d;--garden-peach-soft:#ffe7cf;--garden-yellow:#f6d69c;--garden-lilac:#e2c6d1;--garden-sage:#c9ba96;
+ --tile-tech:#98665a;--tile-life:#f2d1b6;--tile-photo:#d9bdcc;--journal-bg:#f8dbc6;--journal-ink:#814f45;--about-bg:#f4d5c5;
+}
+:root[data-theme='dark'][data-palette='amberlight']{
+ --bg:#2e2524;--surface:#3a2d2b;--surface-soft:#483634;--surface-muted:#584340;--ink:#faf0e7;--ink-soft:#e5d2c6;--muted:#bfa69b;--line:#604944;
+ --accent:#efaa86;--accent-dark:#ffccb0;--accent-pale:#5d4039;--forest:#875a50;--header-glass:rgba(46,37,36,.94);
+ --tile-tech:#85574f;--tile-life:#785754;--tile-photo:#715665;--journal-bg:#694c44;--journal-ink:#ffe8dd;--about-bg:#684c46;
+}
+:root[data-palette='seamist']{
+ --bg:#f0f7f7;--surface:#fbffff;--surface-soft:#e6f2f2;--surface-muted:#d7e9e9;--ink:#26383d;--ink-soft:#415960;--muted:#668088;--line:#d3e6e7;
+ --accent:#367e91;--accent-dark:#226278;--accent-pale:#d8edf2;--forest:#416d7c;--header-glass:rgba(240,247,247,.94);
+ --garden-peach:#e8a58b;--garden-peach-soft:#fae6d8;--garden-yellow:#f1deac;--garden-lilac:#c6d0ed;--garden-sage:#a9d4cb;
+ --tile-tech:#426e7c;--tile-life:#e4d6d1;--tile-photo:#b8d7dc;--journal-bg:#d9ebe9;--journal-ink:#426775;--about-bg:#d1e5e8;
+}
+:root[data-theme='dark'][data-palette='seamist']{
+ --bg:#1e2b31;--surface:#293b42;--surface-soft:#344851;--surface-muted:#405860;--ink:#f1f8fa;--ink-soft:#c7dfe5;--muted:#9db7be;--line:#4b626b;
+ --accent:#8fd4e4;--accent-dark:#c0ebf3;--accent-pale:#385963;--forest:#3e6e7c;--header-glass:rgba(30,43,49,.94);
+ --tile-tech:#386675;--tile-life:#6f666f;--tile-photo:#466b79;--journal-bg:#344f55;--journal-ink:#d1e8eb;--about-bg:#36535b;
+}
+:root[data-palette='inkrose']{
+ --bg:#fbf5f4;--surface:#fffdfc;--surface-soft:#f7e9e9;--surface-muted:#eddbdf;--ink:#3a303b;--ink-soft:#63535d;--muted:#8d7782;--line:#eadde1;
+ --accent:#aa5e7b;--accent-dark:#84425e;--accent-pale:#f6e1eb;--forest:#765368;--header-glass:rgba(251,245,244,.94);
+ --garden-peach:#d68b91;--garden-peach-soft:#f9e5e5;--garden-yellow:#efd7a7;--garden-lilac:#dec0d9;--garden-sage:#cecbc1;
+ --tile-tech:#775769;--tile-life:#f2d4d9;--tile-photo:#d8bad2;--journal-bg:#f6dce0;--journal-ink:#7e5369;--about-bg:#eed0d9;
+}
+:root[data-theme='dark'][data-palette='inkrose']{
+ --bg:#2d2530;--surface:#3b303f;--surface-soft:#48394d;--surface-muted:#58465c;--ink:#f9f1f7;--ink-soft:#e4cedf;--muted:#bca4b6;--line:#665268;
+ --accent:#efb3cf;--accent-dark:#ffd0e3;--accent-pale:#603f56;--forest:#77516c;--header-glass:rgba(45,37,48,.94);
+ --tile-tech:#6c506a;--tile-life:#7c5467;--tile-photo:#6c5475;--journal-bg:#6b495c;--journal-ink:#ffdeef;--about-bg:#69485d;
+}
+:root[data-palette='dusk']{
+ --bg:#f4f3fa;--surface:#fdfcff;--surface-soft:#eceaf7;--surface-muted:#e0dcf0;--ink:#2c3045;--ink-soft:#50546d;--muted:#7a7e97;--line:#deddee;
+ --accent:#6664a8;--accent-dark:#494982;--accent-pale:#e6e4f7;--forest:#53547c;--header-glass:rgba(244,243,250,.94);
+ --garden-peach:#d39bad;--garden-peach-soft:#f3e2ee;--garden-yellow:#f0d9a5;--garden-lilac:#c8c0eb;--garden-sage:#b9c7dd;
+ --tile-tech:#515c86;--tile-life:#dfc9e5;--tile-photo:#a9b1dc;--journal-bg:#e5d7ef;--journal-ink:#5a5483;--about-bg:#ded4ec;
+}
+:root[data-theme='dark'][data-palette='dusk']{
+ --bg:#222437;--surface:#2e3047;--surface-soft:#3b3d58;--surface-muted:#494b6a;--ink:#f4f4ff;--ink-soft:#d4d4eb;--muted:#a7a8c7;--line:#575878;
+ --accent:#b5b4ff;--accent-dark:#d7d5ff;--accent-pale:#45486b;--forest:#52567d;--header-glass:rgba(34,36,55,.94);
+ --tile-tech:#424f7b;--tile-life:#655473;--tile-photo:#525d85;--journal-bg:#524563;--journal-ink:#eee0ff;--about-bg:#4a4564;
+}
+.palette-dot-amberlight{background:linear-gradient(145deg,#f7d49c 0 40%,#b76858 40% 72%,#e6bec6 72%);}
+.palette-dot-seamist{background:linear-gradient(145deg,#cae9e6 0 38%,#5e9db2 38% 75%,#e6bea5 75%);}
+.palette-dot-inkrose{background:linear-gradient(145deg,#f1d5df 0 42%,#ac6685 42% 75%,#6e5770 75%);}
+.palette-dot-dusk{background:linear-gradient(145deg,#d8d5f4 0 37%,#7673b4 37% 70%,#464c83 70%);}
+
+/* Palette-aware editorial accents, with near-black main text in light mode. */
+#post-view .prose{--read-link:var(--accent-dark);--read-emphasis:var(--accent-dark);--read-code:var(--accent-dark);}
+#post-view .prose p,#post-view .prose li,#post-view .prose td{line-height:2.03;}
+#post-view .prose strong{color:var(--read-emphasis);font-weight:750;}
+#post-view .prose em{color:var(--accent-dark);font-style:italic;}
+#post-view .prose a{color:var(--read-link);text-decoration-color:var(--accent);text-underline-offset:4px;font-weight:600;}
+#post-view .prose a:hover{color:var(--accent);}
+#post-view .prose blockquote{background:var(--surface-soft);border-left:4px solid var(--accent);color:var(--accent-dark);}
+#post-view .prose blockquote p,#post-view .prose blockquote li{color:var(--accent-dark);}
+#post-view .prose :not(pre)>code{color:var(--read-code);background:var(--accent-pale);border:1px solid var(--line);font-weight:550;}
+#post-view .prose pre{background:var(--surface-soft);border:1px solid var(--line);color:var(--ink);box-shadow:inset 3px 0 0 var(--accent);line-height:1.85;}
+#post-view .prose pre code{color:inherit;background:none;border:0;font-weight:450;}
+#post-view .prose pre .comment,#post-view .prose pre .token.comment{color:var(--muted);font-style:italic;}
+#post-view .prose pre .string,#post-view .prose pre .token.string{color:var(--accent-dark);}
+#post-view .prose pre .keyword,#post-view .prose pre .token.keyword{color:var(--accent);font-weight:650;}
+#post-view .prose th{background:var(--surface-muted);color:var(--ink);font-weight:750;}
+:root:not([data-theme='dark']) #post-view .prose strong,
+:root:not([data-theme='dark']) #post-view .prose em,
+:root:not([data-theme='dark']) #post-view .prose a,
+:root:not([data-theme='dark']) #post-view .prose blockquote p,
+:root:not([data-theme='dark']) #post-view .prose blockquote li{color:var(--accent-dark);}
+:root:not([data-theme='dark']) #post-view .prose :not(pre)>code{color:var(--accent-dark);}
