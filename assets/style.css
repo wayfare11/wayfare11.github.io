@@ -1921,3 +1921,62 @@ body::before{background:radial-gradient(circle at center,var(--garden-peach-soft
 :root:not([data-theme='dark']) #post-view .prose blockquote p,
 :root:not([data-theme='dark']) #post-view .prose blockquote li{color:var(--accent-dark);}
 :root:not([data-theme='dark']) #post-view .prose :not(pre)>code{color:var(--accent-dark);}
+
+
+/* Calm paper foundation across all palettes: accents belong to components, not the page canvas. */
+:root:not([data-theme='dark']){
+ --bg:#f8f8f6;
+ --surface:#ffffff;
+ --surface-soft:#f5f5f2;
+ --surface-muted:#eeefec;
+ --header-glass:rgba(248,248,246,.94);
+}
+:root[data-theme='dark']{
+ --bg:#202326;
+ --surface:#2a2f33;
+ --surface-soft:#343b40;
+ --surface-muted:#3d464d;
+ --header-glass:rgba(32,35,38,.94);
+}
+/* Forest Afternoon: botanical accents with warm apricot and quiet blue. */
+:root[data-palette='moss']{
+ --ink:#292f30;--ink-soft:#4b5658;--muted:#747e7d;--line:#e2e5e0;
+ --accent:#5c806a;--accent-dark:#37664d;--accent-pale:#e6eee6;--forest:#496d61;
+ --garden-peach:#db9d81;--garden-peach-soft:#faeee6;--garden-yellow:#efcf99;
+ --garden-lilac:#b6c8d8;--garden-sage:#c4d6c5;
+ --tile-tech:#537566;--tile-life:#f1d7c4;--tile-photo:#cbdce6;
+ --journal-bg:#f3dfcf;--journal-ink:#755447;--about-bg:#e7e0d4;--about-mark:#c0a28c;
+}
+:root[data-theme='dark'][data-palette='moss']{
+ --ink:#f1f3ef;--ink-soft:#d0d9d3;--muted:#adbcb4;--line:#4a5550;
+ --accent:#a6ceb6;--accent-dark:#cbe6d4;--accent-pale:#3b5549;--forest:#527565;
+ --garden-peach:#edb395;--garden-peach-soft:#59483e;--garden-yellow:#dbbd8d;
+ --garden-lilac:#859eb6;--garden-sage:#85a997;
+ --tile-tech:#486c5a;--tile-life:#72584e;--tile-photo:#4f6377;
+ --journal-bg:#604d48;--journal-ink:#ffdfcd;--about-bg:#514b46;
+}
+/* Lavender Dream: ink-violet, misty rose, warm sand and blue-grey. */
+:root[data-palette='plum']{
+ --ink:#303039;--ink-soft:#575762;--muted:#807f8c;--line:#e6e3e9;
+ --accent:#8472a8;--accent-dark:#645488;--accent-pale:#eeeaf6;--forest:#69627e;
+ --garden-peach:#dba2a4;--garden-peach-soft:#f8e9e7;--garden-yellow:#ecd9aa;
+ --garden-lilac:#cdc4e5;--garden-sage:#bfcbd1;
+ --tile-tech:#69657f;--tile-life:#efd9de;--tile-photo:#c9d4e6;
+ --journal-bg:#f0dfe3;--journal-ink:#775a6e;--about-bg:#e9e2ed;--about-mark:#b4a1c4;
+}
+:root[data-theme='dark'][data-palette='plum']{
+ --ink:#f5f1fa;--ink-soft:#dcd7e7;--muted:#b5aec2;--line:#514c5b;
+ --accent:#c6b8ea;--accent-dark:#e0d5fa;--accent-pale:#4f4561;--forest:#756b91;
+ --garden-peach:#e4b0b6;--garden-peach-soft:#59434f;--garden-yellow:#ddc79b;
+ --garden-lilac:#9b90bb;--garden-sage:#899eaa;
+ --tile-tech:#625b7e;--tile-life:#755866;--tile-photo:#576780;
+ --journal-bg:#604a59;--journal-ink:#ffdfeb;--about-bg:#524b60;
+}
+/* Repeat calm surfaces at palette-level to beat legacy theme declarations. */
+:root:not([data-theme='dark'])[data-palette]{--bg:#f8f8f6;--surface:#fff;--surface-soft:#f5f5f2;--surface-muted:#eeefec;--header-glass:rgba(248,248,246,.94);}
+:root[data-theme='dark'][data-palette]{--bg:#202326;--surface:#2a2f33;--surface-soft:#343b40;--surface-muted:#3d464d;--header-glass:rgba(32,35,38,.94);}
+body{background:var(--bg);}
+:root:not([data-theme='dark']) body::before{background:none!important;}
+:root[data-theme='dark'] body::before{background:none!important;}
+.palette-dot-moss{background:conic-gradient(#577c64 0 130deg,#e0ab91 130deg 240deg,#b2c7d8 240deg);}
+.palette-dot-plum{background:conic-gradient(#8472a8 0 130deg,#dfa7af 130deg 240deg,#bfd0dc 240deg);}
