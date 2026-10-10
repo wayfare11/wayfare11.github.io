@@ -276,6 +276,81 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       updateSortUI('archive');
     }
 
+    // V15: editorial timeline / the chronological archive is separate from the card index.
+    function renderChronicle() {
+      const ordered = [...posts].sort((a,b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id));
+      const byYear = new Map();
+      for (const post of ordered) {
+        const [year, month] = post.date.split('-');
+        if (!byYear.has(year)) byYear.set(year, new Map());
+        const months = byYear.get(year);
+        if (!months.has(month)) months.set(month, []);
+        months.get(month).push(post);
+      }
+      $('#chronicle-total').textContent = String(ordered.length).padStart(2,'0');
+      $('#chronicle-year-total').textContent = String(byYear.size).padStart(2,'0');
+      const recent = ordered[0];
+      const recentNode = $('#chronicle-latest-date');
+      recentNode.textContent = recent ? dateLabel(recent.date) : '等待第一篇';
+      if (recent) recentNode.setAttribute('datetime',recent.date);
+      else recentNode.removeAttribute('datetime');
+      $('#chronicle-result-label').textContent = `${ordered.length} 篇记录 · 最新在前`;
+      $('#chronicle-bottom-note').hidden = ordered.length === 0;
+      const monthNames = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      $('#chronicle-year-nav').innerHTML = [...byYear].map(([year,months],i) => {
+        const total = [...months.values()].reduce((sum,entries)=>sum+entries.length,0);
+        return `<button type="button" class="chronicle-year-jump ${i===0 ? 'is-current' : ''}" data-chronicle-year="${escapeHtml(year)}" aria-label="跳转到 ${escapeHtml(year)} 年的 ${total} 篇文章"><span>${escapeHtml(year)}</span><small>${total.toString().padStart(2,'0')}</small></button>`;
+      }).join('');
+      const renderEntry = post => {
+        const day = post.date.slice(8,10);
+        const monthName = monthNames[Number(post.date.slice(5,7))-1] || '';
+        const href = '#post/' + encodeURIComponent(post.id);
+        return `<li class="chronicle-entry">
+          <time class="chronicle-entry-date" datetime="${escapeHtml(post.date)}"><strong>${escapeHtml(day)}</strong><small>${monthName}</small></time>
+          <div class="chronicle-entry-body">
+            <div class="chronicle-entry-meta"><span class="chronicle-entry-kind ${post.channel==='tech' ? 'is-tech':'is-life'}">${post.channel==='tech' ? '技术':'生活'}</span><span>${escapeHtml(post.subcategoryLabel)}</span></div>
+            <h4><a href="${href}">${escapeHtml(post.title)}</a></h4>
+            <p>${escapeHtml(post.excerpt)}</p>
+            <div class="chronicle-entry-tags">${(post.tags||[]).slice(0,2).map(t=>`<span>#${escapeHtml(t)}</span>`).join('')}</div>
+          </div>
+          <a href="${href}" class="chronicle-entry-arrow" aria-label="阅读《${escapeHtml(post.title)}》"><span aria-hidden="true">↗</span></a>
+        </li>`;
+      };
+      $('#chronicle-timeline').innerHTML = [...byYear].map(([year,months]) => {
+        const total = [...months.values()].reduce((sum,entries)=>sum+entries.length,0);
+        const monthsHtml = [...months].map(([month,entries]) => `<section class="chronicle-month" aria-label="${escapeHtml(year)} 年 ${Number(month)} 月">
+          <div class="chronicle-month-heading"><span class="chronicle-month-number">${Number(month).toString().padStart(2,'0')} <small>月</small></span><span class="chronicle-month-english">${monthNames[Number(month)-1] || ''}</span><span class="chronicle-month-count">${entries.length} 篇</span></div>
+          <ol class="chronicle-entries">${entries.map(renderEntry).join('')}</ol>
+        </section>`).join('');
+        return `<section class="chronicle-year-group" id="chronicle-year-${escapeHtml(year)}" aria-label="${escapeHtml(year)} 年归档">
+          <header class="chronicle-year-heading"><span class="chronicle-year-title">${escapeHtml(year)}</span><span class="chronicle-year-caption">${total} 篇文字 / NOTES FROM ${escapeHtml(year)}</span></header>
+          <div class="chronicle-months">${monthsHtml}</div>
+        </section>`;
+      }).join('') || `<div class="chronicle-empty"><span aria-hidden="true">✳</span><h3>第一段时光，正在酝酿</h3><p>在技术或生活栏目发布一篇 Markdown 文章，新的时间线就会从这里开始。</p><a href="#articles">去文章列表看看 ↗</a></div>`;
+    }
+
+    function setupChronicle() {
+      $('#chronicle-year-nav').addEventListener('click',event => {
+        const button = event.target.closest('[data-chronicle-year]');
+        if (!button) return;
+        const year = button.dataset.chronicleYear;
+        document.getElementById('chronicle-year-' + year)?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant':'smooth',block:'start'});
+        $('#chronicle-year-nav').querySelectorAll('button').forEach(b => b.classList.toggle('is-current',b===button));
+      });
+      let pending=false;
+      window.addEventListener('scroll',() => {
+        if (location.hash !== '#archive' || pending) return;
+        pending=true;
+        requestAnimationFrame(()=>{
+          pending=false;
+          const groups=[...document.querySelectorAll('#chronicle-timeline .chronicle-year-group')];
+          if (!groups.length) return;
+          const chosen=[...groups].reverse().find(group=>group.getBoundingClientRect().top<=175) || groups[0];
+          $('#chronicle-year-nav').querySelectorAll('[data-chronicle-year]').forEach(b=>b.classList.toggle('is-current',b.dataset.chronicleYear===chosen.id.slice('chronicle-year-'.length)));
+        });
+      },{passive:true});
+    }
+
     function renderTechAndJournal() {
       const tech = posts.filter(post => post.channel === 'tech').sort((a,b) => b.date.localeCompare(a.date));
       $('#tech-posts').innerHTML = tech.slice(0,3).map((post,index) => `
@@ -458,11 +533,11 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
 
     function renderPost(post) {
       const channelHref = '#' + CHANNEL_ROUTES[post.channel];
-      const backHref = ['#home','#tech','#journal','#gallery','#articles'].includes(lastListingRoute) ? lastListingRoute : channelHref;
+      const backHref = ['#home','#tech','#journal','#gallery','#articles','#archive'].includes(lastListingRoute) ? lastListingRoute : channelHref;
       const backLabel = {
         '#home':'\u8fd4\u56de\u9996\u9875','#tech':'\u8fd4\u56de\u6280\u672f',
         '#journal':'\u8fd4\u56de\u65e5\u8bb0','#gallery':'\u8fd4\u56de\u6444\u5f71',
-        '#articles':'\u8fd4\u56de\u6587\u7ae0\u5217\u8868'
+        '#articles':'\u8fd4\u56de\u6587\u7ae0\u5217\u8868', '#archive':'返回时间归档'
       }[backHref];
       const toc = makeToc(post.content);
       let tocIndex = 0;
@@ -509,16 +584,16 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       const isAlbum = hash.startsWith('album/');
       const post = isPost ? getPost(hash.slice(5)) : null;
       const album = isAlbum ? albums.find(item => item.id === hash.slice(6)) : null;
-      const allowed = ['home','tech','journal','gallery','articles','about'];
+      const allowed = ['home','tech','journal','gallery','articles','archive','about'];
       const page = post ? 'post' : album ? 'album' : allowed.includes(hash) ? hash : 'home';
-      if (!post && ['home','tech','journal','gallery','articles'].includes(page)) lastListingRoute = '#' + page;
-      const views = {home:'home-view',tech:'tech-view',journal:'journal-view',articles:'articles-view',about:'about-view',post:'post-view'};
+      if (!post && ['home','tech','journal','gallery','articles','archive'].includes(page)) lastListingRoute = '#' + page;
+      const views = {home:'home-view',tech:'tech-view',journal:'journal-view',articles:'articles-view',archive:'archive-view',about:'about-view',post:'post-view'};
       Object.entries(views).forEach(([key,id]) => { document.getElementById(id).hidden = page !== key; });
       $('#gallery-page-view').hidden = !['gallery','album'].includes(page);
       $('#album-overview').hidden = page !== 'gallery';
       $('#album-detail').hidden = page !== 'album';
       currentPostId = post ? post.id : null;
-      const labels = {tech:'\u6280\u672f\u5b9e\u9a8c\u5ba4',journal:'\u751f\u6d3b\u65e5\u8bb0',gallery:'\u6444\u5f71\u76f8\u518c',articles:'\u6587\u7ae0',about:'\u5173\u4e8e'};
+      const labels = {tech:'\u6280\u672f\u5b9e\u9a8c\u5ba4',journal:'\u751f\u6d3b\u65e5\u8bb0',gallery:'\u6444\u5f71\u76f8\u518c',articles:'\u6587\u7ae0',archive:'时光归档',about:'\u5173\u4e8e'};
       document.title = post ? post.title + ' \u00b7 ' + SITE.name : album ? album.title + ' \u00b7 ' + SITE.name : labels[page] ? labels[page] + ' \u00b7 ' + SITE.name : SITE.name + ' \u00b7 CODE / LIFE / PHOTOS';
       document.querySelectorAll('[data-nav]').forEach(link => {
         const active = !post && (page === link.dataset.nav || (page === 'album' && link.dataset.nav === 'gallery'));
@@ -586,7 +661,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       setupFilterDrawers();
       document.querySelector('.skip-link').addEventListener('click', event => {
         event.preventDefault();
-        const title = document.querySelector('#post-view:not([hidden]) h1, #tech-view:not([hidden]) h1, #journal-view:not([hidden]) h1, #gallery-page-view:not([hidden]) h1, #articles-view:not([hidden]) h2, #about-view:not([hidden]) h2, #home-view:not([hidden]) h1');
+        const title = document.querySelector('#post-view:not([hidden]) h1, #tech-view:not([hidden]) h1, #journal-view:not([hidden]) h1, #gallery-page-view:not([hidden]) h1, #articles-view:not([hidden]) h2, #archive-view:not([hidden]) h1, #about-view:not([hidden]) h2, #home-view:not([hidden]) h1');
         if (title) {
           title.setAttribute('tabindex','-1');
           title.focus({preventScroll:true});
@@ -594,6 +669,8 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
         }
       });
       renderPosts();
+      renderChronicle();
+      setupChronicle();
       renderTechAndJournal();
       renderChannelPage('tech');
       renderChannelPage('journal');

@@ -36,6 +36,7 @@
         <a href="#journal" data-nav="journal">日记</a>
         <a href="#gallery" data-nav="gallery">摄影</a>
         <a href="#articles" data-nav="articles">文章</a>
+        <a href="#archive" data-nav="archive">归档</a>
         <a href="#about" data-nav="about">关于</a>
       </nav>
       <div class="header-actions">
@@ -301,7 +302,7 @@
     <!-- 文章归档是独立视图：点击「文章」导航时才显示。 -->
     <div id="articles-view" class="interior-view" hidden>
       <div class="container">
-        <div class="interior-topline"><a href="#home">← 返回首页</a><span>THE WRITING ARCHIVE / 文章归档</span></div>
+        <div class="interior-topline"><a href="#home">← 返回首页</a><span>THE WRITING INDEX / 文章索引</span></div>
         <section class="section" id="articles" aria-labelledby="posts-heading">
           <div class="section-top">
             <div>
@@ -365,6 +366,43 @@
       </div>
     </div>
 
+
+    <!-- 时间归档：独立于卡片式「文章」列表，按年 / 月倒序浏览全部 Markdown 文章。 -->
+    <div id="archive-view" class="interior-view chronicle-view" hidden>
+      <div class="container">
+        <div class="interior-topline"><a href="#home">← 返回首页</a><span>THE CHRONICLE / 时光归档</span></div>
+        <header class="chronicle-hero" aria-labelledby="chronicle-heading">
+          <div class="chronicle-intro">
+            <span class="eyebrow">A JOURNAL THROUGH TIME</span>
+            <h1 id="chronicle-heading">写过的日子，<br/><em>都有回声。</em></h1>
+            <p>从最近的一页往前翻。关于代码、日常，以及那些值得被好好记下来的瞬间。</p>
+            <div class="chronicle-hero-link"><span class="chronicle-hero-line" aria-hidden="true"></span><span>从新到旧 · 一路慢慢读</span><span aria-hidden="true">↘</span></div>
+          </div>
+          <div class="chronicle-cover" aria-label="文字归档概览">
+            <div class="chronicle-cover-top"><span>THE WRITING CHRONICLE</span><span>VOLUME / 01</span></div>
+            <div class="chronicle-cover-graphic" aria-hidden="true"><span class="chronicle-orbit chronicle-orbit-one"></span><span class="chronicle-orbit chronicle-orbit-two"></span><span class="chronicle-orbit chronicle-orbit-three"></span><span class="chronicle-flower">✳</span></div>
+            <div class="chronicle-cover-bottom">
+              <div class="chronicle-stat"><strong id="chronicle-total">00</strong><span>篇文字</span></div>
+              <div class="chronicle-stat"><strong id="chronicle-year-total">00</strong><span>个年份</span></div>
+              <div class="chronicle-cover-latest"><span>LAST WRITTEN / 最近记录</span><time id="chronicle-latest-date">—</time></div>
+            </div>
+          </div>
+        </header>
+        <div class="chronicle-layout">
+          <aside class="chronicle-rail" aria-label="按年份快速浏览">
+            <span class="chronicle-rail-eyebrow">TIME INDEX / 年份索引</span>
+            <nav id="chronicle-year-nav" class="chronicle-years-nav" aria-label="跳转到文章年份"></nav>
+            <span class="chronicle-rail-footer">每一年，都是一本小小的书。</span>
+          </aside>
+          <div class="chronicle-content">
+            <div class="chronicle-content-title"><div><span class="eyebrow">EVERY NOTE COUNTS</span><h2>时间里的文字<span class="chronicle-period">.</span></h2></div><span id="chronicle-result-label" aria-live="polite">正在整理时间线…</span></div>
+            <div id="chronicle-timeline" class="chronicle-timeline"></div>
+            <div class="chronicle-bottom-note" id="chronicle-bottom-note" hidden><span aria-hidden="true">✳</span><span>你已经读到了时光的起点。期待下一个故事。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- 关于页面独立于首页，仅在点击「关于」时显示。 -->
     <div id="about-view" class="interior-view" hidden>
       <div class="container">
@@ -392,7 +430,7 @@
 
   <footer class="site-footer">
     <div class="container">
-      <div class="footer-top"><div><p data-site-name>小满的手记</p><small>用代码创造，用文字记录，用镜头留住光。</small></div><nav class="footer-links" aria-label="页脚导航"><a href="#tech">技术</a><a href="#journal">日记</a><a href="#gallery">摄影</a><a href="#articles">文章</a><a href="#about">关于</a><a id="footer-email" href="" hidden>联系我 ↗</a><a id="footer-github" href="" target="_blank" rel="noopener noreferrer" hidden>GitHub ↗</a></nav></div>
+      <div class="footer-top"><div><p data-site-name>小满的手记</p><small>用代码创造，用文字记录，用镜头留住光。</small></div><nav class="footer-links" aria-label="页脚导航"><a href="#tech">技术</a><a href="#journal">日记</a><a href="#gallery">摄影</a><a href="#articles">文章</a><a href="#archive">归档</a><a href="#about">关于</a><a id="footer-email" href="" hidden>联系我 ↗</a><a id="footer-github" href="" target="_blank" rel="noopener noreferrer" hidden>GitHub ↗</a></nav></div>
       <div class="footer-bottom"><span>© <span id="copyright-year">2026</span> <span data-site-name>小满的手记</span>. All stories are my own.</span><span>Made with code, coffee & curiosity ✳</span></div>
     </div>
   </footer>
