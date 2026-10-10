@@ -1560,3 +1560,85 @@ body::before{background:radial-gradient(circle at center,var(--garden-peach-soft
 @media (prefers-reduced-motion:reduce) {
   .chronicle-year-jump,.chronicle-entry-arrow {transition:none;}
 }
+
+/* V16 — consistent album titles, compact chronicle and secure collections */
+.album-detail-hero {
+  grid-template-columns:minmax(0,40fr) minmax(0,60fr);
+  min-height:312px;
+}
+.album-detail-copy {padding:clamp(28px,3.2vw,43px);}
+.album-detail-copy h1 {
+  font-family:var(--serif);
+  font-size:clamp(36px,3.25vw,46px);
+  font-weight:600;
+  line-height:1.24;
+  letter-spacing:-.04em;
+  margin:14px 0 13px;
+  overflow-wrap:anywhere;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  line-clamp:2;
+  overflow:hidden;
+}
+.album-detail-meta {margin-top:20px;flex-wrap:wrap;gap:10px 17px;}
+.album-detail-cover {min-height:312px;}
+.album-detail-cover img {height:100%;width:100%;object-fit:cover;}
+/* Match the channel pages' 35/65 header proportions, at a shallower height. */
+.chronicle-hero {grid-template-columns:minmax(0,35fr) minmax(0,65fr);min-height:278px;margin:24px 0 48px;}
+.chronicle-intro {padding:clamp(26px,3.3vw,43px);}
+.chronicle-intro h1 {font-size:clamp(33px,3vw,43px);line-height:1.26;margin:13px 0 10px;}
+.chronicle-intro > p {font-size:12px;line-height:1.8;}
+.chronicle-hero-link {margin-top:17px;}
+.chronicle-cover {min-height:278px;padding:22px 29px;}
+.chronicle-cover-top {font-size:9px;}
+.chronicle-stat strong {font-size:32px;}
+.chronicle-flower {font-size:58px;}
+/* Privacy: a locked cover never requests a plaintext image. */
+.album-locked-art {display:flex;width:100%;height:100%;min-height:210px;position:relative;flex-direction:column;align-items:center;justify-content:center;gap:10px;overflow:hidden;color:var(--forest);background:radial-gradient(circle at 66% 32%,var(--accent-pale),transparent 50%),linear-gradient(140deg,var(--surface-soft),var(--surface-muted));}
+.album-locked-glyph {font:500 94px/1 var(--serif);opacity:.10;position:absolute;transform:rotate(-17deg);}
+.album-locked-icon {font-size:27px;position:relative;}
+.album-locked-art small {font-size:9px;letter-spacing:.14em;font-weight:800;color:var(--ink-soft);position:relative;}
+.album-card.is-locked .album-card-image {background:var(--surface-soft);}
+.album-detail-cover .album-locked-art {min-height:312px;}
+.landing-album-image .album-locked-art {min-height:100%;}
+.album-unlock-panel {margin-top:22px;padding-top:16px;border-top:1px solid var(--line);width:100%;}
+.album-unlock-kicker {font-size:10px;font-weight:800;letter-spacing:.06em;color:var(--accent-dark);}
+.album-unlock-panel > p {font-size:11px;line-height:1.65;margin:7px 0 13px;}
+.album-unlock-label {font-size:11px;font-weight:800;color:var(--ink);display:block;margin-bottom:7px;}
+.album-unlock-input-row {display:flex;gap:7px;min-width:0;flex-wrap:wrap;}
+.album-unlock-input-row input {min-width:150px;flex:1 1 150px;max-width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line);outline:0;padding:10px 12px;border-radius:9px;font:inherit;font-size:12px;}
+.album-unlock-input-row input:focus {border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-pale);}
+.album-unlock-input-row button {border:0;border-radius:9px;padding:11px 15px;background:var(--forest);color:#fff;font-weight:750;font-size:11px;cursor:pointer;}
+.album-unlock-input-row button:disabled {opacity:.5;cursor:wait;}
+.album-unlock-status {font-size:11px!important;line-height:1.4!important;color:var(--accent-dark)!important;min-height:17px;margin:10px 0 0!important;}
+@media (max-width:900px) and (min-width:761px) {
+  .album-detail-hero {grid-template-columns:minmax(0,45fr) minmax(0,55fr);}
+  .chronicle-hero {grid-template-columns:minmax(0,38fr) minmax(0,62fr);}
+}
+@media (max-width:760px) {
+  .album-detail-hero {grid-template-columns:1fr;min-height:0;}
+  .album-detail-copy {padding:28px 25px 32px;}
+  .album-detail-copy h1 {font-size:clamp(35px,8.2vw,46px);line-height:1.24;margin:10px 0;}
+  .album-detail-cover {height:226px;min-height:226px;}
+  .album-detail-cover .album-locked-art {min-height:226px;}
+  .chronicle-hero {grid-template-columns:1fr;min-height:0;margin:22px 0 37px;}
+  .chronicle-intro {padding:27px 29px 25px;}
+  .chronicle-intro h1 {font-size:clamp(31px,7.7vw,41px);margin:12px 0 9px;}
+  .chronicle-hero-link {margin-top:13px;}
+  .chronicle-cover {min-height:143px;padding:16px 27px;}
+  .chronicle-flower {font-size:37px;}
+  .chronicle-stat strong {font-size:25px;}
+}
+/* Album cover art is positioned, not allowed to grow the header with its intrinsic ratio. */
+@media (min-width:761px) {
+  .album-detail-hero:not(.is-protected) {height:348px;min-height:348px;}
+  .album-detail-cover {position:relative;min-height:0;height:100%;}
+  .album-detail-cover > img {position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .album-detail-hero.is-protected {height:auto;min-height:425px;}
+  .album-detail-hero.is-protected .album-detail-cover {min-height:425px;}
+}
+@media (max-width:760px) {
+  .album-detail-cover {position:relative;}
+  .album-detail-cover > img {position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+}

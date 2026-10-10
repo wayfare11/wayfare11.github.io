@@ -11,6 +11,8 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
 
     let visiblePhotos = [];
     let selectedAlbum = null;
+    // Decrypted photos only live in this browser tab (blob: URLs), never localStorage.
+    const unlockedAlbums = new Map();
     const channelPageState = {
       tech: {subcategory:'all', tag:null, search:'', sort:'newest'},
       journal: {subcategory:'all', tag:null, search:'', sort:'newest'}
@@ -44,7 +46,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       const githubLink = $('#footer-github');
       if (SITE.github) { githubLink.href = SITE.github; githubLink.hidden = false; }
       $('#article-total').textContent = String(posts.length).padStart(2,'0');
-      $('#photo-total').textContent = String(albums.reduce((sum, a) => sum + a.photos.length, 0)).padStart(2,'0');
+      $('#photo-total').textContent = String(albums.reduce((sum, a) => sum + a.count, 0)).padStart(2,'0');
     }
 
     // V10: sticky desktop taxonomy sidebars and a focus-managed mobile drawer.
@@ -409,10 +411,25 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       syncFilterCount(page);
     }
 
+    function resolvedAlbum(album) {
+      return unlockedAlbums.get(album.id) || album;
+    }
+
+    function albumCoverMarkup(album, alt, attributes = '') {
+      const ready = resolvedAlbum(album);
+      if (album.protected && !unlockedAlbums.has(album.id)) {
+        return `<span class="album-locked-art" role="img" aria-label="相册已加密，需要密码">
+          <span class="album-locked-glyph" aria-hidden="true">✳</span><span class="album-locked-icon" aria-hidden="true">🔒</span>
+          <small>PRIVATE COLLECTION / 私密相册</small></span>`;
+      }
+      return `<img src="${escapeHtml(ready.cover)}" alt="${escapeHtml(alt)}" ${attributes} />`;
+    }
+
     function albumCard(album, index) {
-      return `<a class="album-card" href="#album/${encodeURIComponent(album.id)}" aria-label="\u67e5\u770b\u76f8\u518c\uff1a${escapeHtml(album.title)}">
-          <span class="album-card-image"><img src="${escapeHtml(album.cover)}" alt="${escapeHtml(album.title)}" loading="lazy" decoding="async" /></span>
-          <span class="album-card-info"><span class="album-card-upper">COLLECTION / ${String(index+1).padStart(2,'0')}</span><strong>${escapeHtml(album.title)}</strong><span class="album-card-desc">${escapeHtml(album.description)}</span><span class="album-card-meta">${album.count} \u5f20\u7167\u7247 <span aria-hidden="true">\u2197</span></span></span>
+      const secured = album.protected && !unlockedAlbums.has(album.id);
+      return `<a class="album-card ${secured ? 'is-locked' : ''}" href="#album/${encodeURIComponent(album.id)}" aria-label="查看相册：${escapeHtml(album.title)}">
+          <span class="album-card-image">${albumCoverMarkup(album, album.title, 'loading="lazy" decoding="async"')}</span>
+          <span class="album-card-info"><span class="album-card-upper">${secured ? '🔒 PRIVATE COLLECTION' : 'COLLECTION'} / ${String(index+1).padStart(2,'0')}</span><strong>${escapeHtml(album.title)}</strong><span class="album-card-desc">${escapeHtml(album.description)}</span><span class="album-card-meta">${album.count} 张照片 ${secured ? '· 需要密码' : ''}<span aria-hidden="true">↗</span></span></span>
         </a>`;
     }
 
@@ -466,11 +483,11 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       const albumLink = '#album/' + encodeURIComponent(recentAlbum.id);
       galleryTarget.innerHTML = `<a class="landing-album-feature" href="${albumLink}" aria-label="打开最新相册：${escapeHtml(recentAlbum.title)}">
           <span class="landing-album-image">
-            <img src="${escapeHtml(recentAlbum.cover)}" alt="${escapeHtml(recentAlbum.title)}相册封面" decoding="async" />
+            ${albumCoverMarkup(recentAlbum, recentAlbum.title + '相册封面', 'decoding="async"')}
             <span class="landing-album-image-label">NEW COLLECTION / 最新主题</span>
           </span>
           <span class="landing-album-information">
-            <span class="landing-album-meta"><time datetime="${recentAlbum.date}">${escapeHtml(dateLabel(recentAlbum.date))}</time><span>${recentAlbum.count} 张照片</span></span>
+            <span class="landing-album-meta"><time datetime="${recentAlbum.date}">${escapeHtml(dateLabel(recentAlbum.date))}</time><span>${recentAlbum.count} 张照片${recentAlbum.protected && !unlockedAlbums.has(recentAlbum.id) ? ' · 🔒 私密' : ''}</span></span>
             <strong>${escapeHtml(recentAlbum.title)}<span aria-hidden="true">↗</span></strong>
             <span class="landing-album-description">${escapeHtml(recentAlbum.description)}</span>
           </span>
@@ -485,26 +502,117 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
     }
 
     function renderAlbumDetail(album) {
-      selectedAlbum = album;
       if (!album) return;
+      const ready = resolvedAlbum(album);
+      selectedAlbum = ready;
       const date = album.date.replace(/-/g, '.');
+      const locked = album.protected && !unlockedAlbums.has(album.id);
+      const lockArea = locked ? `<div class="album-unlock-panel">
+            <span class="album-unlock-kicker">🔒 PASSWORD REQUIRED / 私密相册</span>
+            <p>这本相册的照片已加密。请输入相册密码，仅在当前页面中解锁查看。</p>
+            <form data-album-unlock="${escapeHtml(album.id)}" class="album-unlock-form">
+              <label class="album-unlock-label" for="album-password">相册密码</label>
+              <div class="album-unlock-input-row"><input id="album-password" type="password" autocomplete="off" minlength="12" required placeholder="输入相册密码" aria-describedby="album-unlock-result" />
+                <button type="submit">解锁相册 ↗</button></div>
+              <p class="album-unlock-status" id="album-unlock-result" aria-live="polite"></p>
+            </form>
+          </div>` : '';
+      const photoGrid = locked ? '' : `<div class="album-photo-heading"><div><span class="eyebrow">THE FRAMES</span><h2>这本相册里的照片<span class="landing-period">.</span></h2></div><span>${ready.count} PHOTOS</span></div>
+        <div class="album-photo-grid" id="album-photo-grid">${ready.photos.map((photo,index) => `
+          <button class="album-photo" type="button" data-album-photo="${index}" aria-label="查看照片：${escapeHtml(photo.title)}">
+            <span class="album-photo-image"><img src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.alt)}" loading="lazy" decoding="async" /></span>
+            <span class="album-photo-caption"><span>${String(index+1).padStart(2,'0')} / ${escapeHtml(photo.title)}</span><span aria-hidden="true">↗</span></span>
+          </button>`).join('')}</div>`;
       $('#album-detail-content').innerHTML = `
-        <div class="interior-topline"><a href="#gallery">\u2190 \u8fd4\u56de\u5168\u90e8\u76f8\u518c</a><span>COLLECTION / ${escapeHtml(date)}</span></div>
-        <header class="album-detail-hero">
+        <div class="interior-topline"><a href="#gallery">← 返回全部相册</a><span>COLLECTION / ${escapeHtml(date)}</span></div>
+        <header class="album-detail-hero ${locked ? 'is-protected' : ''}">
           <div class="album-detail-copy"><span class="eyebrow">PHOTO ESSENTIALS / ${escapeHtml(date)}</span>
             <h1>${escapeHtml(album.title)}<span class="landing-period">.</span></h1>
             <p>${escapeHtml(album.description)}</p>
-            <div class="album-detail-meta"><span>${album.count} \u5e27\u753b\u9762</span><span>${escapeHtml(date)}</span></div>
+            <div class="album-detail-meta"><span>${album.count} 帧画面</span><span>${escapeHtml(date)}</span>${album.protected ? '<span>🔒 私密主题</span>' : ''}</div>
+            ${lockArea}
           </div>
-          <div class="album-detail-cover"><img src="${escapeHtml(album.cover)}" alt="${escapeHtml(album.title)}" /></div>
+          <div class="album-detail-cover">${albumCoverMarkup(album, album.title)}</div>
         </header>
-        <div class="album-photo-heading"><div><span class="eyebrow">THE FRAMES</span><h2>\u8fd9\u672c\u76f8\u518c\u91cc\u7684\u7167\u7247<span class="landing-period">.</span></h2></div><span>${album.count} PHOTOS</span></div>
-        <div class="album-photo-grid" id="album-photo-grid">${album.photos.map((photo,index) => `
-          <button class="album-photo" type="button" data-album-photo="${index}" aria-label="\u67e5\u770b\u7167\u7247\uff1a${escapeHtml(photo.title)}">
-            <span class="album-photo-image"><img src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.alt)}" loading="lazy" decoding="async" /></span>
-            <span class="album-photo-caption"><span>${String(index+1).padStart(2,'0')} / ${escapeHtml(photo.title)}</span><span aria-hidden="true">\u2197</span></span>
-          </button>`).join('')}</div>
-        <div class="album-detail-bottom"><a href="#gallery">\u2190 \u8fd4\u56de\u4e3b\u9898\u76f8\u518c</a></div>`;
+        ${photoGrid}
+        <div class="album-detail-bottom"><a href="#gallery">← 返回主题相册</a></div>`;
+    }
+
+    function fromBase64(text) {
+      return Uint8Array.from(atob(text), ch => ch.charCodeAt(0));
+    }
+
+    async function decryptAsset(url, key) {
+      const response = await fetch(url, {cache:'no-store'});
+      if (!response.ok) throw new Error('加密文件未找到，请检查构建设置');
+      const data = await response.arrayBuffer();
+      if (data.byteLength < 29) throw new Error('加密文件格式不正确');
+      const nonce = new Uint8Array(data, 0, 12);
+      // Node writes [12-byte nonce][ciphertext][16-byte GCM authentication tag].
+      return crypto.subtle.decrypt({name:'AES-GCM', iv:nonce, tagLength:128}, key, data.slice(12));
+    }
+
+    async function decryptProtectedAlbum(album, password) {
+      if (!window.isSecureContext || !window.crypto?.subtle) {
+        throw new Error('密码相册需要 HTTPS 或 localhost 环境');
+      }
+      const material = await crypto.subtle.importKey('raw',new TextEncoder().encode(password),'PBKDF2',false,['deriveKey']);
+      const key = await crypto.subtle.deriveKey({name:'PBKDF2',salt:fromBase64(album.salt),iterations:350000,hash:'SHA-256'},
+        material,{name:'AES-GCM',length:256},false,['decrypt']);
+      const metadataBytes = await decryptAsset(album.manifest, key);
+      const privateInfo = JSON.parse(new TextDecoder().decode(metadataBytes));
+      if (!Array.isArray(privateInfo.photos) || privateInfo.photos.length !== album.count) {
+        throw new Error('相册内容与配置不一致');
+      }
+      const paths = [...new Set(privateInfo.photos.map(p => p.src))];
+      const blobs = new Map();
+      try {
+        // The password only unlocks encrypted payloads in this tab. The site
+        // never stores the password or plaintext photos on the server.
+        for (const path of paths) {
+          if (!path.startsWith('photos/.vault/' + album.id + '/')) throw new Error('加密图片路径异常');
+          const info = privateInfo.photos.find(p=>p.src===path);
+          const decoded = await decryptAsset(path,key);
+          blobs.set(path,URL.createObjectURL(new Blob([decoded],{type:info.mime})));
+        }
+      } catch (error) {
+        blobs.forEach(url => URL.revokeObjectURL(url));
+        throw error;
+      }
+      if (!blobs.has(privateInfo.cover)) {
+        blobs.forEach(url => URL.revokeObjectURL(url));
+        throw new Error('相册封面未找到');
+      }
+      return {...album,cover:blobs.get(privateInfo.cover),photos:privateInfo.photos.map(p=>({
+        title:p.title,alt:p.alt,note:p.note,src:blobs.get(p.src)
+      }))};
+    }
+
+    async function handleAlbumUnlock(event) {
+      const form = event.target.closest('[data-album-unlock]');
+      if (!form) return;
+      event.preventDefault();
+      const album = albums.find(a=>a.id===form.dataset.albumUnlock);
+      if (!album || !album.protected) return;
+      const input = form.querySelector('input');
+      const button = form.querySelector('button');
+      const status = form.querySelector('[aria-live]');
+      const password = input.value;
+      input.value = '';
+      status.textContent = '正在安全解锁…';
+      button.disabled = true;
+      try {
+        const resolved = await decryptProtectedAlbum(album,password);
+        unlockedAlbums.set(album.id,resolved);
+        renderAlbumDetail(album);
+        renderAlbums();
+        renderChannelHighlights();
+        showToast('相册已解锁，只在当前标签页有效');
+      } catch (error) {
+        status.textContent = error.name === 'OperationError' ? '密码不正确，请再试一次' : (error.message || '解锁失败，请重试');
+        button.disabled = false;
+        input.focus();
+      }
     }
 
     function showPhoto(index) {
@@ -788,6 +896,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
           if (location.hash !== '#articles') location.hash = '#articles';
         }
       });
+      $('#album-detail').addEventListener('submit', handleAlbumUnlock);
       $('#album-detail').addEventListener('click', event => {
         const photo = event.target.closest('[data-album-photo]');
         if (photo) openPhoto(Number(photo.dataset.albumPhoto));
