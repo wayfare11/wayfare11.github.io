@@ -671,6 +671,8 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
     }
 
     function renderPost(post) {
+      const backgroundPool = window.BLOG_DATA.articleBackgrounds || [];
+      const articleBackground = post.coverPinned || !backgroundPool.length ? post.coverImage : backgroundPool[Math.floor(Math.random() * backgroundPool.length)];
       const channelHref = '#' + CHANNEL_ROUTES[post.channel];
       const backHref = ['#home','#tech','#journal','#gallery','#articles','#archive'].includes(lastListingRoute) ? lastListingRoute : channelHref;
       const backLabel = {
@@ -686,7 +688,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       $('#post-view').innerHTML = `
         <div class="container article-shell">
           <nav class="article-breadcrumb" aria-label="面包屑导航"><a href="#home">首页</a><span class="slash">/</span><a href="${channelHref}">${escapeHtml(CHANNEL_NAMES[post.channel])}</a><span class="slash">/</span><a href="#articles" data-article-channel="${post.channel}" data-article-subcategory="${escapeHtml(post.subcategory)}">${escapeHtml(post.subcategoryLabel)}</a></nav>
-          <header class="article-cover article-hero cover-${escapeHtml(post.cover)} ${post.coverImage ? 'has-photo' : ''}" ${post.coverImage ? `style="--article-photo:url('${encodeURI(post.coverImage)}')"` : ''}>
+          <header class="article-cover article-hero cover-${escapeHtml(post.cover)} ${articleBackground ? 'has-photo' : ''}" ${articleBackground ? `style="--article-photo:url('${encodeURI(articleBackground)}')"` : ''}>
             <div class="article-hero-content">
               <span class="eyebrow">${escapeHtml(CHANNEL_NAMES[post.channel])} / ${escapeHtml(post.subcategoryLabel)}</span>
               <h1>${escapeHtml(post.title)}</h1>
