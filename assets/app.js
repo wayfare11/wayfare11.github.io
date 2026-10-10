@@ -686,16 +686,15 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       $('#post-view').innerHTML = `
         <div class="container article-shell">
           <nav class="article-breadcrumb" aria-label="面包屑导航"><a href="#home">首页</a><span class="slash">/</span><a href="${channelHref}">${escapeHtml(CHANNEL_NAMES[post.channel])}</a><span class="slash">/</span><a href="#articles" data-article-channel="${post.channel}" data-article-subcategory="${escapeHtml(post.subcategory)}">${escapeHtml(post.subcategoryLabel)}</a></nav>
-          <header class="article-heading">
-            <span class="eyebrow">${escapeHtml(CHANNEL_NAMES[post.channel])} / ${escapeHtml(post.subcategoryLabel)}</span>
-            <h1>${escapeHtml(post.title)}</h1>
-            <p>${escapeHtml(post.excerpt)}</p>
-            <div class="article-tags">${(post.tags || []).map(t => `<a href="#articles" data-article-channel="${post.channel}" data-article-tag="${escapeHtml(t)}">#${escapeHtml(t)}</a>`).join('')}</div>
-            <div class="article-meta"><span>文 / ${escapeHtml(SITE.author)}</span><b></b><time datetime="${post.date}">${dateLabel(post.date)}</time><b></b><span>约 ${minutes(post)} 分钟阅读</span></div>
+          <header class="article-cover article-hero cover-${escapeHtml(post.cover)} ${post.coverImage ? 'has-photo' : ''}" ${post.coverImage ? `style="--article-photo:url('${encodeURI(post.coverImage)}')"` : ''}>
+            <div class="article-hero-content">
+              <span class="eyebrow">${escapeHtml(CHANNEL_NAMES[post.channel])} / ${escapeHtml(post.subcategoryLabel)}</span>
+              <h1>${escapeHtml(post.title)}</h1>
+              <p>${escapeHtml(post.excerpt)}</p>
+              <div class="article-tags">${(post.tags || []).map(t => `<a href="#articles" data-article-channel="${post.channel}" data-article-tag="${escapeHtml(t)}">#${escapeHtml(t)}</a>`).join('')}</div>
+              <div class="article-meta"><span>文 / ${escapeHtml(SITE.author)}</span><b></b><time datetime="${post.date}">${dateLabel(post.date)}</time><b></b><span>${post.protected ? '🔒 密码保护' : '公开文章'}</span></div>
+            </div>
           </header>
-          <div class="article-cover cover-${escapeHtml(post.cover)}" role="img" aria-label="文章装饰封面">
-            <span class="cover-nr">AN OPEN JOURNAL / ${post.date.slice(0,4)}</span><span class="cover-deco" aria-hidden="true">${escapeHtml(post.icon)}</span><span class="cover-word">${escapeHtml(post.coverWord)}</span>
-          </div>
           <div class="article-body-layout">
             <div>
               <article class="prose">${post.protected && !unlockedPosts.has(post.id) ? `
