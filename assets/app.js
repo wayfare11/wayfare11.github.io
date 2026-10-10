@@ -906,7 +906,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       $('#photo-next').addEventListener('click', () => showPhoto(activePhotoIndex+1));
       $('#photo-dialog').addEventListener('click', event => { if (event.target === $('#photo-dialog')) $('#photo-dialog').close(); });
       // Independently selectable palettes (default warm garden), persisted locally.
-      const PALETTES = ['garden','moss','plum','coral','mono'];
+      const PALETTES = ['feather','garden','moss','plum','coral','mono'];
       const paletteToggle = $('#palette-toggle');
       const paletteMenu = $('#palette-menu');
       const updateThemeColor = () => {
@@ -918,13 +918,13 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
         if (focus) paletteToggle.focus();
       };
       const syncPalette = () => {
-        const current = document.documentElement.dataset.palette || 'garden';
+        const current = document.documentElement.dataset.palette || 'feather';
         paletteMenu.querySelectorAll('[data-palette-option]').forEach(button => {
           button.setAttribute('aria-pressed',String(button.dataset.paletteOption === current));
         });
         updateThemeColor();
       };
-      if (!PALETTES.includes(document.documentElement.dataset.palette)) document.documentElement.dataset.palette = 'garden';
+      if (!PALETTES.includes(document.documentElement.dataset.palette)) document.documentElement.dataset.palette = 'feather';
       syncPalette();
       paletteToggle.addEventListener('click', () => {
         const opening = paletteMenu.hidden;
