@@ -17,7 +17,7 @@
         if (!p || p === 'garden' || p === 'mono') { p = 'feather'; localStorage.setItem('xiaoman-palette','feather'); }
         localStorage.setItem('feather-default-v1','1');
       }
-      document.documentElement.dataset.palette = ['feather','garden','moss','plum','coral'].includes(p) ? p : 'feather';
+      document.documentElement.dataset.palette = ['feather','garden','moss','plum','coral','amberlight','seamist','inkrose','dusk'].includes(p) ? p : 'feather';
     } catch (_) { document.documentElement.dataset.palette = 'feather'; }
   </script>
 </head>
@@ -54,6 +54,10 @@
           <button class="palette-option" type="button" data-palette-option="moss" aria-pressed="false"><span class="palette-dot palette-dot-moss" aria-hidden="true"></span><span class="palette-option-label">森林午后</span><span class="palette-option-check" aria-hidden="true">✓</span></button>
           <button class="palette-option" type="button" data-palette-option="plum" aria-pressed="false"><span class="palette-dot palette-dot-plum" aria-hidden="true"></span><span class="palette-option-label">薰衣草梦</span><span class="palette-option-check" aria-hidden="true">✓</span></button>
           <button class="palette-option" type="button" data-palette-option="coral" aria-pressed="false"><span class="palette-dot palette-dot-coral" aria-hidden="true"></span><span class="palette-option-label">杏桃暖阳</span><span class="palette-option-check" aria-hidden="true">✓</span></button>
+                      <button class="palette-option" type="button" data-palette-option="amberlight" aria-pressed="false"><span class="palette-dot palette-dot-amberlight" aria-hidden="true"></span><span class="palette-option-label">日落来信</span><span class="palette-option-check" aria-hidden="true">✓</span></button>
+          <button class="palette-option" type="button" data-palette-option="seamist" aria-pressed="false"><span class="palette-dot palette-dot-seamist" aria-hidden="true"></span><span class="palette-option-label">海盐晴空</span><span class="palette-option-check" aria-hidden="true">✓</span></button>
+          <button class="palette-option" type="button" data-palette-option="inkrose" aria-pressed="false"><span class="palette-dot palette-dot-inkrose" aria-hidden="true"></span><span class="palette-option-label">玫瑰旧书</span><span class="palette-option-check" aria-hidden="true">✓</span></button>
+          <button class="palette-option" type="button" data-palette-option="dusk" aria-pressed="false"><span class="palette-dot palette-dot-dusk" aria-hidden="true"></span><span class="palette-option-label">暮色星河</span><span class="palette-option-check" aria-hidden="true">✓</span></button>
             <div class="palette-menu-footnote">&#37197;&#33394;&#20250;&#33258;&#21160;&#35760;&#20303;&#65292;&#20063;&#21487;&#20999;&#25442;&#26126;&#26263;&#27169;&#24335;</div>
           </div>
         </div>
