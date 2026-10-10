@@ -341,6 +341,67 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
         </a>`;
     }
 
+    // V13: editorial lead stories in each channel header. Content is read from
+    // the same Markdown / photo-album data as the grids, never hard-coded.
+    function renderChannelHighlights() {
+      const storySections = [
+        {page:'tech', channel:'tech', overline:'LATEST / DEV NOTES', label:'最新技术笔记', action:'阅读最新技术文章'},
+        {page:'journal', channel:'life', overline:'LATEST / LIFE STORIES', label:'最新生活手记', action:'翻开这篇日记'}
+      ];
+      storySections.forEach(({page, channel, overline, label, action}) => {
+        const target = document.getElementById(page + '-landing-highlight');
+        if (!target) return;
+        const recent = posts.filter(p => p.channel === channel).sort((a,b) =>
+          b.date.localeCompare(a.date) || b.id.localeCompare(a.id));
+        const main = recent[0];
+        if (!main) {
+          target.innerHTML = `<div class="landing-highlight-top"><span>${escapeHtml(overline)}</span></div>
+            <div class="landing-highlight-empty"><span class="landing-highlight-symbol" aria-hidden="true">✳</span>
+              <h2>这里正准备写下第一篇</h2><p>在 content/${channel}/ 新建 Markdown 文章，发布后就会自动展示在这里。</p></div>
+            <a class="landing-highlight-action" href="#articles">去文章归档 <span aria-hidden="true">↗</span></a>`;
+          return;
+        }
+        const postLink = '#post/' + encodeURIComponent(main.id);
+        const second = recent[1];
+        const nextHtml = second ? `<div class="landing-highlight-next">
+          <span class="landing-highlight-next-label">接着读</span>
+          <a href="#post/${encodeURIComponent(second.id)}">${escapeHtml(second.title)}<span aria-hidden="true">↗</span></a>
+        </div>` : '';
+        target.innerHTML = `
+          <div class="landing-highlight-top"><span class="landing-highlight-dot" aria-hidden="true"></span>
+            <span>${escapeHtml(overline)}</span><span class="landing-highlight-index">01 / ${String(recent.length).padStart(2,'0')}</span></div>
+          <div class="landing-highlight-story">
+            <div class="landing-highlight-meta"><time datetime="${main.date}">${escapeHtml(dateLabel(main.date))}</time><span aria-hidden="true">·</span><span>${escapeHtml(main.subcategoryLabel)}</span></div>
+            <h2><a href="${postLink}">${escapeHtml(main.title)}</a></h2>
+            <p>${escapeHtml(main.excerpt)}</p>
+            <a class="landing-highlight-action" href="${postLink}">${escapeHtml(action)} <span aria-hidden="true">↗</span></a>
+          </div>
+          ${nextHtml}`;
+      });
+
+      const galleryTarget = document.getElementById('gallery-landing-highlight');
+      if (!galleryTarget) return;
+      const recentAlbum = [...albums].sort((a,b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id))[0];
+      if (!recentAlbum) {
+        galleryTarget.innerHTML = `<div class="landing-highlight-top"><span>NEW COLLECTION / 主题新作</span></div>
+          <div class="landing-highlight-empty"><span class="landing-highlight-symbol" aria-hidden="true">◎</span>
+            <h2>下一本相册，正在路上</h2><p>在 photos/ 下面添加一个主题文件夹，最新相册就会自动出现在这里。</p></div>`;
+        return;
+      }
+      const albumLink = '#album/' + encodeURIComponent(recentAlbum.id);
+      galleryTarget.innerHTML = `<a class="landing-album-feature" href="${albumLink}" aria-label="打开最新相册：${escapeHtml(recentAlbum.title)}">
+          <span class="landing-album-image">
+            <img src="${escapeHtml(recentAlbum.cover)}" alt="${escapeHtml(recentAlbum.title)}相册封面" decoding="async" />
+            <span class="landing-album-image-label">NEW COLLECTION / 最新主题</span>
+          </span>
+          <span class="landing-album-information">
+            <span class="landing-album-meta"><time datetime="${recentAlbum.date}">${escapeHtml(dateLabel(recentAlbum.date))}</time><span>${recentAlbum.count} 张照片</span></span>
+            <strong>${escapeHtml(recentAlbum.title)}<span aria-hidden="true">↗</span></strong>
+            <span class="landing-album-description">${escapeHtml(recentAlbum.description)}</span>
+          </span>
+        </a>`;
+    }
+
     function renderAlbums() {
       $('#home-albums-grid').innerHTML = albums.slice(0,3).map(albumCard).join('');
       $('#gallery-albums-grid').innerHTML = albums.map(albumCard).join('');
@@ -537,6 +598,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       renderChannelPage('tech');
       renderChannelPage('journal');
       renderAlbums();
+      renderChannelHighlights();
       $('#channel-filters').addEventListener('click', event => {
         const btn = event.target.closest('[data-channel]');
         if (!btn) return;
