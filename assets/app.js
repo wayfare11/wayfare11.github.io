@@ -13,6 +13,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
     let selectedAlbum = null;
     // Decrypted photos only live in this browser tab (blob: URLs), never localStorage.
     const unlockedAlbums = new Map();
+    const unlockedPosts = new Map();
     const channelPageState = {
       tech: {subcategory:'all', tag:null, search:'', sort:'newest'},
       journal: {subcategory:'all', tag:null, search:'', sort:'newest'}
@@ -31,7 +32,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
 
     const $ = selector => document.querySelector(selector);
     const dateLabel = iso => new Date(iso + 'T12:00:00').toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric'});
-    const minutes = post => Math.max(2, Math.ceil(post.content.replace(/<[^>]*>/g, '').replace(/\s+/g, '').length / 320));
+    const minutes = post => Math.max(2, Math.ceil((post.content || '').replace(/<[^>]*>/g, '').replace(/\s+/g, '').length / 320));
     const sortedPosts = arr => [...arr].sort((a,b) => sortOrder === 'newest' ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date));
     const getPost = id => posts.find(post => post.id === id);
     const escapeHtml = str => String(str).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -588,6 +589,36 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       }))};
     }
 
+    async function handlePostUnlock(event) {
+      const form = event.target.closest('[data-post-unlock]');
+      if (!form) return;
+      event.preventDefault();
+      const post = getPost(form.dataset.postUnlock);
+      if (!post?.protected) return;
+      const input = form.querySelector('input');
+      const button = form.querySelector('button');
+      const status = form.querySelector('[aria-live]');
+      const password = input.value;
+      input.value = '';
+      button.disabled = true;
+      status.textContent = '正在解锁…';
+      try {
+        if (!window.isSecureContext || !window.crypto?.subtle) throw new Error('需要 HTTPS 或 localhost');
+        const material = await crypto.subtle.importKey('raw',new TextEncoder().encode(password),'PBKDF2',false,['deriveKey']);
+        const key = await crypto.subtle.deriveKey({name:'PBKDF2',salt:fromBase64(post.salt),iterations:350000,hash:'SHA-256'},
+          material,{name:'AES-GCM',length:256},false,['decrypt']);
+        if (post.vault !== 'posts/.vault/' + post.id + '.bin') throw new Error('文章路径异常');
+        const data = await decryptAsset(post.vault,key);
+        unlockedPosts.set(post.id,new TextDecoder().decode(data));
+        renderPost(post);
+        showToast('文章已解锁，仅在当前标签页有效');
+      } catch (error) {
+        status.textContent = error.name === 'OperationError' ? '密码错误，请重新输入' : (error.message || '解锁失败');
+        button.disabled = false;
+        input.focus();
+      }
+    }
+
     async function handleAlbumUnlock(event) {
       const form = event.target.closest('[data-album-unlock]');
       if (!form) return;
@@ -647,9 +678,10 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
         '#journal':'\u8fd4\u56de\u65e5\u8bb0','#gallery':'\u8fd4\u56de\u6444\u5f71',
         '#articles':'\u8fd4\u56de\u6587\u7ae0\u5217\u8868', '#archive':'返回时间归档'
       }[backHref];
-      const toc = makeToc(post.content);
+      const readableContent = post.protected ? (unlockedPosts.get(post.id) || '') : post.content;
+      const toc = makeToc(readableContent);
       let tocIndex = 0;
-      const bodyHtml = post.content.replace(/<h2>/g, () => '<h2 id="section-' + (tocIndex++) + '">');
+      const bodyHtml = readableContent.replace(/<h2>/g, () => '<h2 id="section-' + (tocIndex++) + '">');
       const recs = posts.filter(p => p.id !== post.id).sort((a,b) => (b.channel === post.channel) - (a.channel === post.channel) || b.date.localeCompare(a.date)).slice(0,2);
       $('#post-view').innerHTML = `
         <div class="container article-shell">
@@ -666,7 +698,20 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
           </div>
           <div class="article-body-layout">
             <div>
-              <article class="prose">${bodyHtml}</article>
+              <article class="prose">${post.protected && !unlockedPosts.has(post.id) ? `
+                <section class="post-unlock-panel">
+                  <span class="eyebrow">PRIVATE WRITING / 加密文章</span>
+                  <h2>这篇文字需要密码解锁</h2>
+                  <p>文章正文已加密，输入密码后仅在当前浏览器标签页中解锁。</p>
+                  <form data-post-unlock="${escapeHtml(post.id)}">
+                    <label for="post-password">文章密码</label>
+                    <div class="album-unlock-input-row">
+                      <input id="post-password" type="password" autocomplete="off" minlength="12" required placeholder="输入文章密码" />
+                      <button type="submit">解锁文章</button>
+                    </div>
+                    <p class="album-unlock-status" aria-live="polite"></p>
+                  </form>
+                </section>` : bodyHtml}</article>
               <div class="article-bottom"><button type="button" id="share-post"><span aria-hidden="true">↗</span> 复制文章链接</button><a href="${backHref}">← ${backLabel}</a></div>
             </div>
             <aside class="reading-aside" aria-label="文章目录">
@@ -897,6 +942,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
         }
       });
       $('#album-detail').addEventListener('submit', handleAlbumUnlock);
+      $('#post-view').addEventListener('submit', handlePostUnlock);
       $('#album-detail').addEventListener('click', event => {
         const photo = event.target.closest('[data-album-photo]');
         if (photo) openPhoto(Number(photo.dataset.albumPhoto));

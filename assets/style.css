@@ -953,7 +953,7 @@ body::before{background:radial-gradient(circle,rgba(90,95,86,.045),transparent 6
   --garden-peach:#f0ae98;--garden-peach-soft:#634139;--garden-yellow:#f5d1a0;
   --garden-lilac:#916d71;--garden-sage:#827760;
 }
-/* Optional archival monochrome scheme remains available but never the default. */
+/* Custom color palettes are independent of dark mode. */
 /* Surface rhythm: colorful highlights, quiet long-form reading. */
 body{background-color:var(--bg);}
 body::before{background:radial-gradient(circle at center,var(--garden-peach-soft) 0%,transparent 69%);opacity:.48;}
@@ -1392,7 +1392,6 @@ body::before{background:radial-gradient(circle at center,var(--garden-peach-soft
 .chronicle-cover {display:flex;flex-direction:column;isolation:isolate;overflow:hidden;position:relative;padding:29px 33px 27px;color:#f5f3e8;background:linear-gradient(135deg,#527360,#345142 80%);min-width:0;min-height:340px;}
 :root[data-palette='plum'] .chronicle-cover {background:linear-gradient(135deg,#7d627b,#59435d);}
 :root[data-palette='coral'] .chronicle-cover {background:linear-gradient(135deg,#b97669,#86564d);}
-:root[data-palette='mono'] .chronicle-cover {background:linear-gradient(135deg,#576159,#333d36);}
 :root[data-theme='dark'] .chronicle-cover {filter:saturate(.82);}
 .chronicle-cover-top {display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:9px;font-weight:800;letter-spacing:.17em;opacity:.88;white-space:nowrap;}
 .chronicle-cover-graphic {position:absolute;inset:19px 0 70px;display:grid;place-items:center;pointer-events:none;overflow:hidden;z-index:-1;}
@@ -1619,3 +1618,11 @@ body::before{background:radial-gradient(circle at center,var(--garden-peach-soft
 :root[data-palette='feather'] body::before{background:radial-gradient(circle,rgba(150,185,193,.13),transparent 67%);}
 :root[data-palette='feather'] .brand-emblem{transform:rotate(-6deg);box-shadow:0 5px 14px rgba(75,100,105,.16);}
 :root[data-palette='feather'] .hero-art::after{content:'❧';font-size:50px;opacity:.75;transform:rotate(-22deg);}
+
+/* Password-protected long-form writing */
+.post-unlock-panel{padding:clamp(22px,4vw,42px);border:1px solid var(--line);border-radius:18px;background:var(--surface-soft);}
+.post-unlock-panel h2{margin:12px 0 8px;color:var(--ink);font:600 clamp(22px,3vw,30px)/1.35 var(--serif);}
+.post-unlock-panel p{font-size:13px;color:var(--ink-soft);line-height:1.8;}
+.post-unlock-panel form{margin-top:22px;}
+.post-unlock-panel label{display:block;font-size:12px;font-weight:700;margin-bottom:9px;}
+.post-unlock-panel .album-unlock-input-row input{background:var(--surface);}
