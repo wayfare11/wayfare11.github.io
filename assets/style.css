@@ -1775,3 +1775,8 @@ body::before{background:radial-gradient(circle at center,var(--garden-peach-soft
 #articles-view .article-toolbar .sort-trigger{
  box-sizing:border-box;height:42px;min-height:42px;
 }
+
+/* Unified feather mark, including the header brand and About artwork. */
+.feather-mark{display:block;width:24px;height:24px;flex:none;}
+.brand-emblem .feather-mark{width:24px;height:24px;}
+.about-flower .feather-mark{width:clamp(90px,13vw,160px);height:clamp(90px,13vw,160px);stroke-width:1.15;}
