@@ -1681,3 +1681,20 @@ body::before{background:radial-gradient(circle at center,var(--garden-peach-soft
 #post-view .article-hero p{font-size:clamp(12px,1.15vw,14px);margin-bottom:12px;line-height:1.7;}
 #post-view .article-hero .article-tags{margin-bottom:9px;}
 @media(max-width:760px){#post-view .article-cover.article-hero{min-height:235px;padding:26px 20px;}#post-view .article-hero h1{font-size:clamp(27px,6.5vw,36px);}}
+
+/* Sticky TOC stays outside the centered article and stops at article end. */
+@media(min-width:1231px){
+ .article-body-layout{grid-template-columns:minmax(0,730px);align-items:start;}
+ .article-body-layout > div:first-child{grid-column:1;grid-row:1;min-width:0;}
+ .article-body-layout .reading-aside{
+   grid-column:1;grid-row:1;
+   position:sticky;top:105px;left:auto;
+   justify-self:start;align-self:start;
+   margin-left:calc(100% + 45px);
+   width:210px;max-width:210px;
+   max-height:calc(100vh - 125px);
+   overflow-y:auto;overscroll-behavior:contain;
+   padding:18px 0 0 16px;
+ }
+ .article-body-layout .reading-aside .toc-list{max-height:none;overflow:visible;}
+}
