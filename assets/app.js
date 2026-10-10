@@ -688,7 +688,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       $('#post-view').innerHTML = `
         <div class="container article-shell">
           <nav class="article-breadcrumb" aria-label="面包屑导航"><a href="#home">首页</a><span class="slash">/</span><a href="${channelHref}">${escapeHtml(CHANNEL_NAMES[post.channel])}</a><span class="slash">/</span><a href="#articles" data-article-channel="${post.channel}" data-article-subcategory="${escapeHtml(post.subcategory)}">${escapeHtml(post.subcategoryLabel)}</a></nav>
-          <header class="article-cover article-hero cover-${escapeHtml(post.cover)} ${articleBackground ? 'has-photo' : ''}" ${articleBackground ? `style="--article-photo:url('${encodeURI(articleBackground)}')"` : ''}>
+          <header class="article-cover article-hero cover-${escapeHtml(post.cover)} ${articleBackground ? 'has-photo' : ''}" ${articleBackground ? `style="background-image:url('/${encodeURI(articleBackground)}')"` : ''}>
             <div class="article-hero-content">
               <span class="eyebrow">${escapeHtml(CHANNEL_NAMES[post.channel])} / ${escapeHtml(post.subcategoryLabel)}</span>
               <h1>${escapeHtml(post.title)}</h1>
