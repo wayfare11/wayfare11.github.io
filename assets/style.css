@@ -1734,3 +1734,26 @@ body::before{background:radial-gradient(circle at center,var(--garden-peach-soft
  #tech-view .channel-page-tools .sort-trigger,
  #journal-view .channel-page-tools .sort-trigger{min-width:0;height:42px;min-height:42px;}
 }
+
+/* Make the tag trigger read like the adjacent sort selector; keep its existing popover. */
+#tech-view .channel-page-tools .tag-disclosure summary,
+#journal-view .channel-page-tools .tag-disclosure summary{
+  justify-content:space-between;gap:12px;min-width:126px;
+}
+#tech-view .channel-page-tools .tag-selected-label,
+#journal-view .channel-page-tools .tag-selected-label{
+  display:block;max-width:125px;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap;color:inherit;font-size:12px;font-weight:650;
+}
+#tech-view .channel-page-tools .tag-selected-label.is-chosen,
+#journal-view .channel-page-tools .tag-selected-label.is-chosen{color:inherit;font-weight:650;}
+#tech-view .channel-page-tools .tag-disclosure summary::after,
+#journal-view .channel-page-tools .tag-disclosure summary::after{
+  content:'';display:block;flex:none;width:7px;height:7px;
+  border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:translateY(-2px) rotate(45deg);transition:transform .18s;
+}
+#tech-view .channel-page-tools .tag-disclosure[open] summary::after,
+#journal-view .channel-page-tools .tag-disclosure[open] summary::after{
+  transform:translateY(2px) rotate(225deg);
+}

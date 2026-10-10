@@ -402,7 +402,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       tagsElement.innerHTML = tags.length ? `<button type="button" class="tag-filter ${!state.tag ? 'active' : ''}" data-channel-tag="${page}" data-tag="all" aria-pressed="${!state.tag}">\u5168\u90e8\u6807\u7b7e</button>` + tags.map(([tag,num]) =>
         `<button type="button" class="tag-filter ${state.tag === tag ? 'active' : ''}" data-channel-tag="${page}" data-tag="${escapeHtml(tag)}" aria-pressed="${state.tag === tag}">#${escapeHtml(tag)} <small>${num}</small></button>`).join('') : '';
       const mark = document.getElementById(page+'-tag-mark');
-      mark.textContent = state.tag ? '#' + state.tag : '选择';
+      mark.textContent = state.tag || '全部';
       mark.classList.toggle('is-chosen',!!state.tag);
       const filtered = state.tag ? found.filter(p => (p.tags || []).includes(state.tag)) : found;
       document.getElementById(page+'-page-posts').innerHTML = filtered.map(post => makeCard(post)).join('');
