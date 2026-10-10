@@ -1780,3 +1780,42 @@ body::before{background:radial-gradient(circle at center,var(--garden-peach-soft
 .feather-mark{display:block;width:24px;height:24px;flex:none;}
 .brand-emblem .feather-mark{width:24px;height:24px;}
 .about-flower .feather-mark{width:clamp(90px,13vw,160px);height:clamp(90px,13vw,160px);stroke-width:1.15;}
+
+
+/* Article typography: neutral reading ink, palette-aware accents, not forest green. */
+#post-view .prose{
+  color:var(--ink);
+  font-size:15px;
+  line-height:2.05;
+}
+#post-view .prose p,
+#post-view .prose li,
+#post-view .prose td{color:var(--ink-soft);}
+#post-view .prose h2,
+#post-view .prose h3,
+#post-view .prose h4{color:var(--ink);letter-spacing:-.018em;}
+#post-view .prose h2{
+  border-bottom:1px solid var(--line);padding-bottom:12px;
+  font-weight:650;
+}
+#post-view .prose h2::before{
+  content:'';display:inline-block;width:5px;height:.75em;
+  margin-right:12px;border-radius:5px;background:var(--accent);
+}
+#post-view .prose strong{color:var(--ink);font-weight:750;}
+#post-view .prose a{color:var(--accent-dark);text-decoration-color:var(--accent);text-decoration-thickness:1px;}
+#post-view .prose a:hover{color:var(--accent);}
+#post-view .prose blockquote{
+  color:var(--ink-soft);background:var(--surface-soft);
+  border-left-color:var(--accent);font-size:17px;
+}
+#post-view .prose :not(pre)>code{
+  color:var(--accent-dark);background:var(--accent-pale);
+  border-radius:6px;padding:2px 6px;
+}
+#post-view .prose pre{background:var(--surface-soft);color:var(--ink);border-color:var(--line);}
+#post-view .prose th{background:var(--surface-muted);color:var(--ink);}
+#post-view .article-body-layout .reading-aside > span{color:var(--muted);}
+#post-view .article-body-layout .toc-list a{color:var(--muted);}
+#post-view .article-body-layout .toc-list a:hover{color:var(--accent-dark);}
+@media(max-width:760px){#post-view .prose{font-size:14px;line-height:2;}}
