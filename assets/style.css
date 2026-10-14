@@ -2142,3 +2142,10 @@ body{background:var(--bg);}
 #about-view .about-compact-contact{align-items:flex-start;flex-direction:column;gap:9px;}
 #about-view .about-contact-links{display:flex;flex-direction:column;align-items:flex-start;gap:9px;}
 #about-view .about-contact-links .about-email{user-select:text;-webkit-user-select:text;color:var(--ink-soft);}
+
+/* Each About contact is a full-width row, never inline. */
+#about-view .about-compact-contact{display:block;}
+#about-view .about-compact-contact .about-contact-label{display:block;margin-bottom:12px;}
+#about-view .about-compact-contact .about-contact-links{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;width:100%;}
+#about-view .about-compact-contact .about-contact-item{display:block;width:100%;min-width:0;line-height:1.6;}
+#about-view .about-compact-contact .about-contact-item .about-email{display:inline;user-select:text;-webkit-user-select:text;}
