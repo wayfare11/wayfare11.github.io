@@ -2149,3 +2149,16 @@ body{background:var(--bg);}
 #about-view .about-compact-contact .about-contact-links{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;width:100%;}
 #about-view .about-compact-contact .about-contact-item{display:block;width:100%;min-width:0;line-height:1.6;}
 #about-view .about-compact-contact .about-contact-item .about-email{display:inline;user-select:text;-webkit-user-select:text;}
+
+
+/* About contact details: compact aligned rows, not scattered links. */
+#about-view .about-compact-contact{padding-top:18px;margin-top:2px;border-top:1px solid var(--line);}
+#about-view .about-compact-contact .about-contact-label{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--muted);margin-bottom:13px;}
+#about-view .about-compact-contact .about-contact-links{display:grid;grid-template-columns:minmax(0,1fr);gap:0;max-width:470px;}
+#about-view .about-compact-contact .about-contact-item{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;align-items:center;padding:10px 0;font-size:13px;min-width:0;}
+#about-view .about-compact-contact .about-contact-item+.about-contact-item{border-top:1px solid var(--line);}
+#about-view .about-compact-contact .about-contact-kind{color:var(--muted);font-size:12px;font-weight:600;}
+#about-view .about-compact-contact .about-email{color:var(--ink);overflow-wrap:anywhere;user-select:text;-webkit-user-select:text;}
+#about-view .about-compact-contact .about-contact-item a{font-size:13px;font-weight:700;color:var(--accent-dark);text-decoration:none;width:max-content;max-width:100%;}
+#about-view .about-compact-contact .about-contact-item a:hover{text-decoration:underline;text-underline-offset:3px;}
+@media(max-width:530px){#about-view .about-compact-contact .about-contact-item{grid-template-columns:64px minmax(0,1fr);gap:10px;}}
