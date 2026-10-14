@@ -2138,3 +2138,7 @@ body{background:var(--bg);}
  #about-view .about-compact-topics a{padding:7px 10px;font-size:11px;}
  #about-view .about-compact-contact{padding-top:15px;}
 }
+
+#about-view .about-compact-contact{align-items:flex-start;flex-direction:column;gap:9px;}
+#about-view .about-contact-links{display:flex;flex-direction:column;align-items:flex-start;gap:9px;}
+#about-view .about-contact-links .about-email{user-select:text;-webkit-user-select:text;color:var(--ink-soft);}
