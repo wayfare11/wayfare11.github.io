@@ -43,7 +43,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       document.querySelectorAll('[data-author]').forEach(el => el.textContent = SITE.author);
       $('#copyright-year').textContent = String(new Date().getFullYear());
       const emailLink = $('#footer-email');
-      if (SITE.email) { emailLink.href = 'mailto:' + SITE.email; emailLink.hidden = false; }
+      if (SITE.email) { emailLink.textContent = SITE.email; emailLink.hidden = false; }
       const githubLink = $('#footer-github');
       if (SITE.github) { githubLink.href = SITE.github; githubLink.hidden = false; }
       $('#article-total').textContent = String(posts.length).padStart(2,'0');
