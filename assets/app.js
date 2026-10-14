@@ -720,15 +720,9 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
               <div class="aside-divider"></div><p class="aside-quote">“慢慢写，<br />慢慢遇见好风景。”</p>
             </aside>
           </div>
-          <section class="comments-section article-comments" aria-labelledby="article-comments-heading">
-            <div class="comments-heading"><div><span class="eyebrow">A CONVERSATION / 文章评论</span><h2 id="article-comments-heading">关于这篇文章，你想说什么？</h2></div><span aria-hidden="true">✧</span></div>
-            <p class="comments-hint">欢迎交流、提问或留下阅读感受。评论将公开保存至 GitHub Issues，发布需登录 GitHub。</p>
-            <div class="comments-host" id="article-comments"></div>
-          </section>
           <h2 class="related-header">或许你还想读<span style="color:var(--accent)">.</span></h2>
           <div class="related-grid">${recs.map(p => `<a class="related-card" href="#post/${encodeURIComponent(p.id)}"><div><small>${escapeHtml(p.subcategoryLabel)}</small><h3>${escapeHtml(p.title)}</h3></div><span aria-hidden="true">↗</span></a>`).join('')}</div>
         </div>`;
-      mountComments($('#article-comments'), 'post/' + post.id);
       $('#share-post').addEventListener('click', () => copyLink(location.href));
       $('#post-view').querySelectorAll('[data-section]').forEach(link => {
         link.addEventListener('click', event => {
@@ -738,38 +732,22 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       });
     }
 
-    // Utterances stores public comments as GitHub Issues in the Pages repository.
-    // One issue per article ID, plus a separate issue for the guestbook.
-    function mountComments(target, issueTerm) {
-      if (!target) return;
-      target.replaceChildren();
-      const script = document.createElement('script');
-      script.src = 'https://utteranc.es/client.js';
-      script.setAttribute('repo', 'wayfare11/wayfare11.github.io');
-      script.setAttribute('issue-term', issueTerm);
-      script.setAttribute('label', 'site-comment');
-      script.setAttribute('theme', document.documentElement.dataset.theme === 'dark' ? 'github-dark' : 'github-light');
-      script.setAttribute('crossorigin', 'anonymous');
-      script.async = true;
-      target.appendChild(script);
-    }
-
     function route() {
       const hash = decodeURIComponent(location.hash.slice(1));
       const isPost = hash.startsWith('post/');
       const isAlbum = hash.startsWith('album/');
       const post = isPost ? getPost(hash.slice(5)) : null;
       const album = isAlbum ? albums.find(item => item.id === hash.slice(6)) : null;
-      const allowed = ['home','tech','journal','gallery','articles','archive','guestbook','about'];
+      const allowed = ['home','tech','journal','gallery','articles','archive','about'];
       const page = post ? 'post' : album ? 'album' : allowed.includes(hash) ? hash : 'home';
       if (!post && ['home','tech','journal','gallery','articles','archive'].includes(page)) lastListingRoute = '#' + page;
-      const views = {home:'home-view',tech:'tech-view',journal:'journal-view',articles:'articles-view',archive:'archive-view',guestbook:'guestbook-view',about:'about-view',post:'post-view'};
+      const views = {home:'home-view',tech:'tech-view',journal:'journal-view',articles:'articles-view',archive:'archive-view',about:'about-view',post:'post-view'};
       Object.entries(views).forEach(([key,id]) => { document.getElementById(id).hidden = page !== key; });
       $('#gallery-page-view').hidden = !['gallery','album'].includes(page);
       $('#album-overview').hidden = page !== 'gallery';
       $('#album-detail').hidden = page !== 'album';
       currentPostId = post ? post.id : null;
-      const labels = {tech:'\u6280\u672f\u5b9e\u9a8c\u5ba4',journal:'\u751f\u6d3b\u65e5\u8bb0',gallery:'\u6444\u5f71\u76f8\u518c',articles:'\u6587\u7ae0',archive:'时光归档',guestbook:'留言板',about:'\u5173\u4e8e'};
+      const labels = {tech:'\u6280\u672f\u5b9e\u9a8c\u5ba4',journal:'\u751f\u6d3b\u65e5\u8bb0',gallery:'\u6444\u5f71\u76f8\u518c',articles:'\u6587\u7ae0',archive:'时光归档',about:'\u5173\u4e8e'};
       document.title = post ? post.title + ' \u00b7 ' + SITE.name : album ? album.title + ' \u00b7 ' + SITE.name : labels[page] ? labels[page] + ' \u00b7 ' + SITE.name : SITE.name + ' \u00b7 CODE / LIFE / PHOTOS';
       document.querySelectorAll('[data-nav]').forEach(link => {
         const active = !post && (page === link.dataset.nav || (page === 'album' && link.dataset.nav === 'gallery'));
@@ -782,7 +760,6 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       closeSortMenus();
       closeFilterDrawer();
       if ($('#photo-dialog').open) $('#photo-dialog').close();
-      if (page === 'guestbook') mountComments($('#guestbook-comments'), 'site-guestbook');
       if (post) renderPost(post);
       else {
         $('#post-view').innerHTML = '';
