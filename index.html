@@ -37,6 +37,7 @@
         <a href="#gallery" data-nav="gallery">摄影</a>
         <a href="#articles" data-nav="articles">文章</a>
         <a href="#archive" data-nav="archive">归档</a>
+        <a href="#guestbook" data-nav="guestbook">留言</a>
         <a href="#about" data-nav="about">关于</a>
       </nav>
       <div class="header-actions">
@@ -430,12 +431,26 @@
         </section>
       </div>
     </div>
+    <div id="guestbook-view" class="interior-view" hidden>
+      <div class="container guestbook-page">
+        <div class="interior-topline"><a href="#home">← 返回首页</a><span>GUESTBOOK / 留言板</span></div>
+        <header class="guestbook-heading">
+          <span class="eyebrow">A LITTLE NOTE FOR YOU</span>
+          <h1>留下一句话，<em>让我们相遇。</em></h1>
+          <p>欢迎分享想法、建议，或者简单打个招呼。留言公开展示，发布需要登录 GitHub。</p>
+        </header>
+        <section class="comments-section guestbook-comments" aria-labelledby="guestbook-comments-heading">
+          <div class="comments-heading"><div><span class="eyebrow">THE GUESTBOOK</span><h2 id="guestbook-comments-heading">留言与回声</h2></div><span>✧</span></div>
+          <div class="comments-host" id="guestbook-comments"></div>
+        </section>
+      </div>
+    </div>
     <div id="post-view" hidden></div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <div class="footer-top"><div><p data-site-name>静止的羽毛</p><small>用代码创造，用文字记录，用镜头留住光。</small></div><nav class="footer-links" aria-label="页脚导航"><a href="#tech">技术</a><a href="#journal">日记</a><a href="#gallery">摄影</a><a href="#articles">文章</a><a href="#archive">归档</a><a href="#about">关于</a><a id="footer-email" href="" hidden>联系我 ↗</a><a id="footer-github" href="" target="_blank" rel="noopener noreferrer" hidden>GitHub ↗</a></nav></div>
+      <div class="footer-top"><div><p data-site-name>静止的羽毛</p><small>用代码创造，用文字记录，用镜头留住光。</small></div><nav class="footer-links" aria-label="页脚导航"><a href="#tech">技术</a><a href="#journal">日记</a><a href="#gallery">摄影</a><a href="#articles">文章</a><a href="#archive">归档</a><a href="#guestbook">留言</a><a href="#about">关于</a><a id="footer-email" href="" hidden>联系我 ↗</a><a id="footer-github" href="" target="_blank" rel="noopener noreferrer" hidden>GitHub ↗</a></nav></div>
       <div class="footer-bottom"><span>© <span id="copyright-year">2026</span> <span data-site-name>静止的羽毛</span>. All stories are my own.</span><span>Made with code, coffee & curiosity ✳</span></div>
     </div>
   </footer>
