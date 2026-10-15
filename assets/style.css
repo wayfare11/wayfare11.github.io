@@ -2162,3 +2162,102 @@ body{background:var(--bg);}
 #about-view .about-compact-contact .about-contact-item a{font-size:13px;font-weight:700;color:var(--accent-dark);text-decoration:none;width:max-content;max-width:100%;}
 #about-view .about-compact-contact .about-contact-item a:hover{text-decoration:underline;text-underline-offset:3px;}
 @media(max-width:530px){#about-view .about-compact-contact .about-contact-item{grid-template-columns:64px minmax(0,1fr);gap:10px;}}
+
+/* Mermaid technical diagrams: consistent with the Still Feather reading palette. */
+#post-view .prose .mermaid-figure {
+  box-sizing: border-box;
+  width: min(940px, calc(100vw - 40px));
+  max-width: none;
+  margin: 30px 0 34px 50%;
+  transform: translateX(-50%);
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fffdfa;
+  box-shadow: 0 9px 25px rgba(39, 33, 27, .055);
+  overflow: hidden;
+}
+#post-view .mermaid-figure-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 17px;
+  border-bottom: 1px solid #eae5de;
+  background: #fbf9f5;
+  color: #796f65;
+  font: 700 10px/1.5 system-ui, sans-serif;
+  letter-spacing: .10em;
+}
+#post-view .mermaid-figure-toolbar button {
+  flex-shrink: 0;
+  border: 1px solid #dfd2c5;
+  color: #865b44;
+  border-radius: 7px;
+  background: white;
+  font-size: 11px;
+  letter-spacing: 0;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+#post-view .mermaid-figure-toolbar button:hover,
+#post-view .mermaid-figure-toolbar button:focus-visible { border-color: #bf7954; }
+#post-view .mermaid-viewport {
+  box-sizing: border-box;
+  padding: 19px 23px 20px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  text-align: center;
+  min-height: 180px;
+}
+#post-view .mermaid-viewport svg {
+  display: block;
+  width: auto;
+  min-width: min(100%, 540px);
+  max-width: none;
+  height: auto;
+  margin: auto;
+}
+#post-view .mermaid-viewport .nodeLabel,
+#post-view .mermaid-viewport .edgeLabel { font-family: "Microsoft YaHei", "PingFang SC", sans-serif; }
+#post-view .mermaid-render-note { font-size: 12px; color: var(--accent-dark); }
+#post-view .mermaid-source-fallback { overflow-x: auto; }
+.mermaid-lightbox {
+  box-sizing: border-box;
+  width: min(96vw, 1450px);
+  max-width: none;
+  max-height: 94vh;
+  padding: 0;
+  border: 1px solid #e9e2d8;
+  border-radius: 16px;
+  background: #fffdfa;
+  color: #423b33;
+  box-shadow: 0 35px 90px rgba(0,0,0,.26);
+}
+.mermaid-lightbox::backdrop { background: rgba(23,24,24,.73); }
+.mermaid-lightbox-content { display: flex; flex-direction: column; max-height: 94vh; }
+.mermaid-lightbox-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 20px;
+  border-bottom: 1px solid #eee8de;
+  font: 650 13px/1.6 system-ui, sans-serif;
+}
+.mermaid-lightbox-header button {
+  border: 1px solid #ddd2c5;
+  padding: 7px 12px;
+  border-radius: 8px;
+  background: #f8f6f1;
+  color: #5b4a3c;
+  cursor: pointer;
+}
+.mermaid-lightbox-canvas { overflow: auto; padding: 30px; }
+.mermaid-lightbox-canvas svg { display: block; margin: auto; max-width: none; height: auto; }
+@media(max-width: 760px) {
+  #post-view .prose .mermaid-figure { width: calc(100vw - 28px); margin-top: 21px; margin-bottom: 24px; border-radius: 12px; }
+  #post-view .mermaid-viewport { padding: 12px; }
+  #post-view .mermaid-figure-toolbar { padding: 9px 11px; }
+  .mermaid-lightbox-canvas { padding: 14px; }
+}
