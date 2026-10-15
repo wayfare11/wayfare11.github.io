@@ -2164,12 +2164,15 @@ body{background:var(--bg);}
 @media(max-width:530px){#about-view .about-compact-contact .about-contact-item{grid-template-columns:64px minmax(0,1fr);gap:10px;}}
 
 /* Mermaid technical diagrams: consistent with the Still Feather reading palette. */
+#post-view .article-body-layout > div:first-child,
+#post-view .prose { min-width: 0; max-width: 100%; }
+
 #post-view .prose .mermaid-figure {
   box-sizing: border-box;
-  width: min(940px, calc(100vw - 40px));
-  max-width: none;
-  margin: 30px 0 34px 50%;
-  transform: translateX(-50%);
+  width: 100%;
+  max-width: 100%;
+  margin: 30px auto 34px;
+  transform: none;
   padding: 0;
   border: 1px solid var(--line);
   border-radius: 16px;
@@ -2204,6 +2207,8 @@ body{background:var(--bg);}
 #post-view .mermaid-figure-toolbar button:focus-visible { border-color: #bf7954; }
 #post-view .mermaid-viewport {
   box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
   padding: 19px 23px 20px;
   overflow-x: auto;
   overscroll-behavior-inline: contain;
@@ -2212,10 +2217,10 @@ body{background:var(--bg);}
 }
 #post-view .mermaid-viewport svg {
   display: block;
-  width: auto;
-  min-width: min(100%, 540px);
-  max-width: none;
-  height: auto;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: auto !important;
   margin: auto;
 }
 #post-view .mermaid-viewport .nodeLabel,
@@ -2256,7 +2261,7 @@ body{background:var(--bg);}
 .mermaid-lightbox-canvas { overflow: auto; padding: 30px; }
 .mermaid-lightbox-canvas svg { display: block; margin: auto; max-width: none; height: auto; }
 @media(max-width: 760px) {
-  #post-view .prose .mermaid-figure { width: calc(100vw - 28px); margin-top: 21px; margin-bottom: 24px; border-radius: 12px; }
+  #post-view .prose .mermaid-figure { width: 100%; max-width: 100%; margin-top: 21px; margin-bottom: 24px; border-radius: 12px; }
   #post-view .mermaid-viewport { padding: 12px; }
   #post-view .mermaid-figure-toolbar { padding: 9px 11px; }
   .mermaid-lightbox-canvas { padding: 14px; }
