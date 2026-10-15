@@ -37,6 +37,9 @@
             mermaid.initialize({
               startOnLoad: false,
               securityLevel: 'strict',
+              // Use native SVG text rather than HTML foreignObject labels.
+              // HTML labels can be clipped when browser zoom / DPI changes.
+              htmlLabels: false,
               theme: 'base',
               themeVariables: {
                 fontFamily: '"Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif',
@@ -54,7 +57,7 @@
                 edgeLabelBackground: '#fffdfa'
               },
               flowchart: {
-                htmlLabels: true,
+                htmlLabels: false,
                 curve: 'basis',
                 nodeSpacing: 26,
                 rankSpacing: 43,
