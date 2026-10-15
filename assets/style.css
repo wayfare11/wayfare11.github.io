@@ -200,13 +200,22 @@
     /* Minimal brand footer: no duplicated navigation or contact links. */
     .site-footer { position: relative; padding: 32px 0 34px; border-top: 1px solid var(--line); }
     .site-footer::before { content: ""; position: absolute; top: -1px; left: calc(50% - 27px); width: 54px; height: 2px; border-radius: 0 0 3px 3px; background: var(--accent); opacity: .62; }
-    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 26px; min-height: 64px; }
+    .footer-inner { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: center; column-gap: clamp(22px,3vw,46px); min-height: 78px; }
     .footer-identity { display: flex; align-items: stretch; gap: 15px; min-width: 0; }
     .footer-identity::before { content: ""; width: 2px; flex: 0 0 2px; border-radius: 3px; background: var(--accent); opacity: .55; }
     .footer-brand-copy { min-width: 0; }
     .footer-name { margin: 0 0 5px; color: var(--ink); font: 550 22px/1.35 var(--serif); letter-spacing: .06em; }
     .footer-motto { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
-    .footer-legal { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.75; letter-spacing: .035em; white-space: nowrap; }
+    .footer-signature { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; min-width: 160px; color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: .16em; white-space: nowrap; }
+    .footer-signature-symbol { color: var(--accent); font-size: 17px; line-height: 1.2; font-weight: 400; opacity: .78; }
+    .footer-credits { display: flex; flex-direction: column; align-items: flex-end; gap: 7px; text-align: right; min-width: 0; }
+    .footer-legal { margin: 0; color: var(--ink-soft); font-size: 11px; line-height: 1.65; letter-spacing: .015em; white-space: normal; }
+    .footer-made { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.6; letter-spacing: .035em; }
+
+    @media (min-width: 761px) and (max-width: 1050px) {
+      .footer-inner { grid-template-columns: minmax(0,1fr) minmax(0,1fr); column-gap: 30px; }
+      .footer-signature { display: none; }
+    }
 
     .article-shell { padding-top: 57px; padding-bottom: 100px; }
     .article-breadcrumb { color: var(--muted); font-size: 12px; display: flex; gap: 11px; align-items: center; }
@@ -316,9 +325,10 @@
       .about-text h2 { font-size: 34px; }
       .note-banner { flex-direction: column; align-items: flex-start; padding: 28px; margin-bottom: 70px; }
       .site-footer { padding: 27px 0 30px; }
-      .footer-inner { flex-direction: column; align-items: flex-start; gap: 19px; }
+      .footer-inner { grid-template-columns: minmax(0,1fr); gap: 20px; min-height: 0; }
       .footer-name { font-size: 20px; }
-      .footer-legal { white-space: normal; padding-left: 17px; }
+      .footer-credits { align-items: flex-start; text-align: left; padding-left: 17px; gap: 4px; }
+      .footer-legal { white-space: normal; }
       .article-shell { padding-top: 32px; padding-bottom: 60px; }
       .article-heading { margin: 52px auto 30px; }
       .article-heading h1 { font-size: clamp(32px,7.7vw,48px); }
@@ -2290,3 +2300,68 @@ body{background:var(--bg);}
   #post-view .mermaid-figure-toolbar { padding: 9px 11px; }
   .mermaid-lightbox-canvas { padding: 14px; }
 }
+
+
+/* All articles: the same tag/sort controls as Tech and Journal pages. */
+#articles-view .article-toolbar .tag-disclosure summary,
+#articles-view .article-toolbar .sort-trigger {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 126px;
+  height: 42px;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 0 13px;
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: none;
+  transition: border-color .18s, background-color .18s, color .18s;
+}
+#articles-view .article-toolbar .tag-disclosure summary:hover,
+#articles-view .article-toolbar .tag-disclosure[open] summary,
+#articles-view .article-toolbar .sort-trigger:hover,
+#articles-view .article-toolbar .sort-trigger[aria-expanded='true'] {
+  border-color: var(--accent);
+  background: var(--surface-soft);
+  color: var(--accent-dark);
+}
+#articles-view .article-toolbar .tag-selected-label,
+#articles-view .article-toolbar .tag-selected-label.is-chosen {
+  display: block;
+  max-width: 125px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: inherit;
+  font-size: 12px;
+  font-weight: 650;
+}
+#articles-view .article-toolbar .tag-disclosure summary::after {
+  content: '';
+  display: block;
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  margin: 0;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform .18s;
+}
+#articles-view .article-toolbar .tag-disclosure[open] summary::after {
+  transform: translateY(2px) rotate(225deg);
+}
+#articles-view .article-toolbar .tag-popover .tag-filter { border-radius: 9px; }
+@media (max-width: 600px) {
+  #articles-view .article-toolbar .tag-disclosure summary,
+  #articles-view .article-toolbar .sort-trigger { min-width: 0; }
+}
+
