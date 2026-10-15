@@ -350,7 +350,7 @@
                 <input id="search-input" type="search" autocomplete="off" placeholder="搜索一些关键词..." aria-label="搜索文章标题和内容" />
               </label>
               <details class="tag-disclosure" id="tag-panel" data-tag-disclosure="archive">
-                <summary aria-label="按文章标签筛选"># 标签 <span class="tag-selected-label" id="archive-tag-mark">选择</span></summary>
+                <summary aria-label="按文章标签筛选"><span class="tag-selected-label" id="archive-tag-mark">全部</span></summary>
                 <div class="tag-popover"><p>按标签查找</p><div class="tag-filters" id="tag-filters" role="group" aria-label="选择文章标签"></div></div>
               </details>
               <div class="sort-control" data-sort-control="archive">
@@ -437,7 +437,14 @@
           <p class="footer-motto">用代码创造，用文字记录，用镜头留住光。</p>
         </div>
       </div>
-      <p class="footer-legal">© <span id="copyright-year">2026</span> <span data-site-name>静止的羽毛</span></p>
+      <div class="footer-signature" aria-hidden="true">
+        <span class="footer-signature-symbol">✳</span>
+        <span>CODE / LIFE / FRAMES</span>
+      </div>
+      <div class="footer-credits">
+        <p class="footer-legal">© <span id="copyright-year">2026</span> <span data-site-name>静止的羽毛</span>. All stories are my own.</p>
+        <p class="footer-made">Made with code, coffee &amp; curiosity ✳</p>
+      </div>
     </div>
   </footer>
   <div id="filter-backdrop" class="filter-backdrop" hidden></div>
