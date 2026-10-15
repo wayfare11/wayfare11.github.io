@@ -133,6 +133,14 @@
         const viewport = document.createElement('div');
         viewport.className = 'mermaid-viewport';
         viewport.innerHTML = svg;
+        // Mermaid diagrams have different natural dimensions. Never enlarge a narrow
+        // diagram to fill the whole article: that magnifies fonts and node spacing.
+        // The SVG viewBox describes its own intrinsic drawing width in CSS pixels.
+        const previewSvg = viewport.querySelector('svg');
+        const naturalWidth = previewSvg?.viewBox?.baseVal?.width;
+        if (Number.isFinite(naturalWidth) && naturalWidth > 0) {
+          previewSvg.style.setProperty('--mermaid-natural-width', Math.ceil(naturalWidth) + 'px');
+        }
         figure.append(toolbar, viewport);
         pre.replaceWith(figure);
         if (typeof bindFunctions === 'function') bindFunctions(viewport);
