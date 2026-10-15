@@ -7,6 +7,7 @@
   if (!article) return;
 
   const providers = [
+    'assets/mermaid.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.3/mermaid.min.js',
     'https://cdn.jsdelivr.net/npm/mermaid@10.9.3/dist/mermaid.min.js',
     'https://unpkg.com/mermaid@10.9.3/dist/mermaid.min.js'
