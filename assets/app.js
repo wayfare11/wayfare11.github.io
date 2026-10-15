@@ -42,10 +42,6 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       document.querySelectorAll('[data-site-name]').forEach(el => el.textContent = SITE.name);
       document.querySelectorAll('[data-author]').forEach(el => el.textContent = SITE.author);
       $('#copyright-year').textContent = String(new Date().getFullYear());
-      const emailLink = $('#footer-email');
-      if (SITE.email) { emailLink.textContent = SITE.email; emailLink.hidden = false; }
-      const githubLink = $('#footer-github');
-      if (SITE.github) { githubLink.href = SITE.github; githubLink.hidden = false; }
       $('#article-total').textContent = String(posts.length).padStart(2,'0');
       $('#photo-total').textContent = String(albums.reduce((sum, a) => sum + a.count, 0)).padStart(2,'0');
     }
