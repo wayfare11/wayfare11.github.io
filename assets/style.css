@@ -2217,7 +2217,8 @@ body{background:var(--bg);}
 }
 #post-view .mermaid-viewport svg {
   display: block;
-  width: 100% !important;
+  /* Shrink wide diagrams, but never upscale compact ones to article width. */
+  width: min(100%, var(--mermaid-natural-width, 100%)) !important;
   min-width: 0 !important;
   max-width: 100% !important;
   height: auto !important;
