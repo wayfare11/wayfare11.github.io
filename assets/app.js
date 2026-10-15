@@ -159,7 +159,7 @@ const CHANNEL_ROUTES = {tech:'tech',life:'journal'};
       $('#tag-filters').innerHTML = `<button class="tag-filter ${!activeTag ? 'active' : ''}" type="button" data-tag="all" aria-pressed="${!activeTag}">全部标签</button>` +
         visibleTags.map(([tag,count]) => `<button class="tag-filter ${activeTag === tag ? 'active' : ''}" type="button" data-tag="${escapeHtml(tag)}" aria-pressed="${activeTag === tag}">#${escapeHtml(tag)} <small>${count}</small></button>`).join('') +
         (entries.length > 10 ? `<button class="tag-expand" type="button" data-expand-tags="true">${showAllTags ? '收起标签' : '更多标签 +'}</button>` : '');
-      $('#archive-tag-mark').textContent = activeTag ? '#' + activeTag : '选择';
+      $('#archive-tag-mark').textContent = activeTag ? '#' + activeTag : '全部';
       $('#archive-tag-mark').classList.toggle('is-chosen',!!activeTag);
     }
 
